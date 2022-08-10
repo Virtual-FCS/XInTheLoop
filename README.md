@@ -11,3 +11,7 @@ The external system can be developed in any language/framework that support UDP 
 ## Site1 Example
 
 The Site1 example is a test model and interfacing blocks for one particular external FCS system containing a fuel cell, a DC-to-DC-converter, a battery, and a variable load.
+
+## Dependencies
+
+- Modelica v3.2.3
