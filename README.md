@@ -15,3 +15,4 @@ The Site1 example is a test model and interfacing blocks for one particular exte
 ## Dependencies
 
 - Modelica v3.2.3
+- Modelica_DeviceDrivers v1.7.1

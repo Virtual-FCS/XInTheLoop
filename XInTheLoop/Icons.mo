@@ -14,6 +14,23 @@ package Icons "Icons for XInTheLoop components"
       Icon(graphics = {Text(origin = {4, 0}, extent = {{-44, 80}, {36, -40}}, textString = "X", textStyle = {TextStyle.Bold, TextStyle.Bold})}, coordinateSystem(initialScale = 0.1)));
   end XInTheLoop;
 
+  partial block HardwareInTheLoopBlock "Hardware-in-the-loop block icon"
+    extends Loop;
+    annotation(
+      Icon(graphics = {Rectangle(lineColor = {0, 0, 127}, fillColor = {255, 255, 255}, extent = {{-100, -100}, {100, 100}}), Text(origin = {4, 0}, extent = {{-44, 80}, {36, -40}}, textString = "H", textStyle = {TextStyle.Bold, TextStyle.Bold}), Text(lineColor = {0, 0, 255}, extent = {{-150, 150}, {150, 110}}, textString = "%name", horizontalAlignment = TextAlignment.Left)},  coordinateSystem(initialScale = 0.1)));
+  end HardwareInTheLoopBlock;
+
+  partial block ProtocolHeadBlock "UDP X-in-the-loop protocol message head block icon"
+    extends Modelica.Blocks.Icons.IntegerBlock;
+    annotation(
+      Icon(graphics = {Text(origin = {-40, 14}, extent = {{-54, 26}, {134, -54}}, textString = "v%version")}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html>
+  <p>
+  Icon for blocks that handle a UDP X-in-the-loop message head.
+  </p>
+  </html>"));
+  end ProtocolHeadBlock;
+
   partial block BlocksPackage
     extends Modelica.Icons.Package;
     annotation(
