@@ -3,8 +3,7 @@ within XInTheLoop.Examples;
 package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
   extends Modelica.Icons.ExamplesPackage;
 
-  model Test
-    "Example model demonstrating exchanging values with this HIL site using a simple time varying set of data"
+  model Test "Example model demonstrating exchanging values with this HIL site using a simple time varying set of data"
     extends Modelica.Icons.Example;
     Modelica.Blocks.Sources.IntegerExpression remoteControl(y = 1) annotation(
       Placement(visible = true, transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -43,7 +42,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       Line(points = {{-19, -30}, {-11, -30}, {-11, -6}, {-2, -6}}, color = {0, 0, 127}));
   protected
     annotation(
-      experiment(StartTime = 0, StopTime = 320, Tolerance = 1e-06, Interval = 0.1));
+      experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1));
   end Test;
 
   block Sync "Example HIL block to exchange values with this site"
@@ -57,8 +56,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
     XInTheLoop.Blocks.Bitwise.AndInts andBitmask(b = bitmask(uDPSync.wSeq), nu = 1) annotation(
       Placement(visible = true, transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-    Modelica.Blocks.Interfaces.IntegerOutput ySeqOutAhead
-      "Difference between the sequence number to be sent and the last reverse sequence number received" annotation(
+    Modelica.Blocks.Interfaces.IntegerOutput ySeqOutAhead "Difference between the sequence number to be sent and the last reverse sequence number received" annotation(
       Placement(visible = true, transformation(origin = {10, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {10, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
     Modelica.Blocks.Interfaces.RealInput uDcDc_SP_req annotation(
       Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
@@ -162,7 +160,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {-120, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Modelica.Blocks.Interfaces.IntegerInput uLoadSequence annotation(
       Placement(visible = true, transformation(origin = {-120, -90}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -90}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-    XInTheLoop.Blocks.Bitwise.PackInt packInt(nu = 4, n_bits = {1, 1, 1, 1})  annotation(
+    XInTheLoop.Blocks.Bitwise.PackInt packInt(nu = 4, n_bits = {1, 1, 1, 1}) annotation(
       Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(uRemoteControl, packInt.u[1]) annotation(
@@ -182,9 +180,9 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
     extends XInTheLoop.Blocks.Bitwise.Icons.BitUnpack;
     Modelica.Blocks.Interfaces.IntegerInput u annotation(
       Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-    XInTheLoop.Blocks.Bitwise.UnpackInt unpackInt(n_bits = {8, 8, 16})  annotation(
+    XInTheLoop.Blocks.Bitwise.UnpackInt unpackInt(n_bits = {8, 8, 16}) annotation(
       Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    XInTheLoop.Blocks.Bitwise.UnpackInt2Bools unpackInt2Bools(b = 13)  annotation(
+    XInTheLoop.Blocks.Bitwise.UnpackInt2Bools unpackInt2Bools(b = 13) annotation(
       Placement(visible = true, transformation(origin = {50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Interfaces.IntegerOutput yModeDcDc annotation(
       Placement(visible = true, transformation(origin = {30, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {30, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
@@ -256,5 +254,34 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
     connect(unpackInt2Bools.y[13], yModelicaHeartbeat) annotation(
       Line(points = {{62, 0}, {80, 0}, {80, -94}, {110, -94}}, color = {255, 0, 255}));
   end UnpackStatusBits;
+  annotation(
+    Documentation(info = "<html><head></head><body>
+This example implements a protocol to exchange values with an external system running a fuel cell, DC-DC-converter, battery, and a variable load - to enable&nbsp;Hardware-in-the-loop (HIL) simulations.
+<h4>Usage</h4>
+To test this without a real hardware I/O application present, use the Python tool included in the tools folder.
 
+<ol>
+<li>Open a command shell window, and change to the tools&nbsp;folder.</li>
+
+<li>To capture and dump the outgoing values sent to the external system, execute
+
+<pre style=\"font-size: 12px;\">python3 site1-protocol.py o</pre>
+
+</li><li>Open a second command shell window, and change to the tools&nbsp;folder.</li>
+
+<li>Start simulation of the Test model.</li>
+
+<li>When the compilation is finished and the simulation has started, execute e.g.
+
+<pre style=\"font-size: 12px;\">python3 site1-protocol.py i 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 50</pre>
+
+in the second shell window to send a series of 50 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 50 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
+
+<li>When the simulation has ended, select e.g. the variables sync.yI_Load, sync.yI_Stack, and sync.yI_Batt to plot these received values in a graph of the simulation.</li>
+
+</ol>
+
+<img src=\"modelica://XInTheLoop/Resources/Images/site1-test-plot.png\">
+
+</body></html>"));
 end Site1;
