@@ -9,7 +9,7 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {0, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica_DeviceDrivers.Blocks.Packaging.SerialPackager.AddString addString(bufferSize = 20, data = "XqIDN?\r\n", nu = 1) annotation(
       Placement(visible = true, transformation(origin = {0, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica_DeviceDrivers.Blocks.Communication.TCPIP_Client_IO tCPIP_Client_IO(enableExternalTrigger = true, port = 4242) annotation(
+    XInTheLoop.Blocks.Customized.TCPIP_Client_IO tCPIP_Client_IO(enableExternalTrigger = true, port = 4242) annotation(
       Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     Modelica.Blocks.Sources.SampleTrigger sampleTrigger(period = 1, startTime = 1.5) annotation(
       Placement(visible = true, transformation(origin = {-50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

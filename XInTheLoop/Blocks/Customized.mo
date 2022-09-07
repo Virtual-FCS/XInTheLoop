@@ -19,6 +19,7 @@ package Customized "Customized versions of blocks from other libraries"
 
   block TCPIP_Client_IO "A client block for TCP/IP socket communication"
     import Modelica_DeviceDrivers;
+    import Modelica_DeviceDrivers.Blocks.Interfaces;
     extends Modelica_DeviceDrivers.Utilities.Icons.BaseIcon;
     extends Modelica_DeviceDrivers.Utilities.Icons.TCPIPconnection;
     extends
