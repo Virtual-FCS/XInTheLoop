@@ -45,6 +45,79 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1));
   end Test;
 
+  model LoadProfile "Example model demonstrating exchanging values with this site for half an hour using a load profile from a data file"
+    extends Modelica.Icons.Example;
+    XInTheLoop.Examples.Site1.Blocks.Sync sync annotation(
+      Placement(visible = true, transformation(origin = {10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.CombiTimeTable loadSP(fileName = Modelica.Utilities.Files.loadResource("modelica://XInTheLoop/Resources/Data/DriveProfile.mat"), tableName = "X", tableOnFile = true) annotation(
+      Placement(visible = true, transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.RealExpression dcdcSP annotation(
+      Placement(visible = true, transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    XInTheLoop.Examples.Site1.Blocks.PackControlBits packControlBits annotation(
+      Placement(visible = true, transformation(origin = {-30, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    XInTheLoop.Examples.Site1.Blocks.UnpackStatusBits unpackStatusBits annotation(
+      Placement(visible = true, transformation(origin = {50, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    XInTheLoop.Blocks.Customized.IntegerTable keyOn(table = [0, 0; 100, 1; 1700, 0]) annotation(
+      Placement(visible = true, transformation(origin = {-80, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.IntegerExpression loadSequence annotation(
+      Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.IntegerExpression remoteControl(y = 1) annotation(
+      Placement(visible = true, transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    XInTheLoop.Blocks.Customized.IntegerTable start(table = [0, 0; 200, 1; 1695, 0]) annotation(
+      Placement(visible = true, transformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Math.MultiProduct powerStack(nu = 2) annotation(
+      Placement(visible = true, transformation(origin = {50, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Math.MultiProduct powerBatt(nu = 2) annotation(
+      Placement(visible = true, transformation(origin = {50, 6}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Math.MultiProduct powerDcDcIn(nu = 2) annotation(
+      Placement(visible = true, transformation(origin = {50, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Math.MultiProduct powerDcDcOut(nu = 2) annotation(
+      Placement(visible = true, transformation(origin = {50, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Math.MultiProduct powerLoad(nu = 2) annotation(
+      Placement(visible = true, transformation(origin = {50, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  equation
+    connect(keyOn.y, packControlBits.uKeyOn) annotation(
+      Line(points = {{-69, 40}, {-42, 40}, {-42, 39}}, color = {255, 127, 0}));
+    connect(loadSequence.y, packControlBits.uLoadSequence) annotation(
+      Line(points = {{-68, -40}, {-52, -40}, {-52, 27}, {-42, 27}}, color = {255, 127, 0}));
+    connect(dcdcSP.y, sync.uDcDc_SP_req) annotation(
+      Line(points = {{-19, 0}, {-2, 0}}, color = {0, 0, 127}));
+    connect(sync.yStatusBits, unpackStatusBits.u) annotation(
+      Line(points = {{14, 11}, {14, 70}, {38, 70}}, color = {255, 127, 0}));
+    connect(packControlBits.y, sync.uControlBits) annotation(
+      Line(points = {{-19, 36}, {-10, 36}, {-10, 6}, {-2, 6}}, color = {255, 127, 0}));
+    connect(start.y, packControlBits.uStartButton) annotation(
+      Line(points = {{-68, 0}, {-60, 0}, {-60, 32}, {-42, 32}, {-42, 33}}, color = {255, 127, 0}));
+    connect(remoteControl.y, packControlBits.uRemoteControl) annotation(
+      Line(points = {{-69, 80}, {-60, 80}, {-60, 44}, {-42, 44}, {-42, 45}}, color = {255, 127, 0}));
+    connect(loadSP.y[1], sync.uLoad_SP_req) annotation(
+      Line(points = {{-18, -30}, {-10, -30}, {-10, -6}, {-2, -6}}, color = {0, 0, 127}));
+    connect(sync.yV_Stack, powerStack.u[1]) annotation(
+      Line(points = {{22, 10}, {28, 10}, {28, 36}, {40, 36}}, color = {0, 0, 127}));
+    connect(sync.yI_Stack, powerStack.u[2]) annotation(
+      Line(points = {{22, 8}, {30, 8}, {30, 34}, {40, 34}, {40, 36}}, color = {0, 0, 127}));
+    connect(sync.yI_Batt, powerBatt.u[1]) annotation(
+      Line(points = {{22, 2}, {40, 2}, {40, 6}}, color = {0, 0, 127}));
+    connect(sync.yV_Batt, powerBatt.u[2]) annotation(
+      Line(points = {{22, 4}, {40, 4}, {40, 6}, {40, 6}}, color = {0, 0, 127}));
+    connect(sync.yV_In_DcDc, powerDcDcIn.u[1]) annotation(
+      Line(points = {{22, -2}, {34, -2}, {34, -18}, {40, -18}, {40, -20}}, color = {0, 0, 127}));
+    connect(sync.yI_In_DcDc, powerDcDcIn.u[2]) annotation(
+      Line(points = {{22, -4}, {32, -4}, {32, -20}, {40, -20}}, color = {0, 0, 127}));
+    connect(sync.yV_Out_DcDc, powerDcDcOut.u[1]) annotation(
+      Line(points = {{22, -4}, {30, -4}, {30, -48}, {40, -48}, {40, -50}}, color = {0, 0, 127}));
+    connect(sync.yI_Out_DcDc, powerDcDcOut.u[2]) annotation(
+      Line(points = {{22, -6}, {28, -6}, {28, -50}, {40, -50}, {40, -50}}, color = {0, 0, 127}));
+    connect(sync.yV_Load, powerLoad.u[1]) annotation(
+      Line(points = {{22, -8}, {26, -8}, {26, -78}, {40, -78}, {40, -80}}, color = {0, 0, 127}));
+    connect(sync.yI_Load, powerLoad.u[2]) annotation(
+      Line(points = {{22, -10}, {24, -10}, {24, -80}, {40, -80}, {40, -80}}, color = {0, 0, 127}));
+    annotation(
+      experiment(StartTime = 0, StopTime = 1750, Tolerance = 1e-06, Interval = 1),
+      __OpenModelica_commandLineOptions = "--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian,newInst",
+      __OpenModelica_simulationFlags(lv = "LOG_STATS", outputFormat = "mat", s = "dassl"));
+  end LoadProfile;
+
   package Blocks "Site1-Specific Blocks"
     extends Icons.BlocksPackage;
 
@@ -257,9 +330,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       connect(unpackInt2Bools.y[13], yModelicaHeartbeat) annotation(
         Line(points = {{62, 0}, {80, 0}, {80, -94}, {110, -94}}, color = {255, 0, 255}));
     end UnpackStatusBits;
-
   end Blocks;
-
   annotation(
     Documentation(info = "<html><head></head><body>
 This example implements a protocol to exchange values with an external system running a fuel cell, DC-DC-converter, battery, and a variable load - to enable&nbsp;Hardware-in-the-loop (HIL) simulations.
