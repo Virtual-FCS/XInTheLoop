@@ -3,7 +3,7 @@ within XInTheLoop.Blocks.Protocol;
 model UDPSync
   "Generic UDP based protocol to exchange values with an external system"
   extends Modelica.Blocks.Icons.Block;
-  import SI = Modelica.SIunits;
+  import SI = Modelica.Units.SI;
   parameter Boolean real_time=true
    "true, if real-time synchronization is enabled, otherwise it is disabled!"
    annotation(choices(checkBox=true));
