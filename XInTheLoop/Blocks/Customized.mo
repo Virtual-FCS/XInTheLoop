@@ -17,7 +17,7 @@ package Customized "Customized versions of blocks from other libraries"
     outputTrigger = pkgIn.trigger;
   end UDPSendTrig;
 
-  block TCPIP_Client_IO "A client block for TCP/IP socket communication"
+  block TCPIP_Client_IO "A custom version of Modelica_DeviceDrivers.Blocks.Communication.TCPIP_Client_IO that allows limiting send size"
     import Modelica_DeviceDrivers;
     import Modelica_DeviceDrivers.Blocks.Interfaces;
     extends Modelica_DeviceDrivers.Utilities.Icons.BaseIcon;
@@ -42,6 +42,8 @@ package Customized "Customized versions of blocks from other libraries"
           extent={{-20,-20},{20,20}},
           rotation=90,
           origin={108,0})));
+    Integer outputSendSize(min=0, max=outputBufferSize)=outputBufferSize
+      "Send size of message data in bytes." annotation(Dialog(group="Outgoing data"));
   protected
     TCPIPSocketClient socket = TCPIPSocketClient();
     Boolean isConnected(start=false, fixed=true);
@@ -62,7 +64,7 @@ package Customized "Customized versions of blocks from other libraries"
           Modelica_DeviceDrivers.Blocks.Communication.Internal.DummyFunctions.sendToTCPIPServer(
             socket,
             pkgIn.pkg,
-            outputBufferSize,
+            outputSendSize,
             pkgIn.dummy));
       else
         pkgOut.dummy = pkgIn.dummy;
