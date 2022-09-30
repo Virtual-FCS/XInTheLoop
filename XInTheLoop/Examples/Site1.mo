@@ -342,7 +342,7 @@ To test this without a real hardware I/O application present, use the Python too
 
 <li>To capture and dump the outgoing values sent to the external system, execute
 
-<pre style=\"font-size: 12px;\">python3 site1-protocol.py o</pre>
+<pre style=\"font-size: 12px;\">python3 site1-protocol.py out</pre>
 
 </li><li>Open a second command shell window, and change to the tools&nbsp;folder.</li>
 
@@ -350,7 +350,7 @@ To test this without a real hardware I/O application present, use the Python too
 
 <li>When the compilation is finished and the simulation has started, execute e.g.
 
-<pre style=\"font-size: 12px;\">python3 site1-protocol.py i 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 50</pre>
+<pre style=\"font-size: 12px;\">python3 site1-protocol.py in 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 50</pre>
 
 in the second shell window to send a series of 50 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 50 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
