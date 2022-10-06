@@ -9,6 +9,14 @@ package Customized "Customized versions of blocks from other libraries"
       Icon(graphics = {Text(extent = {{-200, -110}, {200, -140}}, textString = "%table")}));
   end IntegerTable;
 
+  block ResetPointer "An extension of Modelica_DeviceDrivers.Blocks.Packaging.SerialPackager.ResetPointer that also triggers an output for each message sent by a block earlier in the package connection chain"
+    extends Modelica_DeviceDrivers.Blocks.Packaging.SerialPackager.ResetPointer;
+    Modelica.Blocks.Interfaces.BooleanInput outputTrigger "Activated for each message sent" annotation(
+      Placement(visible = true, transformation(origin = {100, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {120, -2}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  equation
+    outputTrigger = pkgIn.trigger;
+  end ResetPointer;
+
   block UDPSendTrig "An extension of Modelica_DeviceDrivers.Blocks.Communication.UDPSend that also triggers an output for each message sent"
     extends Modelica_DeviceDrivers.Blocks.Communication.UDPSend;
     Modelica.Blocks.Interfaces.BooleanInput outputTrigger "Activated for each message sent" annotation(
