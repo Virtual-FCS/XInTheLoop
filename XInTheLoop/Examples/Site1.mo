@@ -49,7 +49,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
     extends Modelica.Icons.Example;
     XInTheLoop.Examples.Site1.Blocks.Sync sync annotation(
       Placement(visible = true, transformation(origin = {10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.CombiTimeTable loadSP(fileName = Modelica.Utilities.Files.loadResource("modelica://XInTheLoop/Resources/Data/DriveProfile.mat"), tableName = "X", tableOnFile = true) annotation(
+    Modelica.Blocks.Sources.CombiTimeTable loadSP(fileName = Modelica.Utilities.Files.loadResource("modelica://XInTheLoop/Resources/Data/DriveProfile.mat"), shiftTime = -200, tableName = "X", tableOnFile = true) annotation(
       Placement(visible = true, transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.RealExpression dcdcSP annotation(
       Placement(visible = true, transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -57,13 +57,13 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {-30, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     XInTheLoop.Examples.Site1.Blocks.UnpackStatusBits unpackStatusBits annotation(
       Placement(visible = true, transformation(origin = {50, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    XInTheLoop.Blocks.Customized.IntegerTable keyOn(table = [0, 0; 100, 1; 1700, 0]) annotation(
+    XInTheLoop.Blocks.Customized.IntegerTable keyOn(table = [0, 0; 10, 1; 570, 0]) annotation(
       Placement(visible = true, transformation(origin = {-80, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.IntegerExpression loadSequence annotation(
       Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.IntegerExpression remoteControl(y = 1) annotation(
       Placement(visible = true, transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    XInTheLoop.Blocks.Customized.IntegerTable start(table = [0, 0; 200, 1; 1695, 0]) annotation(
+    XInTheLoop.Blocks.Customized.IntegerTable start(table = [0, 0; 90, 1; 560, 0]) annotation(
       Placement(visible = true, transformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.MultiProduct powerStack(nu = 2) annotation(
       Placement(visible = true, transformation(origin = {50, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -113,7 +113,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
     connect(sync.yI_Load, powerLoad.u[2]) annotation(
       Line(points = {{22, -10}, {24, -10}, {24, -80}, {40, -80}, {40, -80}}, color = {0, 0, 127}));
     annotation(
-      experiment(StartTime = 0, StopTime = 1750, Tolerance = 1e-06, Interval = 1),
+      experiment(StartTime = 0, StopTime = 580, Tolerance = 1e-06, Interval = 1),
       __OpenModelica_commandLineOptions = "--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian,newInst",
       __OpenModelica_simulationFlags(lv = "LOG_STATS", outputFormat = "mat", s = "dassl"));
   end LoadProfile;
