@@ -63,7 +63,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.IntegerExpression remoteControl(y = 1) annotation(
       Placement(visible = true, transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    XInTheLoop.Blocks.Customized.IntegerTable start(table = [0, 0; 90, 1; 560, 0]) annotation(
+    XInTheLoop.Blocks.Customized.IntegerTable start(table = [0, 0; 50, 1; 560, 0]) annotation(
       Placement(visible = true, transformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.MultiProduct powerStack(nu = 2) annotation(
       Placement(visible = true, transformation(origin = {50, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
