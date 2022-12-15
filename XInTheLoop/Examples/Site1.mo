@@ -3,7 +3,7 @@ within XInTheLoop.Examples;
 package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
   extends Modelica.Icons.ExamplesPackage;
 
-  model Test "Example model demonstrating exchanging values with this HIL site using a simple time varying set of data"
+  model Test "Example model demonstrating exchanging values with this HIL site using a simple pattern of time varying data as input"
     extends Modelica.Icons.Example;
     Modelica.Blocks.Sources.IntegerExpression remoteControl(y = 1) annotation(
       Placement(visible = true, transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -45,7 +45,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1));
   end Test;
 
-  model LoadProfile "Example model demonstrating exchanging values with this site for half an hour using a load profile from a data file"
+  model LoadProfile "Example model demonstrating exchanging values with this site using a realistic load profile of a luggage transportation vehicle from a data file"
     extends Modelica.Icons.Example;
     XInTheLoop.Examples.Site1.Blocks.Sync sync annotation(
       Placement(visible = true, transformation(origin = {10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
