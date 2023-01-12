@@ -3,7 +3,7 @@ within XInTheLoop.Examples;
 package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
   extends Modelica.Icons.ExamplesPackage;
 
-  model Test "Example model demonstrating exchanging values with this HIL site using a simple time varying set of data"
+  model Test "Example model demonstrating exchanging values with this HIL site using a simple pattern of time varying data as input"
     extends Modelica.Icons.Example;
     Modelica.Blocks.Sources.IntegerExpression remoteControl(y = 1) annotation(
       Placement(visible = true, transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -45,11 +45,11 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1));
   end Test;
 
-  model LoadProfile "Example model demonstrating exchanging values with this site for half an hour using a load profile from a data file"
+  model LoadProfile "Example model demonstrating exchanging values with this site using a realistic load profile of a luggage transportation vehicle from a data file"
     extends Modelica.Icons.Example;
     XInTheLoop.Examples.Site1.Blocks.Sync sync annotation(
       Placement(visible = true, transformation(origin = {10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.CombiTimeTable loadSP(fileName = Modelica.Utilities.Files.loadResource("modelica://XInTheLoop/Resources/Data/DriveProfile.mat"), tableName = "X", tableOnFile = true) annotation(
+    Modelica.Blocks.Sources.CombiTimeTable loadSP(fileName = Modelica.Utilities.Files.loadResource("modelica://XInTheLoop/Resources/Data/DriveProfile.mat"), shiftTime = -200, tableName = "X", tableOnFile = true) annotation(
       Placement(visible = true, transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.RealExpression dcdcSP annotation(
       Placement(visible = true, transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -57,13 +57,13 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {-30, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     XInTheLoop.Examples.Site1.Blocks.UnpackStatusBits unpackStatusBits annotation(
       Placement(visible = true, transformation(origin = {50, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    XInTheLoop.Blocks.Customized.IntegerTable keyOn(table = [0, 0; 100, 1; 1700, 0]) annotation(
+    XInTheLoop.Blocks.Customized.IntegerTable keyOn(table = [0, 0; 10, 1; 570, 0]) annotation(
       Placement(visible = true, transformation(origin = {-80, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.IntegerExpression loadSequence annotation(
       Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.IntegerExpression remoteControl(y = 1) annotation(
       Placement(visible = true, transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    XInTheLoop.Blocks.Customized.IntegerTable start(table = [0, 0; 200, 1; 1695, 0]) annotation(
+    XInTheLoop.Blocks.Customized.IntegerTable start(table = [0, 0; 50, 1; 560, 0]) annotation(
       Placement(visible = true, transformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.MultiProduct powerStack(nu = 2) annotation(
       Placement(visible = true, transformation(origin = {50, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -113,7 +113,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
     connect(sync.yI_Load, powerLoad.u[2]) annotation(
       Line(points = {{22, -10}, {24, -10}, {24, -80}, {40, -80}, {40, -80}}, color = {0, 0, 127}));
     annotation(
-      experiment(StartTime = 0, StopTime = 1750, Tolerance = 1e-06, Interval = 1),
+      experiment(StartTime = 0, StopTime = 580, Tolerance = 1e-06, Interval = 1),
       __OpenModelica_commandLineOptions = "--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian,newInst",
       __OpenModelica_simulationFlags(lv = "LOG_STATS", outputFormat = "mat", s = "dassl"));
   end LoadProfile;
@@ -333,24 +333,29 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
   end Blocks;
   annotation(
     Documentation(info = "<html><head></head><body>
-This example implements a protocol to exchange values with an external system running a fuel cell, DC-DC-converter, battery, and a variable load - to enable&nbsp;Hardware-in-the-loop (HIL) simulations.
-<h4>Usage</h4>
-To test this without a real hardware I/O application present, use the Python tool included in the tools folder.
+This example implements a UDP protocol to exchange values with an external system running a fuel cell, DC-DC-converter, battery, and a variable load - to enable&nbsp;Hardware-in-the-loop (HIL) simulations.
+<h4 id=\"tool\">Python Tool</h4>
+In both the <a href=\"#dry\">Dry Run</a> and the <a href=\"#wet\">Wet Run</a> sections below, the same Python tool is used. It is assumed your PC has Python (version 3 or above) installed. If not, it can be installed from the Microsoft Store App.
+
+The Python file <tt>site1-protocol.py</tt> is located in the <tt>tools</tt> folder below the folder where <a href=\"modelica://XInTheLoop/\">this library</a> is installed or cloned from github.
+
+<h4 id=\"dry\">Dry Run</h4>
+To test this without a real hardware I/O application present, use the <a href=\"#tool\">Python tool included in the tools folder</a>.
 
 <ol>
-<li>Open a command shell window, and change to the tools&nbsp;folder.</li>
+<li>Open a command shell window, and change to the tools&nbsp;folder. The Python file should now be shown if executing a <tt>dir</tt> command.</li>
 
 <li>To capture and dump the outgoing values sent to the external system, execute
 
-<pre style=\"font-size: 12px;\">python3 site1-protocol.py o</pre>
+<pre style=\"font-size: 12px;\">python3 site1-protocol.py out</pre>
 
-</li><li>Open a second command shell window, and change to the tools&nbsp;folder.</li>
+</li><li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
 
 <li>Start simulation of the Test model.</li>
 
 <li>When the compilation is finished and the simulation has started, execute e.g.
 
-<pre style=\"font-size: 12px;\">python3 site1-protocol.py i 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 50</pre>
+<pre style=\"font-size: 12px;\">python3 site1-protocol.py in 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 50</pre>
 
 in the second shell window to send a series of 50 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 50 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
@@ -360,5 +365,15 @@ in the second shell window to send a series of 50 incoming messages while the si
 
 <img src=\"modelica://XInTheLoop/Resources/Images/site1-test-plot.png\">
 
+<h4 id=\"wet\">Wet Run</h4><div>To test this against a real hardware or some other external system, the protocol implemented in this example must also be implemented in a hardware/external I/O application that acts like a UDP service abstraction layer above the actual hardware or external system. The Python script implementation used for the dry run above can be used as an inspiration, but other programming languages able to do UDP communication can also be used, e.g. C/C++ or LabView.</div><div><br></div><div>To develop a similar protocol tailored to your external system, a custom <b>sync</b> block is needed, and we recommend using the <a href=\"XInTheLoop.Examples.Site1.Blocks.Sync\">one in this example</a> as a base and adapt it to the custom set of input control values and output status/measurement values needed for your external system. If you also need some input control bits and/or output status bits packed as integer(s), then custom blocks for packing/unpacking these bits can be developed by using the blocks in this example as basis and adapt them to the set(s) of bits needed for your external system. We also recommend making a custom Python script for testing the protocol, and the one in this example can easily be adapted to a different set of values inside the protocol packets.</div><div><br></div><div>A check-list for executing such a simulation should typically include these items, but depending on the actual system, other items might also need to be added:</div>
+
+<ol>
+<li>Verify that the hardware I/O application is configured to communicate as expected by the <b>sync</b> block. In this example, the parameters of <b>XInTheLoop.Blocks.Protocol.UDPSync</b>&nbsp;expect the application to run at \"127.0.0.1\" (localhost = at the same machine as the Modelica model), listening for UDP packets&nbsp;at port 10002, each containing a v2-header, 1 int, and 2 floats. Further, the application is expected to send UDP packets to port 10001, each containing a v2-header, 1 int, and 16 floats. When making your own protocol for a new external system, these parameters will probably have other values.</li><li>Make sure the external hardware is activated and is ready to communicate with the&nbsp;hardware I/O application.</li><li>Make sure the&nbsp;hardware I/O application is running and has enabled communication with Modelica (if optional). In this example, this can be verified by executing the <a href=\"#tool\">Python tool</a> in a command shell window<pre style=\"font-size: 12px;\">python3 site1-protocol.py in</pre>
+
+before starting the Modelica simulation. The output will then show packets sent from the hardware I/O application to Modelica. Remember to stop this Python script before starting the Modelica simulation.
+
+</li><li>Make sure the external system is in a state that makes it ready to be observed (and optionally controlled) by Modelica. This typically include that the FCS has fuel and is ready to start, battery is connected and functional, a load is ready to be applied, no errors present, etc.</li><li>If remote control of the external system from Modelica is optional, it can be enabled now.</li><li>Execute the Modelica simulation now (or after the next step if the model assumes a running state from start).</li><li>If any start-up sequence is manual and not enabled for remote control, then execute such a sequence now.</li><li>If any shut-down sequence is manual and not enabled for remote control, then execute such a sequence after the simulation is finished.</li>
+
+</ol><h4>Protocol Packet Details</h4><div>In each UDP packet sent in this protocol there is a leading header:</div><div><ol><li>A constant 32-bit \"magic\" integer number to reduce the risk of interpreting a random missent packet from another application as a valid packet in this protocol.</li><li>A 32-bit integer version number that should be increased when the packet format is changed in a way that is not backward compatible. If only appending new values to the packet payload format, then the version number normally does not need to change because extra content at the end should be ignored by the receiver.</li><li>A 16-bit integer packet sequence number incremented by the sender for each packet. The counter is independent for each direction. When a counter value exceeds 16 bits, it wraps around to zero again.</li><li>A 16-bit integer received packet sequence number containing a copy of the packet sequence number from the last received packet in the reverse direction. In the Python script of this example, the last packet in each direction is written to temporary files to remember these sequence numbers, but in a typical hardware/external I/O application, it normally is much easier to use internal variables instead.</li></ol><div>followed by a payload:</div></div><div><ol><li>A vector of 32-bit integer values.</li><li>A vector of 32-bit float values.</li></ol><div>All values are stored as little endian. A protocol implementation for one particular external system will need a fixed packet format in each direction. For each direction, all of these must be defined:</div></div><div><ul><li>Address/IP (in this example, localhost is assumed) and port of the receiving end.</li><li>Header version number.</li><li>Payload vector sizes.</li><li>Meta information for each value in the payload vectors.</li></ul></div>
 </body></html>"));
 end Site1;

@@ -23,10 +23,11 @@
 # All values in little-endian
 
 # Usage to receive incoming messages:  python3 site1-protocol.py
-# Usage to receive outgoing messages:  python3 site1-protocol.py o
-# Usage to send one incoming message:  python3 site1-protocol.py i {4x uint8} {16x float}
-# Usage to send 10 outgoing messages:  python3 site1-protocol.py o {1x uint8} {2x float} 10 {delta vector}
-#  Optional: Vector of delta values between each message in a series (default 1)
+# Usage to receive outgoing messages:  python3 site1-protocol.py out
+# Usage to send one incoming message:  python3 site1-protocol.py in {4x uint8} {16x float}
+# Usage to send 10 outgoing messages:  python3 site1-protocol.py out {1x uint8} {2x float} 10 {delta vector}
+#  Optional: Vector of delta values between each message in a series (default +1)
+# Any missing values in the vectors are assumed to be 1 (default value)
 
 from pathlib import Path
 from socket import socket, AF_INET, SOCK_DGRAM
@@ -59,7 +60,7 @@ def savefile_seq(direction : int, send_or_receive : int) -> int:
 
 direction = argv[1] if len(argv) > 1 else 'i'
 if not direction in ('i', 'in', 'o', 'out'):
-  raise Exception(f'Usage: python3 {argv[0]} [[i|o] [payload vector [count [delta vector]]]]')
+  raise Exception(f'Usage: python3 {argv[0]} [[in|out] [payload vector [count [delta vector]]]]')
 index = 1 if direction[0] == 'i' else 0
 
 if len(argv) < 3:
