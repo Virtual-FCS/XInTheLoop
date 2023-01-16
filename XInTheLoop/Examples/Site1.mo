@@ -337,7 +337,7 @@ This example implements a UDP protocol to exchange values with an external syste
 <h4 id=\"tool\">Python Tool</h4>
 In both the <a href=\"#dry\">Dry Run</a> and the <a href=\"#wet\">Wet Run</a> sections below, the same Python tool is used. It is assumed your PC has Python (version 3 or above) installed. If not, it can be installed from the Microsoft Store App.
 
-The Python file <tt>site1-protocol.py</tt> is located in the <tt>tools</tt> folder below the folder where <a href=\"modelica://XInTheLoop/\">this library</a> is installed or cloned from github.
+The Python file <tt>site1-protocol.py</tt> is located in the <tt>XInTheLoop/Resources/tools/</tt> folder - where <a href=\"modelica://XInTheLoop\">this library</a> is installed or cloned from github.
 
 <h4 id=\"dry\">Dry Run</h4>
 To test this without a real hardware I/O application present, use the <a href=\"#tool\">Python tool included in the tools folder</a>.
