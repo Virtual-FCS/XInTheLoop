@@ -42,7 +42,15 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       Line(points = {{-19, -30}, {-11, -30}, {-11, -6}, {-2, -6}}, color = {0, 0, 127}));
   protected
     annotation(
-      experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1));
+      experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1),
+      Documentation(info = "<html><head></head><body>
+A test model that creates a very&nbsp;simple table based input value sequence with a duration of 60 seconds:
+<div><ul>
+<li>Start-up</li>
+<li>Simple load setpoint pattern</li>
+<li>Shut-down</li></ul>
+<div>It is used in the <b>Dry Run</b> test procedure of <a href=\"modelica://XInTheLoop.Examples.Site1\">this site</a>.</div></div>
+</body></html>"));
   end Test;
 
   model LoadProfile "Example model demonstrating exchanging values with this site using a realistic load profile of a luggage transportation vehicle from a data file"
@@ -115,7 +123,17 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
     annotation(
       experiment(StartTime = 0, StopTime = 580, Tolerance = 1e-06, Interval = 1),
       __OpenModelica_commandLineOptions = "--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian,newInst",
-      __OpenModelica_simulationFlags(lv = "LOG_STATS", outputFormat = "mat", s = "dassl"));
+      __OpenModelica_simulationFlags(lv = "LOG_STATS", outputFormat = "mat", s = "dassl"),
+  Documentation(info = "<html><head></head><body>
+A test model that creates a table based input value sequence with a duration of nearly 10 minutes:
+<div><ul>
+<li>Start-up</li>
+<li>Read load setpoint pattern from a datafile containing a realistic vehicle load profile </li>
+<li>Shut-down</li></ul>
+<div>When simulating this with hardware in the loop that is able to handle such a load profile, you should expect a measured load that follows the load setpoint closely, like in the plot below.
+See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Examples.Site1\">this site</a>.</div></div>
+<img src=\"modelica://XInTheLoop/Resources/Images/site1-loadprofile-plot.png\">
+</body></html>"));
   end LoadProfile;
 
   package Blocks "Site1-Specific Blocks"
@@ -351,7 +369,7 @@ To test this without a real hardware I/O application present, use the <a href=\"
 
 </li><li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
 
-<li>Start simulation of the Test model.</li>
+<li>Start simulation of the <a href=\"modelica://XInTheLoop.Examples.Site1.Test\">Test</a> model.</li>
 
 <li>When the compilation is finished and the simulation has started, execute e.g.
 
@@ -365,7 +383,10 @@ in the second shell window to send a series of 50 incoming messages while the si
 
 <img src=\"modelica://XInTheLoop/Resources/Images/site1-test-plot.png\">
 
-<h4 id=\"wet\">Wet Run</h4><div>To test this against a real hardware or some other external system, the protocol implemented in this example must also be implemented in a hardware/external I/O application that acts like a UDP service abstraction layer above the actual hardware or external system. The Python script implementation used for the dry run above can be used as an inspiration, but other programming languages able to do UDP communication can also be used, e.g. C/C++ or LabView.</div><div><br></div><div>To develop a similar protocol tailored to your external system, a custom <b>sync</b> block is needed, and we recommend using the <a href=\"XInTheLoop.Examples.Site1.Blocks.Sync\">one in this example</a> as a base and adapt it to the custom set of input control values and output status/measurement values needed for your external system. If you also need some input control bits and/or output status bits packed as integer(s), then custom blocks for packing/unpacking these bits can be developed by using the blocks in this example as basis and adapt them to the set(s) of bits needed for your external system. We also recommend making a custom Python script for testing the protocol, and the one in this example can easily be adapted to a different set of values inside the protocol packets.</div><div><br></div><div>A check-list for executing such a simulation should typically include these items, but depending on the actual system, other items might also need to be added:</div>
+<h4 id=\"wet\">Wet Run</h4>
+<div>To test this against a real hardware or some other external system, the protocol implemented in this example must also be implemented in a hardware/external I/O application that acts like a UDP service abstraction layer above the actual hardware or external system. The Python script implementation used for the dry run above can be used as an inspiration, but other programming languages able to do UDP communication can also be used, e.g. C/C++ or LabView.</div><div><br></div>
+<div>To develop a similar protocol tailored to your external system, a custom <b>sync</b> block is needed, and we recommend using the <a href=\"modelica://XInTheLoop.Examples.Site1.Blocks.Sync\">one in this example</a> as a base and adapt it to the custom set of input control values and output status/measurement values needed for your external system. If you also need some input control bits and/or output status bits packed as integer(s), then custom blocks for packing/unpacking these bits can be developed by using the blocks in this example as basis and adapt them to the set(s) of bits needed for your external system. We also recommend making a custom Python script for testing the protocol, and the one in this example can easily be adapted to a different set of values inside the protocol packets.</div><div><br></div>
+<div>A check-list for executing such a simulation should typically include these items, but depending on the actual system, other items might also need to be added:</div>
 
 <ol>
 <li>Verify that the hardware I/O application is configured to communicate as expected by the <b>sync</b> block. In this example, the parameters of <b>XInTheLoop.Blocks.Protocol.UDPSync</b>&nbsp;expect the application to run at \"127.0.0.1\" (localhost = at the same machine as the Modelica model), listening for UDP packets&nbsp;at port 10002, each containing a v2-header, 1 int, and 2 floats. Further, the application is expected to send UDP packets to port 10001, each containing a v2-header, 1 int, and 16 floats. When making your own protocol for a new external system, these parameters will probably have other values.</li><li>Make sure the external hardware is activated and is ready to communicate with the&nbsp;hardware I/O application.</li><li>Make sure the&nbsp;hardware I/O application is running and has enabled communication with Modelica (if optional). In this example, this can be verified by executing the <a href=\"#tool\">Python tool</a> in a command shell window<pre style=\"font-size: 12px;\">python3 site1-protocol.py in</pre>
