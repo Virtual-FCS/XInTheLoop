@@ -30,5 +30,8 @@ equation
   end for;
   assert(unpackInt.u == packInt.y, "TestPack: " + int2hex(unpackInt.u) + "->Unpack->Pack->" + int2hex(packInt.y));
   annotation(
-    experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.0151515));
+    experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.0151515),
+    Documentation(info = "<html><head></head><body>
+Test the basic bitwise integer pack and unpack operations. A set of integer values are first unpacked into a vector, then packed into an integer again (using the same n_bits configuration), and finally compute the difference between the input and output integer value. This difference should be zero for all input integer values.
+</body></html>"));
 end TestPack;

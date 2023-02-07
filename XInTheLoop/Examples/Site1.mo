@@ -267,7 +267,11 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
         Line(points = {{-120, -90}, {-40, -90}, {-40, -6}, {-10, -6}, {-10, 0}}, color = {255, 127, 0}));
       connect(packInt.y, y) annotation(
         Line(points = {{12, 0}, {104, 0}, {104, 0}, {110, 0}}, color = {255, 127, 0}));
-    end PackControlBits;
+    annotation(
+        Documentation(info = "<html><head></head><body>
+Pack all control bits into an integer output.
+</body></html>"));
+end PackControlBits;
 
     block UnpackStatusBits "Unpack all status bits from an integer"
       extends Modelica.Blocks.Icons.IntegerBlock;
@@ -347,7 +351,11 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
         Line(points = {{62, 0}, {80, 0}, {80, -78}, {110, -78}}, color = {255, 0, 255}));
       connect(unpackInt2Bools.y[13], yModelicaHeartbeat) annotation(
         Line(points = {{62, 0}, {80, 0}, {80, -94}, {110, -94}}, color = {255, 0, 255}));
-    end UnpackStatusBits;
+    annotation(
+        Documentation(info = "<html><head></head><body>
+Unpack all status bits from an integer input.
+</body></html>"));
+end UnpackStatusBits;
   end Blocks;
   annotation(
     Documentation(info = "<html><head></head><body>
