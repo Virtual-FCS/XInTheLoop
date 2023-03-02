@@ -17,8 +17,9 @@ package XInTheLoop "Components for X-in-the-Loop functionality"
 <div>Topic: FCH-01-3-2019 - Cyber-physical platform for hybrid Fuel Cell Systems.</div>
 </div></body></html>", revisions = "<html><head></head><body>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\"><tbody>
-<tr><td>Future version</td><td>Not yet released</td><td>Enhanced documentation, and support <a href=\"modelica://Modelica\">Modelica</a> v4.</td></tr>
-<tr><td>Version 0.1.0-beta</td><td>2022-11-29</td><td>Initial public release.</td></tr>
+<tr><td>Future version</td><td>Not yet released</td><td>Enhanced documentation, and support <a href=\"modelica://Modelica\">Modelica Standard Library</a> v4.0.0</td></tr>
+<tr><td>Version 0.1.1-beta</td><td>2022-11-29</td><td>Live demonstration at M36 meeting</td></tr>
+<tr><td>Version 0.1.0</td><td>2022-09-09</td><td>Initial release</td></tr>
 </tbody></table>
 </body></html>"));
 end XInTheLoop;
