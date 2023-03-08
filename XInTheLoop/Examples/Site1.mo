@@ -144,7 +144,7 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
       import XInTheLoop.Functions.bitmask;
       Modelica.Blocks.Interfaces.IntegerInput uControlBits annotation(
         Placement(visible = true, transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 16, nFloatsOut = 2) annotation(
+      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 18, nFloatsOut = 2, real_time = true, vIn = 3) annotation(
         Placement(visible = true, transformation(origin = {-20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.MathInteger.Sum sum(k = {1, -1}, nu = 2) annotation(
         Placement(visible = true, transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
@@ -190,6 +190,10 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
         Placement(visible = true, transformation(origin = {110, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.RealOutput yI_Load annotation(
         Placement(visible = true, transformation(origin = {110, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Blocks.Interfaces.RealOutput yP_StackFuel_In annotation(
+        Placement(visible = true, transformation(origin = {80, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {68, -96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Blocks.Interfaces.RealOutput yP_StackAir_In annotation(
+        Placement(visible = true, transformation(origin = {60, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {54, -112}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       connect(uControlBits, uDPSync.uIntegers[1]) annotation(
         Line(points = {{-120, 60}, {-40, 60}, {-40, 0}, {-32, 0}}, color = {255, 127, 0}));
@@ -216,32 +220,36 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
       connect(uDPSync.yFloats[4], yI_Stack) annotation(
         Line(points = {{-9, -8}, {80, -8}, {80, 76}, {110, 76}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[5], yT_Stack_In) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 62}, {110, 62}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[6], yT_Stack_Out) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 48}, {110, 48}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[7], yV_Batt) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 34}, {110, 34}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[8], yI_Batt) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 20}, {110, 20}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[9], ySOC) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 6}, {110, 6}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[10], yT_Batt) annotation(
-        Line(points = {{-9, -8}, {110, -8}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[11], yV_In_DcDc) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -22}, {110, -22}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[12], yI_In_DcDc) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -36}, {110, -36}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[13], yV_Out_DcDc) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -50}, {110, -50}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[14], yI_Out_DcDc) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -64}, {110, -64}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[15], yV_Load) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -78}, {110, -78}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[16], yI_Load) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -92}, {110, -92}}, color = {0, 0, 127}));
-      annotation(
-        Documentation(info = "<html><head></head><body>Sync outgoing values to and incoming values from an example external Site 1 using a UDP protocol.</body></html>"));
-    end Sync;
+    Line(points = {{-9, -8}, {80, -8}, {80, 62}, {110, 62}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[6], yT_Stack_Out) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, 48}, {110, 48}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[7], yV_Batt) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, 34}, {110, 34}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[8], yI_Batt) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, 20}, {110, 20}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[9], ySOC) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, 6}, {110, 6}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[10], yT_Batt) annotation(
+    Line(points = {{-9, -8}, {110, -8}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[11], yV_In_DcDc) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, -22}, {110, -22}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[12], yI_In_DcDc) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, -36}, {110, -36}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[13], yV_Out_DcDc) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, -50}, {110, -50}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[14], yI_Out_DcDc) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, -64}, {110, -64}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[15], yV_Load) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, -78}, {110, -78}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[16], yI_Load) annotation(
+    Line(points = {{-9, -8}, {80, -8}, {80, -92}, {110, -92}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[17], yP_StackFuel_In) annotation(
+    Line(points = {{-8, -8}, {80, -8}, {80, -110}}, color = {0, 0, 127}));
+  connect(uDPSync.yFloats[18], yP_StackAir_In) annotation(
+    Line(points = {{-8, -8}, {60, -8}, {60, -110}}, color = {0, 0, 127}));
+  annotation(
+    Documentation(info = "<html><head></head><body>Sync outgoing values to and incoming values from an example external Site 1 using a UDP protocol.</body></html>"));
+end Sync;
 
     block PackControlBits "Pack all control bits into an integer"
       extends Modelica.Blocks.Interfaces.IntegerSO;
