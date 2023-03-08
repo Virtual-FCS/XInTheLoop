@@ -152,43 +152,43 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
         Placement(visible = true, transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
       Modelica.Blocks.Interfaces.IntegerOutput ySeqOutAhead "Difference between the sequence number to be sent and the last reverse sequence number received" annotation(
         Placement(visible = true, transformation(origin = {10, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {10, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-      Modelica.Blocks.Interfaces.RealInput uDcDc_SP_req annotation(
+      Modelica.Blocks.Interfaces.RealInput uDcDc_SP_req(unit="A") annotation(
         Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealInput uLoad_SP_req annotation(
+      Modelica.Blocks.Interfaces.RealInput uLoad_SP_req(unit="W") annotation(
         Placement(visible = true, transformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       Modelica.Blocks.Interfaces.IntegerOutput yStatusBits annotation(
         Placement(visible = true, transformation(origin = {40, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {40, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-      Modelica.Blocks.Interfaces.RealOutput yDcDc_SP annotation(
+      Modelica.Blocks.Interfaces.RealOutput yDcDc_SP(unit="A") annotation(
         Placement(visible = true, transformation(origin = {60, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {60, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-      Modelica.Blocks.Interfaces.RealOutput yLoad_SP annotation(
+      Modelica.Blocks.Interfaces.RealOutput yLoad_SP(unit="W") annotation(
         Placement(visible = true, transformation(origin = {80, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {80, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-      Modelica.Blocks.Interfaces.RealOutput yV_Stack annotation(
+      Modelica.Blocks.Interfaces.RealOutput yV_Stack(unit="V") annotation(
         Placement(visible = true, transformation(origin = {110, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yI_Stack annotation(
+      Modelica.Blocks.Interfaces.RealOutput yI_Stack(unit="A") annotation(
         Placement(visible = true, transformation(origin = {110, 76}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 76}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yT_Stack_In annotation(
+      Modelica.Blocks.Interfaces.RealOutput yT_Stack_In(unit="degC") annotation(
         Placement(visible = true, transformation(origin = {110, 62}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yT_Stack_Out annotation(
+      Modelica.Blocks.Interfaces.RealOutput yT_Stack_Out(unit="degC") annotation(
         Placement(visible = true, transformation(origin = {110, 48}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yV_Batt annotation(
+      Modelica.Blocks.Interfaces.RealOutput yV_Batt(unit="V") annotation(
         Placement(visible = true, transformation(origin = {110, 34}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 34}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yI_Batt annotation(
+      Modelica.Blocks.Interfaces.RealOutput yI_Batt(unit="A") annotation(
         Placement(visible = true, transformation(origin = {110, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput ySOC annotation(
+      Modelica.Blocks.Interfaces.RealOutput ySOC(unit="1/100") annotation(
         Placement(visible = true, transformation(origin = {110, 6}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 6}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yT_Batt annotation(
+      Modelica.Blocks.Interfaces.RealOutput yT_Batt(unit="degC") annotation(
         Placement(visible = true, transformation(origin = {110, -8}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yV_In_DcDc annotation(
+      Modelica.Blocks.Interfaces.RealOutput yV_In_DcDc(unit="V") annotation(
         Placement(visible = true, transformation(origin = {110, -22}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yI_In_DcDc annotation(
+      Modelica.Blocks.Interfaces.RealOutput yI_In_DcDc(unit="A") annotation(
         Placement(visible = true, transformation(origin = {110, -36}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yV_Out_DcDc annotation(
+      Modelica.Blocks.Interfaces.RealOutput yV_Out_DcDc(unit="V") annotation(
         Placement(visible = true, transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yI_Out_DcDc annotation(
+      Modelica.Blocks.Interfaces.RealOutput yI_Out_DcDc(unit="A") annotation(
         Placement(visible = true, transformation(origin = {110, -64}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yV_Load annotation(
+      Modelica.Blocks.Interfaces.RealOutput yV_Load(unit="V") annotation(
         Placement(visible = true, transformation(origin = {110, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.RealOutput yI_Load annotation(
+      Modelica.Blocks.Interfaces.RealOutput yI_Load(unit="A") annotation(
         Placement(visible = true, transformation(origin = {110, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       connect(uControlBits, uDPSync.uIntegers[1]) annotation(
