@@ -66,7 +66,7 @@ model UDPSync
     Placement(visible = true, transformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica_DeviceDrivers.Blocks.Packaging.SerialPackager.GetFloat getFloat(n = nFloatsIn) annotation(
     Placement(visible = true, transformation(origin = {50, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  DecodeHead decodeHead(magicNumber = createHead.magicNumber, version = vIn) annotation(
+  DecodeHead decodeHead(version = vIn) annotation(
     Placement(visible = true, transformation(origin = {80, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.IntegerOutput ySeqOut "Outgoing packet sequence number to be sent" annotation(
     Placement(visible = true, transformation(origin = {110, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
