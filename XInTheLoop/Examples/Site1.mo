@@ -144,7 +144,7 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
       import XInTheLoop.Functions.bitmask;
       Modelica.Blocks.Interfaces.IntegerInput uControlBits annotation(
         Placement(visible = true, transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 18, nFloatsOut = 2, real_time = true, vIn = 3) annotation(
+      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 21, nFloatsOut = 2, real_time = true, vIn = 3) annotation(
         Placement(visible = true, transformation(origin = {-20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.MathInteger.Sum sum(k = {1, -1}, nu = 2) annotation(
         Placement(visible = true, transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
@@ -194,6 +194,12 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
         Placement(visible = true, transformation(origin = {80, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {68, -96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.RealOutput yP_StackAir_In annotation(
         Placement(visible = true, transformation(origin = {60, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {54, -112}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Blocks.Interfaces.RealOutput yP_H0 annotation(
+        Placement(visible = true, transformation(origin = {40, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {38, -112}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Blocks.Interfaces.RealOutput yH2_Mass annotation(
+        Placement(visible = true, transformation(origin = {20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {4, -116}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Blocks.Interfaces.RealOutput yH2_Flow annotation(
+        Placement(visible = true, transformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {-12, -112}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       connect(uControlBits, uDPSync.uIntegers[1]) annotation(
         Line(points = {{-120, 60}, {-40, 60}, {-40, 0}, {-32, 0}}, color = {255, 127, 0}));
@@ -247,6 +253,12 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
         Line(points = {{-8, -8}, {80, -8}, {80, -110}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[18], yP_StackAir_In) annotation(
         Line(points = {{-8, -8}, {60, -8}, {60, -110}}, color = {0, 0, 127}));
+      connect(uDPSync.yFloats[19], yP_H0) annotation(
+        Line(points = {{-8, -8}, {40, -8}, {40, -110}}, color = {0, 0, 127}));
+      connect(uDPSync.yFloats[20], yH2_Mass) annotation(
+        Line(points = {{-8, -8}, {20, -8}, {20, -110}}, color = {0, 0, 127}));
+      connect(uDPSync.yFloats[21], yH2_Flow) annotation(
+        Line(points = {{-8, -8}, {0, -8}, {0, -110}}, color = {0, 0, 127}));
       annotation(
         Documentation(info = "<html><head></head><body>Sync outgoing values to and incoming values from an example external Site 1 using a UDP protocol.</body></html>"));
     end Sync;
