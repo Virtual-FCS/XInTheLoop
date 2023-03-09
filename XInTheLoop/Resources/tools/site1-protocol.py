@@ -16,16 +16,17 @@
 # - 1x unsigned byte: Status flags
 # - 1x unsigned byte: Control flags actually in use
 # - 2x 32 bit float SP actually in use: DcDc_SP [A], Load_SP [W]
-# - 16x 32 bit float: V_Stack [V], I_Stack [A], T_Stack_In [C], T_Stack_Out [C],
+# - 19x 32 bit float: V_Stack [V], I_Stack [A], T_Stack_In [C], T_Stack_Out [C],
 #                     V_Batt [V], I_Batt [A], SOC [1], T_Batt [C],
 #                     V_In_DcDc [V], I_In_DcDc [A], V_Out_DcDc [V], I_Out_DcDc [A],
-#                     V_Load [V], I_Load [A]
-#                     P_StackFuel_In [Pa], P_StackAir_In [Pa] (both as absolute pressure)
+#                     V_Load [V], I_Load [A],
+#                     P_StackFuel_In [Pa], P_StackAir_In [Pa], P_H0 [Pa], (all as absolute pressure)
+#                     H2_Mass [kg], H2_Flow [kg/s]
 # All values in little-endian
 
 # Usage to receive incoming messages:  python3 site1-protocol.py
 # Usage to receive outgoing messages:  python3 site1-protocol.py out
-# Usage to send one incoming message:  python3 site1-protocol.py in {4x uint8} {18x float}
+# Usage to send one incoming message:  python3 site1-protocol.py in {4x uint8} {21x float}
 # Usage to send 10 outgoing messages:  python3 site1-protocol.py out {1x uint8} {2x float} 10 {delta vector}
 #  Optional: Vector of delta values between each message in a series (default +1)
 # Any missing values in the vectors are assumed to be 1 (default value)
@@ -40,10 +41,10 @@ HOST = 'localhost'
 
 # Tuple of outgoing (index=0) and incoming (index=1) values
 PORT = (10002, 10001)
-FORMAT = ('<2L2H1L2f', '<2L2H4B18f')
+FORMAT = ('<2L2H1L2f', '<2L2H4B21f')
 MAGIC = (0x53434656, 0x73636676)  # Little endian (b'VFCS', b'vfcs')
 VER = (2, 3)
-TYPES = ((int,float,float), 4*(int,) + 18*(float,))
+TYPES = ((int,float,float), 4*(int,) + 21*(float,))
 
 fname = Path('_' + argv[0])
 
