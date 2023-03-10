@@ -11,7 +11,7 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {-80, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     XInTheLoop.Blocks.Customized.IntegerTable start(table = [0, 0; 15, 1; 290, 0]) annotation(
       Placement(visible = true, transformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.IntegerExpression loadSequence annotation(
+    Modelica.Blocks.Sources.IntegerExpression inactive annotation(
       Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     XInTheLoop.Examples.Site1.Blocks.PackControlBits packControlBits annotation(
       Placement(visible = true, transformation(origin = {-30, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -27,19 +27,23 @@ package Site1 "Example Site 1 for Hardware-in-the-loop (HIL) simulation"
     connect(remoteControl.y, packControlBits.uRemoteControl) annotation(
       Line(points = {{-69, 80}, {-60, 80}, {-60, 44}, {-42, 44}, {-42, 45}}, color = {255, 127, 0}));
     connect(keyOn.y, packControlBits.uKeyOn) annotation(
-      Line(points = {{-69, 40}, {-42, 40}, {-42, 39}}, color = {255, 127, 0}));
+      Line(points = {{-69, 40}, {-42, 40}}, color = {255, 127, 0}));
     connect(start.y, packControlBits.uStartButton) annotation(
-      Line(points = {{-68, 0}, {-60, 0}, {-60, 32}, {-42, 32}, {-42, 33}}, color = {255, 127, 0}));
-    connect(loadSequence.y, packControlBits.uLoadSequence) annotation(
+      Line(points = {{-68, 0}, {-60, 0}, {-60, 36}, {-42, 36}}, color = {255, 127, 0}));
+    connect(inactive.y, packControlBits.uLoadSequence) annotation(
+      Line(points = {{-68, -40}, {-52, -40}, {-52, 32}, {-42, 32}}, color = {255, 127, 0}));
+    connect(inactive.y, packControlBits.uExternalEms) annotation(
       Line(points = {{-68, -40}, {-52, -40}, {-52, 27}, {-42, 27}}, color = {255, 127, 0}));
     connect(packControlBits.y, sync.uControlBits) annotation(
       Line(points = {{-19, 36}, {-10, 36}, {-10, 6}, {-2, 6}}, color = {255, 127, 0}));
-    connect(dcdcSP.y, sync.uDcDc_SP_req) annotation(
+    connect(dcdcSP.y, sync.uDcDc_SP_add) annotation(
       Line(points = {{-19, 0}, {-2, 0}}, color = {0, 0, 127}));
+    connect(dcdcSP.y, sync.uDcDc_SP_ems) annotation(
+      Line(points = {{-18, 0}, {-14, 0}, {-14, -8}, {-2, -8}}, color = {0, 0, 127}));
+    connect(loadSP.y, sync.uLoad_SP_req) annotation(
+      Line(points = {{-19, -30}, {-11, -30}, {-11, -4}, {-2, -4}}, color = {0, 0, 127}));
     connect(sync.yStatusBits, unpackStatusBits.u) annotation(
       Line(points = {{14, 11}, {14, 70}, {28, 70}}, color = {255, 127, 0}));
-    connect(loadSP.y, sync.uLoad_SP_req) annotation(
-      Line(points = {{-19, -30}, {-11, -30}, {-11, -6}, {-2, -6}}, color = {0, 0, 127}));
   protected
     annotation(
       experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1),
@@ -56,7 +60,7 @@ A test model that creates a very&nbsp;simple table based input value sequence wi
   model LoadProfile "Example model demonstrating exchanging values with this site using a realistic load profile of a luggage transportation vehicle from a data file"
     extends Modelica.Icons.Example;
     XInTheLoop.Examples.Site1.Blocks.Sync sync annotation(
-      Placement(visible = true, transformation(origin = {10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {10, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.CombiTimeTable loadSP(fileName = Modelica.Utilities.Files.loadResource("modelica://XInTheLoop/Resources/Data/DriveProfile.mat"), shiftTime = -200, tableName = "X", tableOnFile = true) annotation(
       Placement(visible = true, transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.RealExpression dcdcSP annotation(
@@ -67,7 +71,7 @@ A test model that creates a very&nbsp;simple table based input value sequence wi
       Placement(visible = true, transformation(origin = {50, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     XInTheLoop.Blocks.Customized.IntegerTable keyOn(table = [0, 0; 10, 1; 570, 0]) annotation(
       Placement(visible = true, transformation(origin = {-80, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.IntegerExpression loadSequence annotation(
+    Modelica.Blocks.Sources.IntegerExpression inactive annotation(
       Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.IntegerExpression remoteControl(y = 1) annotation(
       Placement(visible = true, transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -84,42 +88,46 @@ A test model that creates a very&nbsp;simple table based input value sequence wi
     Modelica.Blocks.Math.MultiProduct powerLoad(nu = 2) annotation(
       Placement(visible = true, transformation(origin = {50, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-    connect(keyOn.y, packControlBits.uKeyOn) annotation(
-      Line(points = {{-69, 40}, {-42, 40}, {-42, 39}}, color = {255, 127, 0}));
-    connect(loadSequence.y, packControlBits.uLoadSequence) annotation(
-      Line(points = {{-68, -40}, {-52, -40}, {-52, 27}, {-42, 27}}, color = {255, 127, 0}));
-    connect(dcdcSP.y, sync.uDcDc_SP_req) annotation(
-      Line(points = {{-19, 0}, {-2, 0}}, color = {0, 0, 127}));
-    connect(sync.yStatusBits, unpackStatusBits.u) annotation(
-      Line(points = {{14, 11}, {14, 70}, {38, 70}}, color = {255, 127, 0}));
-    connect(packControlBits.y, sync.uControlBits) annotation(
-      Line(points = {{-19, 36}, {-10, 36}, {-10, 6}, {-2, 6}}, color = {255, 127, 0}));
-    connect(start.y, packControlBits.uStartButton) annotation(
-      Line(points = {{-68, 0}, {-60, 0}, {-60, 32}, {-42, 32}, {-42, 33}}, color = {255, 127, 0}));
     connect(remoteControl.y, packControlBits.uRemoteControl) annotation(
       Line(points = {{-69, 80}, {-60, 80}, {-60, 44}, {-42, 44}, {-42, 45}}, color = {255, 127, 0}));
+    connect(keyOn.y, packControlBits.uKeyOn) annotation(
+      Line(points = {{-69, 40}, {-42, 40}}, color = {255, 127, 0}));
+    connect(start.y, packControlBits.uStartButton) annotation(
+      Line(points = {{-68, 0}, {-60, 0}, {-60, 36}, {-42, 36}}, color = {255, 127, 0}));
+    connect(inactive.y, packControlBits.uLoadSequence) annotation(
+      Line(points = {{-68, -40}, {-52, -40}, {-52, 32}, {-42, 32}}, color = {255, 127, 0}));
+    connect(inactive.y, packControlBits.uExternalEms) annotation(
+      Line(points = {{-68, -40}, {-52, -40}, {-52, 27}, {-42, 27}}, color = {255, 127, 0}));
+    connect(packControlBits.y, sync.uControlBits) annotation(
+      Line(points = {{-18, 36}, {-10, 36}, {-10, 10}, {-2, 10}}, color = {255, 127, 0}));
+    connect(dcdcSP.y, sync.uDcDc_SP_add) annotation(
+      Line(points = {{-18, 0}, {-14, 0}, {-14, 4}, {-2, 4}}, color = {0, 0, 127}));
+    connect(dcdcSP.y, sync.uDcDc_SP_ems) annotation(
+      Line(points = {{-18, 0}, {-14, 0}, {-14, -4}, {-2, -4}}, color = {0, 0, 127}));
     connect(loadSP.y[1], sync.uLoad_SP_req) annotation(
-      Line(points = {{-18, -30}, {-10, -30}, {-10, -6}, {-2, -6}}, color = {0, 0, 127}));
+      Line(points = {{-18, -30}, {-10, -30}, {-10, 0}, {-2, 0}}, color = {0, 0, 127}));
+    connect(sync.yStatusBits, unpackStatusBits.u) annotation(
+      Line(points = {{14, 15}, {14, 70}, {38, 70}}, color = {255, 127, 0}));
     connect(sync.yV_Stack, powerStack.u[1]) annotation(
-      Line(points = {{22, 10}, {28, 10}, {28, 36}, {40, 36}}, color = {0, 0, 127}));
+      Line(points = {{21, 13}, {28, 13}, {28, 36}, {40, 36}}, color = {0, 0, 127}));
     connect(sync.yI_Stack, powerStack.u[2]) annotation(
-      Line(points = {{22, 8}, {30, 8}, {30, 34}, {40, 34}, {40, 36}}, color = {0, 0, 127}));
+      Line(points = {{21, 12}, {30, 12}, {30, 34}, {40, 34}, {40, 36}}, color = {0, 0, 127}));
     connect(sync.yI_Batt, powerBatt.u[1]) annotation(
-      Line(points = {{22, 2}, {40, 2}, {40, 6}}, color = {0, 0, 127}));
+      Line(points = {{21, 6}, {40, 6}}, color = {0, 0, 127}));
     connect(sync.yV_Batt, powerBatt.u[2]) annotation(
-      Line(points = {{22, 4}, {40, 4}, {40, 6}, {40, 6}}, color = {0, 0, 127}));
+      Line(points = {{21, 7}, {40, 7}, {40, 6}}, color = {0, 0, 127}));
     connect(sync.yV_In_DcDc, powerDcDcIn.u[1]) annotation(
-      Line(points = {{22, -2}, {34, -2}, {34, -18}, {40, -18}, {40, -20}}, color = {0, 0, 127}));
+      Line(points = {{21, 2}, {34, 2}, {34, -18}, {40, -18}, {40, -20}}, color = {0, 0, 127}));
     connect(sync.yI_In_DcDc, powerDcDcIn.u[2]) annotation(
-      Line(points = {{22, -4}, {32, -4}, {32, -20}, {40, -20}}, color = {0, 0, 127}));
+      Line(points = {{21, 0}, {32, 0}, {32, -20}, {40, -20}}, color = {0, 0, 127}));
     connect(sync.yV_Out_DcDc, powerDcDcOut.u[1]) annotation(
-      Line(points = {{22, -4}, {30, -4}, {30, -48}, {40, -48}, {40, -50}}, color = {0, 0, 127}));
+      Line(points = {{21, -1}, {30, -1}, {30, -48}, {40, -48}, {40, -50}}, color = {0, 0, 127}));
     connect(sync.yI_Out_DcDc, powerDcDcOut.u[2]) annotation(
-      Line(points = {{22, -6}, {28, -6}, {28, -50}, {40, -50}, {40, -50}}, color = {0, 0, 127}));
+      Line(points = {{21, -2}, {28, -2}, {28, -50}, {40, -50}}, color = {0, 0, 127}));
     connect(sync.yV_Load, powerLoad.u[1]) annotation(
-      Line(points = {{22, -8}, {26, -8}, {26, -78}, {40, -78}, {40, -80}}, color = {0, 0, 127}));
+      Line(points = {{21, -4}, {26, -4}, {26, -78}, {40, -78}, {40, -80}}, color = {0, 0, 127}));
     connect(sync.yI_Load, powerLoad.u[2]) annotation(
-      Line(points = {{22, -10}, {24, -10}, {24, -80}, {40, -80}, {40, -80}}, color = {0, 0, 127}));
+      Line(points = {{21, -5}, {24, -5}, {24, -80}, {40, -80}}, color = {0, 0, 127}));
     annotation(
       experiment(StartTime = 0, StopTime = 580, Tolerance = 1e-06, Interval = 1),
       __OpenModelica_commandLineOptions = "--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian,newInst",
@@ -144,7 +152,7 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
       import XInTheLoop.Functions.bitmask;
       Modelica.Blocks.Interfaces.IntegerInput uControlBits annotation(
         Placement(visible = true, transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 21, nFloatsOut = 2, real_time = true, vIn = 3) annotation(
+      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 21, nFloatsOut = 3, real_time = true, vIn = 3, vOut = 3) annotation(
         Placement(visible = true, transformation(origin = {-20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.MathInteger.Sum sum(k = {1, -1}, nu = 2) annotation(
         Placement(visible = true, transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
@@ -152,10 +160,12 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
         Placement(visible = true, transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
       Modelica.Blocks.Interfaces.IntegerOutput ySeqOutAhead "Difference between the sequence number to be sent and the last reverse sequence number received" annotation(
         Placement(visible = true, transformation(origin = {10, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {10, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-      Modelica.Blocks.Interfaces.RealInput uDcDc_SP_req annotation(
+      Modelica.Blocks.Interfaces.RealInput uDcDc_SP_add annotation(
         Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       Modelica.Blocks.Interfaces.RealInput uLoad_SP_req annotation(
-        Placement(visible = true, transformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+      Modelica.Blocks.Interfaces.RealInput uDcDc_SP_ems annotation(
+        Placement(visible = true, transformation(origin = {-120, -80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -80}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       Modelica.Blocks.Interfaces.IntegerOutput yStatusBits annotation(
         Placement(visible = true, transformation(origin = {40, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {40, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
       Modelica.Blocks.Interfaces.RealOutput yDcDc_SP annotation(
@@ -191,22 +201,24 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
       Modelica.Blocks.Interfaces.RealOutput yI_Load annotation(
         Placement(visible = true, transformation(origin = {110, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.RealOutput yP_StackFuel_In annotation(
-        Placement(visible = true, transformation(origin = {80, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {68, -96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {80, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {80, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.RealOutput yP_StackAir_In annotation(
-        Placement(visible = true, transformation(origin = {60, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {54, -112}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {60, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {60, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.RealOutput yP_H0 annotation(
-        Placement(visible = true, transformation(origin = {40, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {38, -112}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {40, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {40, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.RealOutput yH2_Mass annotation(
-        Placement(visible = true, transformation(origin = {20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {4, -116}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.RealOutput yH2_Flow annotation(
-        Placement(visible = true, transformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {-12, -112}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     equation
       connect(uControlBits, uDPSync.uIntegers[1]) annotation(
         Line(points = {{-120, 60}, {-40, 60}, {-40, 0}, {-32, 0}}, color = {255, 127, 0}));
-      connect(uDcDc_SP_req, uDPSync.uFloats[1]) annotation(
+      connect(uDcDc_SP_add, uDPSync.uFloats[1]) annotation(
         Line(points = {{-120, 0}, {-60, 0}, {-60, -6}, {-32, -6}}, color = {0, 0, 127}));
       connect(uLoad_SP_req, uDPSync.uFloats[2]) annotation(
-        Line(points = {{-120, -60}, {-60, -60}, {-60, -6}, {-32, -6}}, color = {0, 0, 127}));
+        Line(points = {{-120, -40}, {-60, -40}, {-60, -6}, {-32, -6}}, color = {0, 0, 127}));
+      connect(uDcDc_SP_ems, uDPSync.uFloats[3]) annotation(
+        Line(points = {{-120, -80}, {-60, -80}, {-60, -6}, {-32, -6}}, color = {0, 0, 127}));
       connect(uDPSync.ySeqOut, sum.u[1]) annotation(
         Line(points = {{-8, 8}, {6, 8}, {6, 20}, {10, 20}}, color = {255, 127, 0}));
       connect(uDPSync.ySeqRev, sum.u[2]) annotation(
@@ -267,31 +279,35 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
       extends Modelica.Blocks.Interfaces.IntegerSO;
       extends XInTheLoop.Blocks.Bitwise.Icons.BitPack;
       Modelica.Blocks.Interfaces.IntegerInput uRemoteControl annotation(
-        Placement(visible = true, transformation(origin = {-120, 90}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 90}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-120, 80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 90}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       Modelica.Blocks.Interfaces.IntegerInput uKeyOn annotation(
-        Placement(visible = true, transformation(origin = {-120, 30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 30}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-120, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 44}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       Modelica.Blocks.Interfaces.IntegerInput uStartButton annotation(
-        Placement(visible = true, transformation(origin = {-120, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       Modelica.Blocks.Interfaces.IntegerInput uLoadSequence annotation(
-        Placement(visible = true, transformation(origin = {-120, -90}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -90}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-      XInTheLoop.Blocks.Bitwise.PackInt packInt(nu = 4, n_bits = {1, 1, 1, 1}) annotation(
+        Placement(visible = true, transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -44}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+      Modelica.Blocks.Interfaces.IntegerInput uExternalEms annotation(
+        Placement(visible = true, transformation(origin = {-120, -80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -90}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+      XInTheLoop.Blocks.Bitwise.PackInt packInt(nu = 5, n_bits = fill(1, 5)) annotation(
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       connect(uRemoteControl, packInt.u[1]) annotation(
-        Line(points = {{-120, 90}, {-40, 90}, {-40, 6}, {-10, 6}, {-10, 0}}, color = {255, 127, 0}));
+        Line(points = {{-120, 80}, {-40, 80}, {-40, 4}, {-10, 4}, {-10, 0}}, color = {255, 127, 0}));
       connect(uKeyOn, packInt.u[2]) annotation(
-        Line(points = {{-120, 30}, {-60, 30}, {-60, 2}, {-10, 2}, {-10, 0}}, color = {255, 127, 0}));
+        Line(points = {{-120, 40}, {-60, 40}, {-60, 2}, {-10, 2}, {-10, 0}}, color = {255, 127, 0}));
       connect(uStartButton, packInt.u[3]) annotation(
-        Line(points = {{-120, -30}, {-60, -30}, {-60, -2}, {-10, -2}, {-10, 0}}, color = {255, 127, 0}));
+        Line(points = {{-120, 0}, {-10, 0}}, color = {255, 127, 0}));
       connect(uLoadSequence, packInt.u[4]) annotation(
-        Line(points = {{-120, -90}, {-40, -90}, {-40, -6}, {-10, -6}, {-10, 0}}, color = {255, 127, 0}));
+        Line(points = {{-120, -40}, {-60, -40}, {-60, -2}, {-10, -2}, {-10, 0}}, color = {255, 127, 0}));
+      connect(uExternalEms, packInt.u[5]) annotation(
+        Line(points = {{-120, -80}, {-40, -80}, {-40, -4}, {-10, -4}, {-10, 0}}, color = {255, 127, 0}));
       connect(packInt.y, y) annotation(
         Line(points = {{12, 0}, {104, 0}, {104, 0}, {110, 0}}, color = {255, 127, 0}));
-    annotation(
+      annotation(
         Documentation(info = "<html><head></head><body>
 Pack all control bits into an integer output.
 </body></html>"));
-end PackControlBits;
+    end PackControlBits;
 
     block UnpackStatusBits "Unpack all status bits from an integer"
       extends Modelica.Blocks.Icons.IntegerBlock;
@@ -300,14 +316,14 @@ end PackControlBits;
         Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       XInTheLoop.Blocks.Bitwise.UnpackInt unpackInt(n_bits = {8, 8, 16}) annotation(
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      XInTheLoop.Blocks.Bitwise.UnpackInt2Bools unpackInt2Bools(b = 13) annotation(
+      XInTheLoop.Blocks.Bitwise.UnpackInt2Bools unpackInt2Bools(b = 14) annotation(
         Placement(visible = true, transformation(origin = {50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.IntegerOutput yModeDcDc annotation(
-        Placement(visible = true, transformation(origin = {30, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {30, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+        Placement(visible = true, transformation(origin = {20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {30, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.IntegerOutput yModeFCM annotation(
-        Placement(visible = true, transformation(origin = {50, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {50, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+        Placement(visible = true, transformation(origin = {40, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {50, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.IntegerOutput yBoolBits "All Bool bits" annotation(
-        Placement(visible = true, transformation(origin = {70, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {70, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+        Placement(visible = true, transformation(origin = {60, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {70, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.BooleanOutput yRemoteControl annotation(
         Placement(visible = true, transformation(origin = {110, 94}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 94}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.BooleanOutput yKeyOn annotation(
@@ -334,15 +350,17 @@ end PackControlBits;
         Placement(visible = true, transformation(origin = {110, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.BooleanOutput yModelicaHeartbeat annotation(
         Placement(visible = true, transformation(origin = {110, -94}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -94}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Blocks.Interfaces.BooleanOutput yExternalEms annotation(
+        Placement(visible = true, transformation(origin = {80, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {90, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     equation
       connect(u, unpackInt.u) annotation(
         Line(points = {{-120, 0}, {-14, 0}, {-14, 0}, {-12, 0}}, color = {255, 127, 0}));
       connect(unpackInt.y[1], yModeDcDc) annotation(
-        Line(points = {{12, 0}, {30, 0}, {30, -110}, {30, -110}}, color = {255, 127, 0}));
+        Line(points = {{12, 0}, {20, 0}, {20, -110}}, color = {255, 127, 0}));
       connect(unpackInt.y[2], yModeFCM) annotation(
-        Line(points = {{12, 0}, {30, 0}, {30, -80}, {50, -80}, {50, -110}, {50, -110}}, color = {255, 127, 0}));
+        Line(points = {{12, 0}, {20, 0}, {20, -80}, {40, -80}, {40, -110}}, color = {255, 127, 0}));
       connect(unpackInt.y[3], yBoolBits) annotation(
-        Line(points = {{12, 0}, {30, 0}, {30, -80}, {70, -80}, {70, -110}, {70, -110}}, color = {255, 127, 0}));
+        Line(points = {{12, 0}, {20, 0}, {20, -80}, {60, -80}, {60, -110}}, color = {255, 127, 0}));
       connect(unpackInt.y[3], unpackInt2Bools.u) annotation(
         Line(points = {{12, 0}, {38, 0}, {38, 0}, {38, 0}}, color = {255, 127, 0}));
       connect(unpackInt2Bools.y[1], yRemoteControl) annotation(
@@ -371,11 +389,13 @@ end PackControlBits;
         Line(points = {{62, 0}, {80, 0}, {80, -78}, {110, -78}}, color = {255, 0, 255}));
       connect(unpackInt2Bools.y[13], yModelicaHeartbeat) annotation(
         Line(points = {{62, 0}, {80, 0}, {80, -94}, {110, -94}}, color = {255, 0, 255}));
-    annotation(
+      connect(unpackInt2Bools.y[14], yExternalEms) annotation(
+        Line(points = {{62, 0}, {80, 0}, {80, -110}}, color = {255, 0, 255}));
+      annotation(
         Documentation(info = "<html><head></head><body>
 Unpack all status bits from an integer input.
 </body></html>"));
-end UnpackStatusBits;
+    end UnpackStatusBits;
   end Blocks;
   annotation(
     Documentation(info = "<html><head></head><body>
@@ -401,7 +421,7 @@ To test this without a real hardware I/O application present, use the <a href=\"
 
 <li>When the compilation is finished and the simulation has started, execute e.g.
 
-<pre style=\"font-size: 12px;\">python3 site1-protocol.py in 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 50</pre>
+<pre style=\"font-size: 12px;\">python3 site1-protocol.py in 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 50</pre>
 
 in the second shell window to send a series of 50 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 50 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
