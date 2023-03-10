@@ -5,16 +5,17 @@
 # - Version number as 4 bytes unsigned integer
 # - Sequence number as 2 bytes unsigned integer (expected to increment for each message)
 # - Sequence number from last message in reverse direction as 2 bytes unsigned integer
-# - 1x unsigned byte: Control flags requested
-# - 2x 32 bit float: DcDc_SP_req [A], Load_SP_req [W]
+# - 1x unsigned 4 bytes integer: Control flags requested (RemoteControl, KeyOn, StartButton, LoadSequence, ExternalEms)
+# - 3x 32 bit float: DcDc_SP_add [A], Load_SP_req [W], DcDc_SP_ems [A]
 # Current Site1 incoming protocol message (in to Modelica) contains:
 # - Magic number as 4 bytes
 # - Version number as 4 bytes unsigned integer
 # - Sequence number as 2 bytes unsigned integer (expected to increment for each message)
 # - Sequence number from last message in reverse direction as 2 bytes unsigned integer
 # - 2x unsigned bytes: Mode_DcDc, Mode_FCM
-# - 1x unsigned byte: Status flags
-# - 1x unsigned byte: Control flags actually in use
+# - 1x unsigned 2 bytes integer : Status flags (including control flags actually in use)
+#   (RemoteControl, KeyOn, StartButton, LoadSequence, Ready, H2Supply, FMCHeartbeat,
+#    DcDcOk, Warning, Alarm, BatteryRelay, DcDcRelay, ModelicaHeartbeat, ExternalEms)
 # - 2x 32 bit float SP actually in use: DcDc_SP [A], Load_SP [W]
 # - 19x 32 bit float: V_Stack [V], I_Stack [A], T_Stack_In [C], T_Stack_Out [C],
 #                     V_Batt [V], I_Batt [A], SOC [1], T_Batt [C],
@@ -26,8 +27,8 @@
 
 # Usage to receive incoming messages:  python3 site1-protocol.py
 # Usage to receive outgoing messages:  python3 site1-protocol.py out
-# Usage to send one incoming message:  python3 site1-protocol.py in {4x uint8} {21x float}
-# Usage to send 10 outgoing messages:  python3 site1-protocol.py out {1x uint8} {2x float} 10 {delta vector}
+# Usage to send one incoming message:  python3 site1-protocol.py in {2x uint8} {1x uint16} {21x float}
+# Usage to send 10 outgoing messages:  python3 site1-protocol.py out {1x uint} {3x float} 10 {delta vector}
 #  Optional: Vector of delta values between each message in a series (default +1)
 # Any missing values in the vectors are assumed to be 1 (default value)
 
@@ -41,10 +42,10 @@ HOST = 'localhost'
 
 # Tuple of outgoing (index=0) and incoming (index=1) values
 PORT = (10002, 10001)
-FORMAT = ('<2L2H1L2f', '<2L2H4B21f')
+FORMAT = ('<2L2H1L3f', '<2L2H2B1H21f')
 MAGIC = (0x53434656, 0x73636676)  # Little endian (b'VFCS', b'vfcs')
-VER = (2, 3)
-TYPES = ((int,float,float), 4*(int,) + 21*(float,))
+VER = (3, 3)
+TYPES = ((int,) + 3*(float,), 3*(int,) + 21*(float,))
 
 fname = Path('_' + argv[0])
 
@@ -77,6 +78,8 @@ if len(argv) < 3:
       if values[0] == MAGIC[index] and values[1] == VER[index]:
         savefile(index, 1).write_bytes(package)
         print(f"seq=({values[2]}, {values[3]}), {values[4:]}")
+      else:
+        print("Error: Unknown magic number and/or version in header received!")
 
 # Sending packets
 
