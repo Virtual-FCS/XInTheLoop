@@ -152,8 +152,8 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
       import XInTheLoop.Functions.bitmask;
       Modelica.Blocks.Interfaces.IntegerInput uControlBits annotation(
         Placement(visible = true, transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 21, nFloatsOut = 3, real_time = true, vIn = 3, vOut = 3) annotation(
-        Placement(visible = true, transformation(origin = {-20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 22, nFloatsOut = 3, real_time = true, vIn = 3, vOut = 3) annotation(
+        Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.MathInteger.Sum sum(k = {1, -1}, nu = 2) annotation(
         Placement(visible = true, transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
       XInTheLoop.Blocks.Bitwise.AndInts andBitmask(b = bitmask(uDPSync.wSeq), nu = 1) annotation(
@@ -204,73 +204,77 @@ See also the <b>Wet Run</b> test procedure of <a href=\"modelica://XInTheLoop.Ex
         Placement(visible = true, transformation(origin = {80, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {80, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.RealOutput yP_StackAir_In annotation(
         Placement(visible = true, transformation(origin = {60, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {60, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-      Modelica.Blocks.Interfaces.RealOutput yP_H0 annotation(
+      Modelica.Blocks.Interfaces.RealOutput yP_0 annotation(
         Placement(visible = true, transformation(origin = {40, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {40, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.RealOutput yH2_Mass annotation(
         Placement(visible = true, transformation(origin = {20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       Modelica.Blocks.Interfaces.RealOutput yH2_Flow annotation(
         Placement(visible = true, transformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Blocks.Interfaces.RealOutput yP_H2_Supply annotation(
+        Placement(visible = true, transformation(origin = {-20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {-20, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     equation
       connect(uControlBits, uDPSync.uIntegers[1]) annotation(
-        Line(points = {{-120, 60}, {-40, 60}, {-40, 0}, {-32, 0}}, color = {255, 127, 0}));
+        Line(points = {{-120, 60}, {-60, 60}, {-60, 0}, {-52, 0}}, color = {255, 127, 0}));
       connect(uDcDc_SP_add, uDPSync.uFloats[1]) annotation(
-        Line(points = {{-120, 0}, {-60, 0}, {-60, -6}, {-32, -6}}, color = {0, 0, 127}));
+        Line(points = {{-120, 0}, {-70, 0}, {-70, -6}, {-52, -6}}, color = {0, 0, 127}));
       connect(uLoad_SP_req, uDPSync.uFloats[2]) annotation(
-        Line(points = {{-120, -40}, {-60, -40}, {-60, -6}, {-32, -6}}, color = {0, 0, 127}));
+        Line(points = {{-120, -40}, {-70, -40}, {-70, -6}, {-52, -6}}, color = {0, 0, 127}));
       connect(uDcDc_SP_ems, uDPSync.uFloats[3]) annotation(
-        Line(points = {{-120, -80}, {-60, -80}, {-60, -6}, {-32, -6}}, color = {0, 0, 127}));
+        Line(points = {{-120, -80}, {-70, -80}, {-70, -6}, {-52, -6}}, color = {0, 0, 127}));
       connect(uDPSync.ySeqOut, sum.u[1]) annotation(
-        Line(points = {{-8, 8}, {6, 8}, {6, 20}, {10, 20}}, color = {255, 127, 0}));
+        Line(points = {{-29, 8}, {6, 8}, {6, 20}, {10, 20}}, color = {255, 127, 0}));
       connect(uDPSync.ySeqRev, sum.u[2]) annotation(
-        Line(points = {{-8, 0}, {14, 0}, {14, 20}, {10, 20}}, color = {255, 127, 0}));
+        Line(points = {{-29, 0}, {14, 0}, {14, 20}, {10, 20}}, color = {255, 127, 0}));
       connect(sum.y, andBitmask.u[1]) annotation(
         Line(points = {{10, 42}, {10, 42}, {10, 60}, {10, 60}}, color = {255, 127, 0}));
       connect(andBitmask.y, ySeqOutAhead) annotation(
         Line(points = {{10, 82}, {10, 82}, {10, 110}, {10, 110}}, color = {255, 127, 0}));
       connect(uDPSync.yIntegers[1], yStatusBits) annotation(
-        Line(points = {{-9, -4}, {40, -4}, {40, 110}}, color = {255, 127, 0}));
+        Line(points = {{-29, -4}, {40, -4}, {40, 110}}, color = {255, 127, 0}));
       connect(uDPSync.yFloats[1], yDcDc_SP) annotation(
-        Line(points = {{-9, -8}, {60, -8}, {60, 110}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {60, -8}, {60, 110}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[2], yLoad_SP) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 110}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, 110}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[3], yV_Stack) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 90}, {110, 90}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, 90}, {110, 90}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[4], yI_Stack) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 76}, {110, 76}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, 76}, {110, 76}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[5], yT_Stack_In) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 62}, {110, 62}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, 62}, {110, 62}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[6], yT_Stack_Out) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 48}, {110, 48}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, 48}, {110, 48}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[7], yV_Batt) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 34}, {110, 34}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, 34}, {110, 34}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[8], yI_Batt) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 20}, {110, 20}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, 20}, {110, 20}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[9], ySOC) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, 6}, {110, 6}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, 6}, {110, 6}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[10], yT_Batt) annotation(
-        Line(points = {{-9, -8}, {110, -8}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {110, -8}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[11], yV_In_DcDc) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -22}, {110, -22}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, -22}, {110, -22}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[12], yI_In_DcDc) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -36}, {110, -36}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, -36}, {110, -36}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[13], yV_Out_DcDc) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -50}, {110, -50}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, -50}, {110, -50}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[14], yI_Out_DcDc) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -64}, {110, -64}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, -64}, {110, -64}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[15], yV_Load) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -78}, {110, -78}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, -78}, {110, -78}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[16], yI_Load) annotation(
-        Line(points = {{-9, -8}, {80, -8}, {80, -92}, {110, -92}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, -92}, {110, -92}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[17], yP_StackFuel_In) annotation(
-        Line(points = {{-8, -8}, {80, -8}, {80, -110}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {80, -8}, {80, -110}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[18], yP_StackAir_In) annotation(
-        Line(points = {{-8, -8}, {60, -8}, {60, -110}}, color = {0, 0, 127}));
-      connect(uDPSync.yFloats[19], yP_H0) annotation(
-        Line(points = {{-8, -8}, {40, -8}, {40, -110}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {60, -8}, {60, -110}}, color = {0, 0, 127}));
+      connect(uDPSync.yFloats[19], yP_0) annotation(
+        Line(points = {{-29, -8}, {40, -8}, {40, -110}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[20], yH2_Mass) annotation(
-        Line(points = {{-8, -8}, {20, -8}, {20, -110}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {20, -8}, {20, -110}}, color = {0, 0, 127}));
       connect(uDPSync.yFloats[21], yH2_Flow) annotation(
-        Line(points = {{-8, -8}, {0, -8}, {0, -110}}, color = {0, 0, 127}));
+        Line(points = {{-29, -8}, {0, -8}, {0, -110}}, color = {0, 0, 127}));
+      connect(uDPSync.yFloats[22], yP_H2_Supply) annotation(
+        Line(points = {{-28, -8}, {-20, -8}, {-20, -110}}, color = {0, 0, 127}));
       annotation(
         Documentation(info = "<html><head></head><body>Sync outgoing values to and incoming values from an example external Site 1 using a UDP protocol.</body></html>"));
     end Sync;
@@ -421,7 +425,7 @@ To test this without a real hardware I/O application present, use the <a href=\"
 
 <li>When the compilation is finished and the simulation has started, execute e.g.
 
-<pre style=\"font-size: 12px;\">python3 site1-protocol.py in 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 50</pre>
+<pre style=\"font-size: 12px;\">python3 site1-protocol.py in 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 50</pre>
 
 in the second shell window to send a series of 50 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 50 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
