@@ -16,13 +16,13 @@
 # - 1x unsigned 2 bytes integer : Status flags (including control flags actually in use)
 #   (RemoteControl, KeyOn, StartButton, LoadSequence, Ready, H2Supply, FMCHeartbeat,
 #    DcDcOk, Warning, Alarm, BatteryRelay, DcDcRelay, ModelicaHeartbeat, ExternalEms)
-# - 2x 32 bit float SP actually in use: DcDc_SP [A], Load_SP [W]
-# - 19x 32 bit float: V_Stack [V], I_Stack [A], T_Stack_In [C], T_Stack_Out [C],
+# - 22x 32 bit float: DcDc_SP [A], Load_SP [W], (both are SP actually in use)
+#                     V_Stack [V], I_Stack [A], T_Stack_In [C], T_Stack_Out [C],
 #                     V_Batt [V], I_Batt [A], SOC [1], T_Batt [C],
 #                     V_In_DcDc [V], I_In_DcDc [A], V_Out_DcDc [V], I_Out_DcDc [A],
 #                     V_Load [V], I_Load [A],
 #                     P_StackFuel_In [Pa], P_StackAir_In [Pa], P_0 [Pa], (all as absolute pressure)
-#                     H2_Mass [kg], H2_Flow, [kg/s]
+#                     H2_Mass [kg], H2_Flow [kg/s],
 #                     P_H2_Supply [Pa], (as absolute pressure)
 # All values in little-endian
 
