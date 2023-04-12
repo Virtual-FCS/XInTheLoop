@@ -16,3 +16,7 @@ The Site1 example is a test model and interfacing blocks for one particular exte
 
 - Modelica v4.0.0
 - Modelica_DeviceDrivers v2.1.0
+
+## Known Issue
+
+Due to a [bug in OMEdit v1.20 for Windows](https://github.com/OpenModelica/OpenModelica/issues/10132), models using this library from that OMEdit version need to add `-lws2_32` to the _C/C++ Compiler Flags (Optional)_ in the _General_ tab of _Simulation Setup_ to compensate for the bug as described in https://github.com/modelica-3rdparty/Modelica_DeviceDrivers/issues/369.
