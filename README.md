@@ -15,7 +15,7 @@ The Site1 example is a test model and interfacing blocks for one particular exte
 ## Dependencies
 
 - Modelica v4.0.0
-- Modelica_DeviceDrivers v2.1.0
+- Modelica_DeviceDrivers v2.1.1
 
 ## Known Issue
 
