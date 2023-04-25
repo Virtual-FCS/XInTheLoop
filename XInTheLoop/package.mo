@@ -4,7 +4,7 @@ package XInTheLoop "Components for X-in-the-Loop functionality"
   annotation(
     preferredView = "info",
     version = "0.2.0-dev",
-    uses(Modelica(version = "4.0.0"), Modelica_DeviceDrivers(version = "2.1.0")),
+    uses(Modelica(version = "4.0.0"), Modelica_DeviceDrivers(version = "2.1.1")),
     Documentation(info = "<html><head></head><body>This package enables an external system in the loop while simulating your model. A typical use case is to exchange the needed set of values between a high-level controller model and a low level hardware controller process.<div><br></div>
 <div>In our <a href=\"modelica://XInTheLoop.Examples.Site1\">main example</a>, the hardware is a Fuel Cell System (FCS) that consists of a Fuel Cell, a DC-DC-converter, a battery, and a variable load. The UDP protocol between the model and the low-level hardware controller is adapted to this, but any user can make customized versions to support other external systems by reusing a set of generic blocks.
 <h4>Known Issue</h4>
