@@ -19,9 +19,19 @@ models using this library from that OMEdit version need to add <tt>-lws2_32</tt>
 <div>This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 875087.</div>
 <div>Programme: H2020-EU.3.4.6.1. - Reduce the production cost of fuel cell systems to be used in transportation applications, while increasing their lifetime to levels which can compete with conventional technologies.</div>
 <div>Topic: FCH-01-3-2019 - Cyber-physical platform for hybrid Fuel Cell Systems.</div>
+<h4>License</h4>
+This library is shared under an MIT license. For more information, please see the file LICENSE.
 </div></body></html>", revisions = "<html><head></head><body>
+<p>
+<a href=\"https://doi.org/10.5281/zenodo.7697300\"><img src=\"https://zenodo.org/badge/DOI/10.5281/zenodo.7697300.svg\" alt=\"DOI 10.5281/zenodo.7697300\"></a>
+is the DOI number to use when citing all (including future) versions of this library.
+When clicking the DOI above, it will resolve to the DOI information of the currently latest version, and the same page also contains a section with DOI numbers to use for each released version when citing one particular version.
+</p>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\"><tbody>
-<tr><td>Future version</td><td>Not yet released</td><td>Enhanced documentation, and support <a href=\"modelica://Modelica\">Modelica Standard Library</a> v4.0.0</td></tr>
+<!--
+<tr><td>Future version</td><td>Not yet released</td><td>Enhanced documentation?</td></tr>
+-->
+<tr><td>Version 0.2.0-beta</td><td>2023-04-25</td><td>Live demonstration at M40 meeting - supporting external EMS and <a href=\"modelica://Modelica\">Modelica Standard Library</a> v4.0.0 </td></tr>
 <tr><td>Version 0.1.1-beta</td><td>2022-11-29</td><td>Live demonstration at M36 meeting</td></tr>
 <tr><td>Version 0.1.0</td><td>2022-09-09</td><td>Initial release</td></tr>
 </tbody></table>
