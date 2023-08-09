@@ -48,7 +48,8 @@ MAGIC = (0x53434656, 0x73636676)  # Little endian (b'VFCS', b'vfcs')
 VER = (3, 3)
 TYPES = ((int,) + 3*(float,), 3*(int,) + 22*(float,))
 
-fname = Path('_' + argv[0])
+fname = Path(argv[0])
+fname = fname.parent / ('_' + fname.name)
 
 def savefile(direction : int, send_or_receive : int) -> Path:
   """Return Path object storing the last package."""
