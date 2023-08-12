@@ -32,4 +32,4 @@ Due to a [bug in OMEdit v1.20 for Windows](https://github.com/OpenModelica/OpenM
 
 ## License
 
-This library is shared under an MIT license. For more information, please see the file LICENSE.
+This library is shared under an MIT license. For more information, please see the [LICENSE file](LICENSE).
