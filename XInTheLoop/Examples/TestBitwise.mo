@@ -42,5 +42,8 @@ equation
     Line(points = {{21, 40}, {48, 40}, {48, 24}, {60, 24}, {60, 20}}, color = {255, 127, 0}));
 protected
   annotation(
-    experiment(StartTime = 0, StopTime = 2, Tolerance = 1e-06, Interval = 0.004));
+    experiment(StartTime = 0, StopTime = 2, Tolerance = 1e-06, Interval = 0.004),
+    Documentation(info = "<html><head></head><body>
+Test the basic bitwise integer operations.
+</body></html>"));
 end TestBitwise;

@@ -15,7 +15,10 @@ package Bitwise "Bitwise integer operation blocks"
       y := Functions.and_ints(u[i], y);
     end for;
     annotation(
-      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "AND")}));
+      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "AND")}),
+  Documentation(info = "<html><head></head><body>
+Output bitwise AND between input 32 bit integers.
+</body></html>"));
   end AndInts;
 
   block OrInts "Output bitwise OR between input 32 bit integers"
@@ -29,7 +32,10 @@ package Bitwise "Bitwise integer operation blocks"
       y := Functions.or_ints(u[i], y);
     end for;
     annotation(
-      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "OR")}));
+      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "OR")}),
+      Documentation(info = "<html><head></head><body>
+Output bitwise OR between input 32 bit integers.
+</body></html>"));
   end OrInts;
 
   block LeftShiftInt "Output bitwise LEFT SHIFT of input 32 bit integer"
@@ -39,7 +45,10 @@ package Bitwise "Bitwise integer operation blocks"
   algorithm
     y := Functions.lshift_int(u, b);
     annotation(
-      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "<<%b")}));
+      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "<<%b")}),
+      Documentation(info = "<html><head></head><body>
+Output bitwise LEFT SHIFT of input 32 bit integer.
+</body></html>"));
   end LeftShiftInt;
 
   block RightShiftInt "Output bitwise RIGHT SHIFT of input signed 32 bit integer"
@@ -49,7 +58,10 @@ package Bitwise "Bitwise integer operation blocks"
   algorithm
     y := Functions.rshift_int(u, b);
     annotation(
-      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "s>>%b")}));
+      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "s>>%b")}),
+      Documentation(info = "<html><head></head><body>
+Output bitwise RIGHT SHIFT of input signed 32 bit integer.
+</body></html>"));
   end RightShiftInt;
 
   block RightShiftUInt "Output bitwise RIGHT SHIFT of input unsigned 32 bit integer"
@@ -59,7 +71,10 @@ package Bitwise "Bitwise integer operation blocks"
   algorithm
     y := Functions.rshift_uint(u, b);
     annotation(
-      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "u>>%b")}));
+      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "u>>%b")}),
+      Documentation(info = "<html><head></head><body>
+Output bitwise RIGHT SHIFT of input unsigned 32 bit integer.
+</body></html>"));
   end RightShiftUInt;
 
   block PackInt "Pack specified number of bits into densely packed bits of 32 bit integer output"
@@ -79,7 +94,11 @@ package Bitwise "Bitwise integer operation blocks"
     for i in nu:(-1):1 loop
       y := lshift_int(y, n_bits[i]) + and_bitmask(u[i], n_bits[i]);
     end for;
-  end PackInt;
+  annotation(
+      Documentation(info = "<html><head></head><body>
+Pack specified number of bits from input integer vector into densely packed bits of 32 bit integer output.
+</body></html>"));
+end PackInt;
 
   block UnpackInt "Unpack specified number of bits from densely packed bits of 32 bit integer input"
     extends Modelica.Blocks.Icons.IntegerBlock;
@@ -102,7 +121,11 @@ package Bitwise "Bitwise integer operation blocks"
       y[i] := Functions.and_bitmask(temp, n_bits[i]);
       temp := Functions.rshift_uint(temp, n_bits[i]);
     end for;
-  end UnpackInt;
+  annotation(
+      Documentation(info = "<html><head></head><body>
+Unpack specified number of bits from densely packed bits of 32 bit integer input into output integer vector.
+</body></html>"));
+end UnpackInt;
 
   block UnpackInt2Bools "Unpack specified number of booleans from densely packed bits of 32 bit integer input"
     extends Modelica.Blocks.Icons.IntegerBlock;
@@ -122,7 +145,11 @@ package Bitwise "Bitwise integer operation blocks"
 //    Discarded alternative (how C would do it): y[i] = not (unpackInt.y[i] == 0);
       y[i] = unpackInt.y[i] >= 1;
     end for;
-  end UnpackInt2Bools;
+  annotation(
+      Documentation(info = "<html><head></head><body>
+Unpack specified number of booleans from densely packed bits of 32 bit integer input into output boolean vector.
+</body></html>"));
+end UnpackInt2Bools;
 
   package Icons "Partial blocks with icon annotations for bitwise integer operation blocks"
     extends Modelica.Icons.IconsPackage;
