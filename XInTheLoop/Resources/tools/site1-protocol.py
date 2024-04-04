@@ -41,7 +41,7 @@ site1 = Protocol(
     magic = 0x53434656, # Little endian b'VFCS'
     ver = 3,
     format = '1L3f',
-    types = (int,) + 3*(float,),
+    types = 1*(int,) + 3*(float,),
   ),
   iconfig = Config(
     port = 10001,
