@@ -30,6 +30,7 @@ from sys import argv
 from time import sleep
 
 class Config:
+  """Configuration of outgoing or incoming messages."""
   def __init__(self, port: int, magic: int, ver: int, format: str, types: tuple):
     self.port = port
     self.magic = magic
@@ -38,11 +39,12 @@ class Config:
     self.types = types
 
 class Protocol:
+  """XIntheLoop protocol with a pair of outgoing and incoming message configurations."""
   def __init__(self, oconfig: Config, iconfig: Config):
     fname = Path(argv[0])
     self.fname = fname.parent / ('_' + fname.name)
 
-    self.host = 'localhost'
+    self.host = 'localhost'  # The only host supported for now
 
     # Tuple of outgoing (index=0) and incoming (index=1) values
     self.cfg = (oconfig, iconfig)
@@ -82,7 +84,12 @@ class Protocol:
             print("Error: Unknown magic number and/or version in header received!")
 
     # Sending packets
-    values = tuple(t(argv[2+i] if 2+i < len(argv) else 1) for i, t in enumerate(self.cfg[index].types + (int,) + self.cfg[index].types))
+    values = tuple(
+      t(argv[2+i] if 2+i < len(argv) else 1)
+      for i, t in enumerate(
+        self.cfg[index].types + (int,) + self.cfg[index].types
+      )
+    )
     median = len(values) // 2
     n = values[median]
     delta = values[median + 1:]
