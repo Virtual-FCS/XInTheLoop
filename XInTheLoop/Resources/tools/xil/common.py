@@ -34,7 +34,7 @@ class Config:
     self.port = port
     self.magic = magic
     self.ver = ver
-    self.format = format
+    self.format = '<2L2H' + format  # Initial little-endian, magic, ver, 2*seq
     self.types = types
 
 class Protocol:

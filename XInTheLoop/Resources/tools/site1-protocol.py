@@ -40,14 +40,14 @@ site1 = Protocol(
     port = 10002,
     magic = 0x53434656, # Little endian b'VFCS'
     ver = 3,
-    format = '<2L2H1L3f',
+    format = '1L3f',
     types = (int,) + 3*(float,),
   ),
   iconfig = Config(
     port = 10001,
     magic = 0x73636676, # Little endian b'vfcs'
     ver = 3,
-    format = '<2L2H2B1H22f',
+    format = '2B1H22f',
     types = 3*(int,) + 22*(float,)
   ),
 )
