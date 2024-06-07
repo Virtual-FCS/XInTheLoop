@@ -78,7 +78,7 @@ class Protocol:
           self.savefile(index, 1).write_bytes(package)
           callback(package, values)
         else:
-          print("Error: Unknown magic number and/or version in header received!")
+          raise ValueError("Unknown magic number and/or version in header received!")
 
   def send_message(self, s: socket, index: int, values: list, callback: Callable[[], None] = print_message) -> None:
     seq = 1 + self.savefile_seq(index, 0)  # Last sent seq in same direction.
@@ -92,7 +92,7 @@ class Protocol:
     """Run one end (send or receive) of incoming/outgoing protocol"""
     direction = argv[1] if len(argv) > 1 else 'i'
     if not direction in ('i', 'in', 'o', 'out'):
-      raise Exception(f'Usage: python3 {argv[0]} [[in|out] [payload vector [count [delta vector]]]]')
+      raise ValueError(f'Unknown argument\nUsage: python3 {argv[0]} [[in|out] [payload vector [count [delta vector]]]]')
     index = 1 if direction[0] == 'i' else 0
 
     if len(argv) < 3:
