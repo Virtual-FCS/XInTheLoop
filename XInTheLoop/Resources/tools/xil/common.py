@@ -56,7 +56,7 @@ class Protocol:
   def savefile_seq(self, direction: int, send_or_receive: int) -> int:
     """Return sequence number of the last package or 0 if none."""
     try:
-      return unpack(self.cfg[direction].format, savefile(direction, send_or_receive).read_bytes())[2]
+      return unpack(self.cfg[direction].format, self.savefile(direction, send_or_receive).read_bytes())[2]
     except:
       return 0
 
