@@ -61,12 +61,15 @@ class Protocol:
     except:
       return 0
 
+  def socket(self):
+    return socket(AF_INET, SOCK_DGRAM)
+
   def print_message(package: bytes, values: list) -> None:
     print(f"{package.hex()} seq=({values[2]}, {values[3]}), {values[4:]}")
 
   def receive_loop(self, index: int, callback: Callable[[bytes, list], None] = print_message) -> None:
     # Receiving packets
-    with socket(AF_INET, SOCK_DGRAM) as s:
+    with self.socket() as s:
       s.bind((self.host, self.cfg[index].port))
       while True:
         print(f"Listening for UDP package at {self.host}:{self.cfg[index].port}")
@@ -109,7 +112,7 @@ class Protocol:
     n = values[median]
     delta = values[median + 1:]
     values = values[:median]
-    with socket(AF_INET, SOCK_DGRAM) as s:
+    with self.socket() as s:
       s.connect((self.host, self.cfg[index].port))
       for i in range(n):
         vector = tuple(v + i * d for v, d in zip(values, delta))
