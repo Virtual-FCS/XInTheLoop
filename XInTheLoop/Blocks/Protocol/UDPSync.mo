@@ -13,6 +13,8 @@ model UDPSync
     annotation (Dialog(group="Outgoing data"));
   parameter Integer port_send=10002 "Target port of the receiving UDP server"
     annotation (Dialog(group="Outgoing data"));
+  parameter Integer mOut=1396917846 "Packet header magic number out from Modelica"
+    annotation (Dialog(group="Outgoing data"));
   parameter Integer vOut=2 "Packet header version out from Modelica"
     annotation (Dialog(group="Outgoing data"));
   parameter Integer nIntsOut=1 "Number of integer values out from Modelica"
@@ -21,6 +23,8 @@ model UDPSync
     annotation (Dialog(group="Outgoing data"));
   parameter Integer port_recv=10001
     "Listening port number of the server. Must be unique on the system"
+    annotation (Dialog(group="Incoming data"));
+  parameter Integer mIn=1935894134 "Packet header magic number in to Modelica"
     annotation (Dialog(group="Incoming data"));
   parameter Integer vIn=2 "Packet header version in to Modelica"
     annotation (Dialog(group="Incoming data"));
@@ -32,7 +36,7 @@ model UDPSync
     Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput uFloats[nFloatsOut] annotation(
     Placement(visible = true, transformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  CreateHead createHead(version = vOut) annotation(
+  CreateHead createHead(magicNumber = mOut, version = vOut) annotation(
     Placement(visible = true, transformation(origin = {-70, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.IntegerExpression increment(y = 1) annotation(
     Placement(visible = true, transformation(origin = {-90, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -66,7 +70,7 @@ model UDPSync
     Placement(visible = true, transformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica_DeviceDrivers.Blocks.Packaging.SerialPackager.GetFloat getFloat(n = nFloatsIn) annotation(
     Placement(visible = true, transformation(origin = {50, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  DecodeHead decodeHead(version = vIn) annotation(
+  DecodeHead decodeHead(magicNumber = mIn, version = vIn) annotation(
     Placement(visible = true, transformation(origin = {80, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.IntegerOutput ySeqOut "Outgoing packet sequence number to be sent" annotation(
     Placement(visible = true, transformation(origin = {110, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -128,6 +132,6 @@ equation
   connect(uDPSend.outputTrigger, triggeredAdd.trigger) annotation(
     Line(points = {{-8, -90}, {-2, -90}, {-2, -12}, {-70, -12}, {-70, 33}}, color = {255, 0, 255}));
 annotation(
-    Icon(graphics = {Text(origin = {-29, 1}, extent = {{-67, 9}, {29, -11}}, textString = "%nIntsOut i", horizontalAlignment = TextAlignment.Left), Text(origin = {-29, -59}, extent = {{-67, 9}, {29, -11}}, textString = "%nFloatsOut f", horizontalAlignment = TextAlignment.Left), Text(origin = {71, -39}, extent = {{-71, 9}, {25, -11}}, textString = "%nIntsIn i", horizontalAlignment = TextAlignment.Right), Text(origin = {71, -79}, extent = {{-71, 9}, {25, -11}}, textString = "%nFloatsIn f", horizontalAlignment = TextAlignment.Right), Text(origin = {71, 81}, extent = {{-167, 15}, {25, -11}}, textString = "v%vOut   →", horizontalAlignment = TextAlignment.Right), Text(origin = {71, 41}, extent = {{-167, 15}, {25, -11}}, textString = "v%vIn   ←", horizontalAlignment = TextAlignment.Right), Text(origin = {71, 1}, extent = {{-69, 15}, {25, -11}}, textString = "↔", horizontalAlignment = TextAlignment.Right)}, coordinateSystem(initialScale = 0.1)),
+    Icon(graphics = {Text(origin = {-29, 1}, extent = {{-67, 9}, {29, -11}}, textString = "%nIntsOut i", horizontalAlignment = TextAlignment.Left), Text(origin = {-29, -59}, extent = {{-67, 9}, {29, -11}}, textString = "%nFloatsOut f", horizontalAlignment = TextAlignment.Left), Text(origin = {71, -39}, extent = {{-71, 9}, {25, -11}}, textString = "%nIntsIn i", horizontalAlignment = TextAlignment.Right), Text(origin = {71, -79}, extent = {{-71, 9}, {25, -11}}, textString = "%nFloatsIn f", horizontalAlignment = TextAlignment.Right), Text(origin = {71, 81}, extent = {{-167, 15}, {25, -11}}, textString = "v%vOut   →", horizontalAlignment = TextAlignment.Right), Text(origin = {71, 41}, extent = {{-167, 15}, {25, -11}}, textString = "v%vIn   ←", horizontalAlignment = TextAlignment.Right), Text(origin = {71, 1}, extent = {{-69, 15}, {25, -11}}, textString = "↔", horizontalAlignment = TextAlignment.Right), Text(origin = {-129, 81}, extent = {{-167, 15}, {25, -11}}, textString = "%mOut", horizontalAlignment = TextAlignment.Right), Text(origin = {-129, 43}, extent = {{-167, 15}, {25, -11}}, textString = "%mIn", horizontalAlignment = TextAlignment.Right)}, coordinateSystem(initialScale = 0.1)),
     Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">Sync outgoing values to and incoming values from an external system using a binary UDP protocol with constant headers and incrementing sequence numbers. Specify the number of payload </span><span style=\"font-size: 12px;\">integers and floats in both directions as parameters.</span></body></html>"));
 end UDPSync;
