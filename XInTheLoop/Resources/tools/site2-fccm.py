@@ -4,7 +4,7 @@ import can
 import cantools
 import keyboard
 from pathlib import Path
-from stashh.incoming import InService
+from stashh.incoming import IncomingCanService
 
 if __name__ == "__main__":
   with can.Bus(interface='pcan', channel='PCAN_USBBUS2', bitrate=500000, receive_own_messages=False) as bus:
@@ -12,8 +12,8 @@ if __name__ == "__main__":
       Path(__file__).with_name('STASHH_FCCU_VCU_communication_20221123_v02.dbc')
     )
 
-    print("Create StasHH incoming service...")
-    canService = InService(bus, db, tscale=100)
+    print("Create StasHH incoming CAN service...")
+    canService = IncomingCanService(bus, db, tscale=100)
     canService.notifier()
     canService.initialize_signals(0)
     canService.start()
