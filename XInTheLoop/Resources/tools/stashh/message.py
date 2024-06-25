@@ -17,8 +17,8 @@ def crc_calc(msg: can.message.Message, rule: CrcRule, store: bool = False) -> bo
   msg.data[c] = crc
   return True
 
-# TODO: Rename MessageOut to CanMessage to avoid confusion with the Outgoing term
-class MessageOut:
+class CanMessage:
+  """StasHH CAN message"""
 
   def __init__(self, db: Database, name: str):
     # Not (yet) needed: self.db = db
@@ -54,8 +54,9 @@ class MessageOut:
       self.task.stop()
       quit()
 
-# TODO: Rename CrcMessageOut to CrcCanMessage to avoid confusion with the Outgoing term
-class CrcMessageOut(MessageOut):
+class CrcCanMessage(CanMessage):
+  """StasHH CAN message with a one-byte CRC and 4-bit counter"""
+
   def __init__(self, db: Database, name: str, crc_rule: CrcRule):
     super().__init__(db, name)
     self.crc_rule = crc_rule
@@ -80,8 +81,7 @@ class CrcMessageOut(MessageOut):
         signals[s.name] = 0
     super().filter_encode(signals)
 
-# TODO: Rename Service to CanService?
-class Service:
+class CanService:
   def __init__(self, bus: can.BusABC, db: Database, tscale: float = 1):
     self.bus = bus
     self.db = db

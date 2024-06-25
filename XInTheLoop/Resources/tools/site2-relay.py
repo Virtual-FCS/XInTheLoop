@@ -4,7 +4,7 @@ import can
 import cantools
 from pathlib import Path
 from site2 import site2
-from stashh.outgoing import OutService
+from stashh.outgoing import OutgoingCanService
 
 if __name__ == "__main__":
   with can.Bus(interface='pcan', channel='PCAN_USBBUS1', bitrate=500000, receive_own_messages=False) as bus, site2.socket() as s:
@@ -13,8 +13,8 @@ if __name__ == "__main__":
       Path(__file__).with_name('STASHH_FCCU_VCU_communication_20221123_v02.dbc')
     )
 
-    print("Create StasHH outgoing service...")
-    canService = OutService(bus, db, tscale=100)
+    print("Create StasHH outgoing CAN service...")
+    canService = OutgoingCanService(bus, db, tscale=100)
     canService.notifier()
 
     def receivedUDP(package: bytes, values: list) -> None:
