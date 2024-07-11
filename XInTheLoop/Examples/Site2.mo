@@ -180,7 +180,7 @@ A test model that creates a very&nbsp;simple input value sequence with a duratio
         Placement(visible = true, transformation(origin = {-120, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 44}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       Modelica.Blocks.Interfaces.IntegerInput uDriveline_Availability(min=0, max=15) annotation(
         Placement(visible = true, transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-      XInTheLoop.Blocks.Bitwise.PackInt packInt(nu = 5, n_bits = {5, 2, 4}) annotation(
+      XInTheLoop.Blocks.Bitwise.PackInt packInt(nu = 3, n_bits = {5, 2, 4}) annotation(
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       connect(uSetpoint_Mode_Req, packInt.u[1]) annotation(
