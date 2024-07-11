@@ -32,17 +32,17 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {-24, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.BooleanExpression alwaysTrue(y = true)  annotation(
       Placement(visible = true, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  XInTheLoop.Examples.Site2.Blocks.Sync sync annotation(
+    XInTheLoop.Examples.Site2.Blocks.Sync sync annotation(
       Placement(visible = true, transformation(origin = {10, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  XInTheLoop.Examples.Site2.Blocks.UnpackStatusBits unpackStatusBits annotation(
+    XInTheLoop.Examples.Site2.Blocks.UnpackStatusBits unpackStatusBits annotation(
       Placement(visible = true, transformation(origin = {40, -58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  XInTheLoop.Examples.Site2.Blocks.PackControlBits packControlBits annotation(
+    XInTheLoop.Examples.Site2.Blocks.PackControlBits packControlBits annotation(
       Placement(visible = true, transformation(origin = {-30, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.IntegerExpression HVESSC1_PowerDown_Command annotation(
+    Modelica.Blocks.Sources.IntegerExpression HVESSC1_PowerDown_Command annotation(
       Placement(visible = true, transformation(origin = {-84, -62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.IntegerExpression HVBI_Driveline_Availability(y = 1)  annotation(
+    Modelica.Blocks.Sources.IntegerExpression HVBI_Driveline_Availability(y = 1)  annotation(
       Placement(visible = true, transformation(origin = {-84, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.RealExpression MG1IC_Setpoint_Req(y = 25.0)  annotation(
+    Modelica.Blocks.Sources.RealExpression MG1IC_Setpoint_Req(y = 25.0)  annotation(
       Placement(visible = true, transformation(origin = {-50, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(alwaysTrue.y, toStarting.condition) annotation(
