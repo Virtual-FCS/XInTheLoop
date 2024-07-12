@@ -5,12 +5,13 @@ package XInTheLoop "Components for X-in-the-Loop functionality"
     preferredView = "info",
     version = "0.2.1-dev",
     uses(Modelica(version = "4.0.0"), Modelica_DeviceDrivers(version = "2.1.1")),
-    Documentation(info = "<html><head></head><body>This package enables an external system in the loop while simulating your model. A typical use case is to exchange the needed set of values between a high-level controller model and a low level hardware controller process.<div><br></div>
-<div>In our <a href=\"modelica://XInTheLoop.Examples.Site1\">main example</a>, the hardware is a Fuel Cell System (FCS) that consists of a Fuel Cell, a DC-DC-converter, a battery, and a variable load. The UDP protocol between the model and the low-level hardware controller is adapted to this, but any user can make customized versions to support other external systems by reusing a set of generic blocks.
+    Documentation(info = "<html><head></head><body>
+<p>This package enables an external system in the loop while simulating your model. A typical use case is to exchange the needed set of values between a high-level controller model and a low level hardware controller process.</p>
+<p>In our <a href=\"modelica://XInTheLoop.Examples.Site1\">main example</a>, the hardware is a Fuel Cell System (FCS) that consists of a Fuel Cell, a DC-DC-converter, a battery, and a variable load. The UDP protocol between the model and the low-level hardware controller is adapted to this, but any user can make customized versions to support other external systems by reusing a set of generic blocks.</p>
 <h4>Known Issue</h4>
-Due to a <a href=\"https://github.com/OpenModelica/OpenModelica/issues/10132\">bug in OMEdit v1.20 for Windows</a>,
-models using this library from that OMEdit version need to add <tt>-lws2_32</tt> to the <i>C/C++ Compiler Flags (Optional)</i> in the <i>General</i> tab of <i>Simulation Setup</i> to compensate for the bug as described in <a href=\"https://github.com/modelica-3rdparty/Modelica_DeviceDrivers/issues/369\">Modelica_DeviceDrivers#369</a>.
-
+<p>Due to a <a href=\"https://github.com/OpenModelica/OpenModelica/issues/10132\">bug in OMEdit v1.20 for Windows</a>,
+models using this library from that OMEdit version need to add <tt>-lws2_32</tt> to the <i>C/C++ Compiler Flags (Optional)</i> in the <i>General</i> tab of <i>Simulation Setup</i> to compensate for the bug as described in <a href=\"https://github.com/modelica-3rdparty/Modelica_DeviceDrivers/issues/369\">Modelica_DeviceDrivers#369</a>.</p>
+<p>The bug is still present in OMEdit v1.23.1 for Windows.</p>
 <h4>Development</h4>
 <div>This package has been developed as part of the Virtual-FCS project. The main packet <a href=\"modelica://VirtualFCS\">VirtualFCS</a>&nbsp;can be used to build advanced FCS models, and then combined with this packet to include an external system in the loop.</div>
 <h4>Contact</h4>
@@ -21,7 +22,7 @@ models using this library from that OMEdit version need to add <tt>-lws2_32</tt>
 <div>Topic: FCH-01-3-2019 - Cyber-physical platform for hybrid Fuel Cell Systems.</div>
 <h4>License</h4>
 This library is shared under an MIT license. For more information, please see the file LICENSE.
-</div></body></html>", revisions = "<html><head></head><body>
+</body></html>", revisions = "<html><head></head><body>
 <p>
 <a href=\"https://doi.org/10.5281/zenodo.7697300\"><img src=\"https://zenodo.org/badge/DOI/10.5281/zenodo.7697300.svg\" alt=\"DOI 10.5281/zenodo.7697300\"></a>
 is the DOI number to use when citing all (including future) versions of this library.
