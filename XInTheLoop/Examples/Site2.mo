@@ -97,8 +97,8 @@ A test model that creates a very&nbsp;simple input value sequence with a duratio
 <div><ul>
 <li>Start-up (idle)</li><li>Standby</li>
 <li>Starting</li><li>Running</li>
-<li>Stopping</li></ul>
-<div>It is used in the <b>Dry Run</b> test procedure of <a href=\"modelica://XInTheLoop.Examples.Site1\">this site</a>.</div></div>
+<li>Stopping</li></ul></div>
+<p>It is used in the <b>Dry Run</b> test procedure of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
 </body></html>"));
   end Test;
 
