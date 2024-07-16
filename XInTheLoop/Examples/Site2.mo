@@ -110,7 +110,7 @@ A test model that creates a very&nbsp;simple input value sequence with a duratio
       import XInTheLoop.Functions.bitmask;
       Modelica.Blocks.Interfaces.IntegerInput uControlBits annotation(
         Placement(visible = true, transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 7, nFloatsOut = 1, port_recv = 10004, port_send = 10003, real_time = true, vIn = 1, vOut = 1) annotation(
+      XInTheLoop.Blocks.Protocol.UDPSync uDPSync(nFloatsIn = 7, nFloatsOut = 1, port_recv = 10004, port_send = 10003, real_time = true, vIn = 1, vOut = 1, mOut = 1213420627, mIn = 1752396915) annotation(
         Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.MathInteger.Sum sum(k = {1, -1}, nu = 2) annotation(
         Placement(visible = true, transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
