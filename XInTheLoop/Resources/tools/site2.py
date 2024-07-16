@@ -30,10 +30,10 @@
 #    - MG1IMT_Temperature_3 [°C] {64369:10221}, MG1IMT_Temperature_4 [°C] {64369:10222},
 # All values in little-endian
 
-# Usage to receive incoming messages:  python3 site2-protocol.py
-# Usage to receive outgoing messages:  python3 site2-protocol.py out
-# Usage to send one incoming message:  python3 site2-protocol.py in {1x uint32} {7x float}
-# Usage to send 10 outgoing messages:  python3 site2-protocol.py out {1x uint32} {1x float} 10 {delta vector}
+# Usage to receive incoming messages:  python3 site2.py
+# Usage to receive outgoing messages:  python3 site2.py out
+# Usage to send one incoming message:  python3 site2.py in {1x uint32} {7x float}
+# Usage to send 10 outgoing messages:  python3 site2.py out {1x uint32} {1x float} 10 {delta vector}
 #  Optional: Vector of delta values between each message in a series (default +1)
 # Any missing values in the vectors are assumed to be 1 (default value)
 
