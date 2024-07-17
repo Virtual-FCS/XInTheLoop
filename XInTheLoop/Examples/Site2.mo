@@ -93,12 +93,12 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
     annotation(
       experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1),
       Documentation(info = "<html><head></head><body>
-A test model that creates a very&nbsp;simple input value sequence with a duration of 60 seconds that sends request of these modes to the FCM:
+<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 60 seconds that in a cycle sends request of these modes to the FCM:</p>
 <div><ul>
 <li>Start-up (idle)</li><li>Standby</li>
 <li>Starting</li><li>Running</li>
 <li>Stopping</li></ul></div>
-<p>It is used in the <b>Dry Run</b> test procedure of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
+<p>It is used in the <b>Dry Run</b> and <b>Moist Run</b> test procedures of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
 </body></html>"));
   end Test;
 
@@ -234,14 +234,35 @@ Unpack all status bits from an integer input.
   end Blocks;
   annotation(
     Documentation(info = "<html><head></head><body>
+<p>
 This example implements a UDP protocol to exchange values with an external system running a StasHH compatible fuel cell module (FCM).
-<h4 id=\"tool\">Python Tool</h4>
-In both the <a href=\"#dry\">Dry Run</a> and the <a href=\"#wet\">Wet Run</a> sections below, the same Python tool is used. It is assumed your PC has Python (version 3 or above) installed. If not, it can be installed from the Microsoft Store App.
+</p>
 
+<h4 id=\"tool\">Python Tools</h4>
+<ul>
+<li><tt>site2.py</tt> is the base Site2 protocol.</li>
+<li><tt>site2-relay.py</tt> is the UDP-CAN relay service.</li>
+<li><tt>site2-fccm.py</tt> is a simple simulator of the FCCM CAN messages.</li>
+</ul>
+
+<p>
+In all the <a href=\"#dry\">Dry Run</a>, <a href=\"#moist\">Moist Run</a>,  and the <a href=\"#wet\">Wet Run</a> sections below, a selection of these Python tools are used. It is assumed your PC has Python (version 3 or above) installed. If not, it can be installed from the Microsoft Store App.<p>
+
+Except for the Dry Run (which only uses the base Site2 protocol), these Python packages need to be installed in the python environment in use:
+<ul>
+<li><tt>can</tt></li>
+<li><tt>cantools</tt></li>
+<li><tt>crcmod</tt></li>
+<li><tt>keyboard</tt> (only needed by <tt>site2-fccm.py</tt> used in the Moist Run)</li>
+</ul>
+<p><tt>pip install can cantools crcmod keyboard</tt></p>
+
+<p>
 The Python files&nbsp;<tt>site2*.py</tt>&nbsp;is located in the <tt>XInTheLoop/Resources/tools/</tt> folder - where <a href=\"modelica://XInTheLoop\">this library</a> is installed or cloned from github.
+</p>
 
 <h4 id=\"dry\">Dry Run</h4>
-To test this without a real hardware I/O application present, use the <a href=\"#tool\">Python tool included in the tools folder</a>.
+To test this without a real hardware I/O application present, use the basic <a href=\"#tool\">Python tool included in the tools folder</a>.
 
 <ol>
 <li>Open a command shell window, and change to the tools&nbsp;folder. The Python file should now be shown if executing a <tt>dir</tt> command.</li>
@@ -260,15 +281,54 @@ To test this without a real hardware I/O application present, use the <a href=\"
 
 in the second shell window to send a series of 50 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 50 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
-<li>When the simulation has ended, select e.g. the variables sync.yDC_current_output and sync.yDC_voltage_output to plot these received values in a graph of the simulation.</li>
+<li>When the simulation has ended, select e.g. the variables packControlBits.uSetpoint_Mode_Req,  sync.yDC_current_output and sync.yDC_voltage_output to plot these received values in a graph of the simulation.</li>
 
 </ol>
 
-TODO: img src=\"modelica://XInTheLoop/Resources/Images/site2-test-plot.png\"
+<img src=\"modelica://XInTheLoop/Resources/Images/site2-test-plot.png\">
+
+<h4 id=\"moist\">Moist Run</h4>
+<p>To test this without a real Fuel Cell Module present, but with two USB-CAN adapters connected to test together with the UDP-CAN relay process, use the <a href=\"#tool\">Python tools included in the tools folder</a>.
+</p>
+
+<ol>
+<li>Open a command shell window, and change to the tools&nbsp;folder. The Python file should now be shown if executing a <tt>dir</tt> command.</li>
+
+<li>To starte the UDP-CAN relay service, execute
+
+<pre style=\"font-size: 12px;\">python3 site2-relay.py</pre>
+
+</li><li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
+
+<li>Start simulation of the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model.</li>
+
+<li>When the compilation is finished and the simulation has started, execute
+
+<pre style=\"font-size: 12px;\">python3 site2-fccm.py</pre>
+
+in the second shell window to simulate the CAN messages of and FCCM.</li>
+
+<li>When the simulation has ended, select e.g. the variables packControlBits.uSetpoint_Mode_Req,  sync.yDC_current_output and sync.yDC_voltage_output to plot these received values in a graph of the simulation.</li>
+
+</ol>
 
 <h4 id=\"wet\">Wet Run</h4>
-<div>To test this against a real StasHH FCM hardware, it must be connected to the same CAN bus as also available via a CAN adapter at the same PC as running OpenModelica and the site2-relay process that acts like a UDP service abstraction layer above the actual hardware or external system. The Python script implementation used for the dry run above is part of such a service.</div><div><br></div><div>TODO: Expand description.</div><div><br></div><ol>
+<div>To test this against a real StasHH FCM hardware, it must be connected to the same CAN bus as also available via a CAN adapter at the same PC as running OpenModelica and the site2-relay process that acts like a UDP service abstraction layer above the actual hardware or external system. The Python script implementation used for the dry run above is part of such a service.</div><div><br></div><div>TODO: Expand description.</div><div><br></div>
 
-</ol><h4>Protocol Packet Details</h4><div>In each UDP packet sent in this protocol there is a leading header:</div><div><ol><li>A constant 32-bit \"magic\" integer number to reduce the risk of interpreting a random missent packet from another application as a valid packet in this protocol.</li><li>A 32-bit integer version number that should be increased when the packet format is changed in a way that is not backward compatible. If only appending new values to the packet payload format, then the version number normally does not need to change because extra content at the end should be ignored by the receiver.</li><li>A 16-bit integer packet sequence number incremented by the sender for each packet. The counter is independent for each direction. When a counter value exceeds 16 bits, it wraps around to zero again.</li><li>A 16-bit integer received packet sequence number containing a copy of the packet sequence number from the last received packet in the reverse direction. In the Python script of this example, the last packet in each direction is written to temporary files to remember these sequence numbers, but in a typical hardware/external I/O application, it normally is much easier to use internal variables instead.</li></ol><div>followed by a payload:</div></div><div><ol><li>A vector of 32-bit integer values.</li><li>A vector of 32-bit float values.</li></ol><div>All values are stored as little endian. A protocol implementation for one particular external system will need a fixed packet format in each direction. For each direction, all of these must be defined:</div></div><div><ul><li>Address/IP (in this example, localhost is assumed) and port of the receiving end.</li><li>Header version number.</li><li>Payload vector sizes.</li><li>Meta information for each value in the payload vectors.</li></ul></div>
+<h4>Protocol Packet Details</h4>
+<div>In each UDP packet sent in this protocol there is a leading header:</div>
+<div><ol><li>A constant 32-bit \"magic\" integer number to reduce the risk of interpreting a random missent packet from another application as a valid packet in this protocol.</li><li>A 32-bit integer version number that should be increased when the packet format is changed in a way that is not backward compatible. If only appending new values to the packet payload format, then the version number normally does not need to change because extra content at the end should be ignored by the receiver.</li><li>A 16-bit integer packet sequence number incremented by the sender for each packet. The counter is independent for each direction. When a counter value exceeds 16 bits, it wraps around to zero again.</li><li>A 16-bit integer received packet sequence number containing a copy of the packet sequence number from the last received packet in the reverse direction. In the Python script of this example, the last packet in each direction is written to temporary files to remember these sequence numbers, but in a typical hardware/external I/O application, it normally is much easier to use internal variables instead.</li></ol></div>
+<div>followed by a payload:</div>
+<div><ol>
+<li>A vector of 32-bit integer values.</li>
+<li>A vector of 32-bit float values.</li>
+</ol></div>
+<p>All values are stored as little endian. A protocol implementation for one particular external system will need a fixed packet format in each direction. For each direction, all of these must be defined:</p>
+<div><ul>
+<li>Address/IP (in this example, localhost is assumed) and port of the receiving end.</li>
+<li>Header version number.</li>
+<li>Payload vector sizes.</li>
+<li>Meta information for each value in the payload vectors.</li>
+</ul></div>
 </body></html>"));
 end Site2;
