@@ -245,17 +245,21 @@ This example implements a UDP protocol to exchange values with an external syste
 <li><tt>site2-fccm.py</tt> is a simple simulator of the FCCM CAN messages.</li>
 </ul>
 
+<p>The two latter tools both assume a USB-CAN adapter of type Peak PCAN-USB is connected, but it's easy to switch to some other CAN adapter that is supported by <tt>python-can</tt>.</p>
+
 <p>
 In all the <a href=\"#dry\">Dry Run</a>, <a href=\"#moist\">Moist Run</a>,  and the <a href=\"#wet\">Wet Run</a> sections below, a selection of these Python tools are used. It is assumed your PC has Python (version 3 or above) installed. If not, it can be installed from the Microsoft Store App.<p>
 
-Except for the Dry Run (which only uses the base Site2 protocol), these Python packages need to be installed in the python environment in use:
+Except for the <b>Dry Run</b> (which only uses the base Site2 protocol), a USB-CAN adapter (or two such adapters for the <b>Moist Run</b>) must be connected and these Python packages need to be installed in the python environment in use:
 <ul>
-<li><tt>can</tt></li>
 <li><tt>cantools</tt></li>
+<li><tt>python-can</tt> (automatically installed as a dependency of <tt>cantools</tt>)</li>
 <li><tt>crcmod</tt></li>
 <li><tt>keyboard</tt> (only needed by <tt>site2-fccm.py</tt> used in the Moist Run)</li>
 </ul>
-<p><tt>pip install can cantools crcmod keyboard</tt></p>
+<p>Command to install the packages above:</p>
+
+<pre style=\"font-size: 12px;\">pip install cantools crcmod keyboard</pre>
 
 <p>
 The Python files&nbsp;<tt>site2*.py</tt>&nbsp;is located in the <tt>XInTheLoop/Resources/tools/</tt> folder - where <a href=\"modelica://XInTheLoop\">this library</a> is installed or cloned from github.
@@ -269,7 +273,7 @@ To test this without a real hardware I/O application present, use the basic <a h
 
 <li>To capture and dump the outgoing values sent to the external system, execute
 
-<pre style=\"font-size: 12px;\">python3 site2.py out</pre>
+<pre style=\"font-size: 12px;\">python site2.py out</pre>
 
 </li><li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
 
@@ -277,7 +281,7 @@ To test this without a real hardware I/O application present, use the basic <a h
 
 <li>When the compilation is finished and the simulation has started, execute e.g.
 
-<pre style=\"font-size: 12px;\">python3 site2.py in 2 3 4 5 6 7 8 9 50</pre>
+<pre style=\"font-size: 12px;\">python site2.py in 2 3 4 5 6 7 8 9 50</pre>
 
 in the second shell window to send a series of 50 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 50 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
@@ -294,9 +298,9 @@ in the second shell window to send a series of 50 incoming messages while the si
 <ol>
 <li>Open a command shell window, and change to the tools&nbsp;folder. The Python file should now be shown if executing a <tt>dir</tt> command.</li>
 
-<li>To starte the UDP-CAN relay service, execute
+<li>To start the UDP-CAN relay service, execute
 
-<pre style=\"font-size: 12px;\">python3 site2-relay.py</pre>
+<pre style=\"font-size: 12px;\">python site2-relay.py</pre>
 
 </li><li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
 
@@ -304,7 +308,7 @@ in the second shell window to send a series of 50 incoming messages while the si
 
 <li>When the compilation is finished and the simulation has started, execute
 
-<pre style=\"font-size: 12px;\">python3 site2-fccm.py</pre>
+<pre style=\"font-size: 12px;\">python site2-fccm.py</pre>
 
 in the second shell window to simulate the CAN messages of and FCCM.</li>
 
