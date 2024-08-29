@@ -1,5 +1,5 @@
 # Receive or send Site1 protocol messages via UDP
-# Copyright (c) 2021-2024 Virtual-FCS H2020
+# Copyright (c) 2021-2024 SINTEF
 # Current Site1 outgoing protocol message (out from Modelica) contains:
 # - Magic number as 4 bytes
 # - Version number as 4 bytes unsigned integer

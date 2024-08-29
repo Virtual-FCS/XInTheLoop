@@ -2,7 +2,7 @@
 
 XInTheLoop is a Modelica library for interfacing a model with an external system for continuous interaction during simulation of the model. The external system in this case is a software tightly coupled with e.g. a physical process hardware, some user interface, another model simulation, a computational service, or some other software service.
 
-[![OpenModelica v1.20 win64](https://img.shields.io/badge/OpenModelica-v1.20%20win64-blue)](https://openmodelica.org/)
+[![OpenModelica v1.23 win64](https://img.shields.io/badge/OpenModelica-v1.23%20win64-blue)](https://openmodelica.org/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7697300.svg)](https://doi.org/10.5281/zenodo.7697300)
 
 Note that this library might also work with other Modelica frameworks and at other platforms that win64, but that is not tested during development.
@@ -31,6 +31,22 @@ The Site1 example is a test model and interfacing blocks for one particular exte
 Due to a [bug in OMEdit v1.20 for Windows](https://github.com/OpenModelica/OpenModelica/issues/10132), models using this library from that OMEdit version need to add `-lws2_32` to the _C/C++ Compiler Flags (Optional)_ in the _General_ tab of _Simulation Setup_ to compensate for the bug as described in https://github.com/modelica-3rdparty/Modelica_DeviceDrivers/issues/369.
 
 The bug is still present in OMEdit v1.23.1 for Windows.
+
+## Development
+
+The base of this library has been developed as part of the Virtual-FCS project. The main library [VirtualFCS](https://github.com/Virtual-FCS/VirtualFCS) can be used to build advanced FCS models, and then combined with this library to include an external system in the loop.
+
+This library has been further developed as part of the StasHH project.
+
+## Contact
+
+- www.virtual-fcs.eu
+- www.stashh.eu
+
+## Funding
+
+- The Virtual-FCS project has received funding from European Union's Horizon 2020 Research and Innovation programme under Grant Agreement No 875087.
+- The StasHH project has received funding from Fuel Cells and Hydrogen 2 Joint Undertaking (now Clean Hydrogen Partnership) under Grant Agreement No 101005934. This Joint Undertaking receives support from the European Union's Horizon 2020 Research and Innovation programme, Hydrogen Europe and Hydrogen Europe Research.
 
 ## License
 
