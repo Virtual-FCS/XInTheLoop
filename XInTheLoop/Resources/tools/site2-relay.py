@@ -1,4 +1,5 @@
 # site2 relay outgoing UDP to CAN and incoming CAN to UDP
+# Copyright (c) 2024 SINTEF
 
 import can
 import cantools
