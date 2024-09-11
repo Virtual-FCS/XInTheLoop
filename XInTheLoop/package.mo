@@ -22,10 +22,9 @@ models using this library from that OMEdit version need to add <tt>-lws2_32</tt>
 </ul>
 <h4>Funding</h4>
 <ul>
-<li>The Virtual-FCS project has received funding from European Union's Horizon 2020 Research and Innovation programme under Grant Agreement No 875087.
-<div>Programme: H2020-EU.3.4.6.1. - Reduce the production cost of fuel cell systems to be used in transportation applications, while increasing their lifetime to levels which can compete with conventional technologies.</div>
-<div>Topic: FCH-01-3-2019 - Cyber-physical platform for hybrid Fuel Cell Systems.</div></li>
-<li>The StasHH project has received funding from Fuel Cells and Hydrogen 2 Joint Undertaking (now Clean Hydrogen Partnership) under Grant Agreement No 101005934. This Joint Undertaking receives support from the European Union's Horizon 2020 Research and Innovation programme, Hydrogen Europe and Hydrogen Europe Research.</li>
+<li>The Virtual-FCS project has received funding from the Fuel Cells and Hydrogen 2 Joint Undertaking (now Clean Hydrogen Partnership) under Grant Agreement No. 875087.</li>
+<li>The StasHH project has received funding from the same Joint Undertaking under Grant Agreement No. 101005934.</li>
+<li>This Joint Undertaking receives support from the European Union's Horizon 2020 Research and Innovation Program, Hydrogen Europe and Hydrogen Europe Research.</li>
 </ul>
 <h4>License</h4>
 This library is shared under an MIT license. For more information, please see the LICENSE file.

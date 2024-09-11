@@ -45,8 +45,9 @@ This library has been further developed as part of the StasHH project.
 
 ## Funding
 
-- The Virtual-FCS project has received funding from European Union's Horizon 2020 Research and Innovation programme under Grant Agreement No 875087.
-- The StasHH project has received funding from Fuel Cells and Hydrogen 2 Joint Undertaking (now Clean Hydrogen Partnership) under Grant Agreement No 101005934. This Joint Undertaking receives support from the European Union's Horizon 2020 Research and Innovation programme, Hydrogen Europe and Hydrogen Europe Research.
+- The Virtual-FCS project has received funding from the Fuel Cells and Hydrogen 2 Joint Undertaking (now Clean Hydrogen Partnership) under Grant Agreement No. 875087.
+- The StasHH project has received funding from the same Joint Undertaking under Grant Agreement No. 101005934.
+- This Joint Undertaking receives support from the European Union's Horizon 2020 Research and Innovation Program, Hydrogen Europe and Hydrogen Europe Research.
 
 ## License
 
