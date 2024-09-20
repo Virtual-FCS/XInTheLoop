@@ -8,7 +8,7 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
 
     inner Modelica.StateGraph.StateGraphRoot stateGraphRoot annotation(
       Placement(visible = true, transformation(origin = {-70, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.MathInteger.MultiSwitch modeRequest(expr = {0, 2, 11, 11, 20}, nu = 5, use_pre_as_default = true) annotation(
+    Modelica.Blocks.MathInteger.MultiSwitch modeRequest(expr = {0, 2, 10, 10, 21}, nu = 5, use_pre_as_default = true) annotation(
       Placement(visible = true, transformation(origin = {56, -26}, extent = {{-10, -10}, {30, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal standby(nIn = 1, nOut = 1) annotation(
       Placement(visible = true, transformation(origin = {-44, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
