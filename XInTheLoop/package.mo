@@ -3,7 +3,7 @@ package XInTheLoop "Components for X-in-the-Loop functionality"
   extends Icons.XInTheLoop;
   annotation(
     preferredView = "info",
-    version = "0.2.1-dev",
+    version = "0.3.0",
     uses(Modelica(version = "4.0.0"), Modelica_DeviceDrivers(version = "2.1.1")),
     Documentation(info = "<html><head></head><body>
 <p>This library enables an external system in the loop while simulating a model. A typical use case is to exchange the needed set of values between a high-level controller model and a low level hardware controller process.</p>
@@ -37,9 +37,8 @@ When clicking the DOI above, it will resolve to the DOI information of the curre
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\"><tbody>
 <tr><th>Version</th><th>Released</th><th>Description</th></tr>
 <!-- DOI for the latest version is created AFTER the release, and is therefore not known when describing it here -->
-<!--
-<tr><td>Future version</td><td>Not yet released</td><td>Enhanced documentation?</td></tr>
--->
+<tr><td>0.3.0</td><td>2024-09-23</td>
+<td>Combining previous pre-releases. Improving documentation and Python scripts.</td></tr>
 <tr><td>0.2.0-beta</td><td>2023-04-25</td>
 <td>Live demonstration at M40 meeting - supporting external EMS and <a href=\"modelica://Modelica\">Modelica Standard Library</a> v4.0.0</td></tr>
 <tr><td>0.1.1-beta</td><td>2022-11-29</td>
