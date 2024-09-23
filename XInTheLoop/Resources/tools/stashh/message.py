@@ -32,6 +32,7 @@ class CanMessage:
     return [s.name for s in self.message.signals]
 
   def dict_encode(self, signals: dict) -> None:
+    """Encode signals from dict"""
     #DEBUG print(f"encode({signals})")
     msg = can.Message(arbitration_id=self.message.frame_id, data=self.message.encode(signals))
     # TODO: self.task.modify(msg) ?
@@ -45,7 +46,12 @@ class CanMessage:
     else:
       self.msg = msg  # Initial assignment
 
+  def nc_filter_encode(self, signals: dict) -> None:
+    """Encode own non-counter signals only, ignore others"""
+    self.filter_encode({k: v for k,v in signals.items() if not k.endswith("_Counter")})
+
   def filter_encode(self, signals: dict) -> None:
+    """Encode own signals only, ignore others"""
     self.dict_encode({k: v for k,v in signals.items() if k.startswith(self.name + "_")})
 
   def send_periodic(self, bus: can.BusABC, tscale: float = 1) -> None:

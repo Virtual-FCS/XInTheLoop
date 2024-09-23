@@ -15,7 +15,7 @@ if __name__ == "__main__":
     )
 
     print("Create StasHH outgoing CAN service...")
-    canService = OutgoingCanService(bus, db, tscale=100)
+    canService = OutgoingCanService(bus, db, tscale=100)  # TODO: tscale=8
     canService.notifier()
 
     def receivedUDP(package: bytes, values: list) -> None:
