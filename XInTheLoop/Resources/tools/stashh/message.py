@@ -32,7 +32,7 @@ class CanMessage:
     return [s.name for s in self.message.signals]
 
   def dict_encode(self, signals: dict) -> None:
-    print(f"encode({signals})")
+    #DEBUG print(f"encode({signals})")
     msg = can.Message(arbitration_id=self.message.frame_id, data=self.message.encode(signals))
     # TODO: self.task.modify(msg) ?
     if type(msg) == type(self.msg):
@@ -72,7 +72,7 @@ class CrcCanMessage(CanMessage):
   def dict_encode(self, signals: dict, crc: int = None) -> None:
     super().dict_encode(signals)
     assert crc_calc(self.msg, self.crc_rule, crc is None)
-    print(f"CRC={self.msg.data[0 if self.crc_rule == CrcRule.B else 7]}")
+    #DEBUG print(f"CRC={self.msg.data[0 if self.crc_rule == CrcRule.B else 7]}")
 
   def filter_encode(self, signals: dict) -> None:
     for s in self.message.signals:
