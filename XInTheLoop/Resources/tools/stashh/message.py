@@ -95,6 +95,7 @@ class CanService:
     self.tscale = tscale
     self.send_messages = []
     self.received_signals = {}
+    self.counter_steps = {}
 
   def send_signal_names(self) -> list:
     return sum((m.signal_names() for m in self.send_messages), [])
@@ -121,9 +122,21 @@ class CanService:
         return
       try:
         signals = self.db.decode_message(msg.arbitration_id, msg.data, decode_choices=False)
-        self.received_signals.update(signals)
-        # TODO: Increment counter of msg in self.send_messages if any
-        print(signals)
+        if any(msg.arbitration_id == m.message.frame_id for m in self.send_messages):
+           # Increment counter of msg in self.send_messages if seeing a sent message
+          self.dict_encode({k: v+1 if k.endswith("_Counter") else v for k,v in signals.items()})
+          print("Incremented counter of ", signals.keys()[0])
+        else:
+          for k,v in signals.items():
+            if k.endswith("_Counter"):
+              step_value = v - self.received_signals.get(k, 0)  # Subtract previous counter value
+              steps = self.counter_steps.get(k, {})
+              steps[step_value] = steps.get(step_value, 0) + 1  # Increase step frequency
+              self.counter_steps[k] = steps
+              print(k, "=", v, "steps", steps)
+          self.received_signals.update(signals)
+        #DEBUG print(signals)
+        #DEBUG print({k: v for k,v in signals.items() if k.endswith("_Counter")})
       except KeyError:
         print(f"Ignoring unexpected ID={msg.arbitration_id}  started={self.started()}")
 
