@@ -18,12 +18,16 @@ if __name__ == "__main__":
 
     def received(msg: can.Message) -> None:
       """Received CAN message, but don't print it"""
-      pass
+      # Simulate incoming values based on outgoing requests.
+      canService.dict_encode({
+        "MG1IMF1_Setpoint_Mode": canService.received_signals.get("MG1IC_Setpoint_Mode_Req", 0),
+        "MG1IMF1_HVIL_Status": canService.received_signals.get("HVBI_Driveline_Availability", 0) == 1,
+        "MG1IS1_DC_current_output": canService.received_signals.get("MG1IC_Setpoint_Req", 0),
+        "MG1IS1_DC_voltage_output": canService.received_signals.get("MG1IC_Setpoint_Req", 0),
+      })
 
     canService.notifier([received])
     canService.initialize_signals(0)
     canService.start()
 
-    # TODO: Change some signal values for test purposes
-    # TODO: Simulate state machines, e.g. using canService.received_signals["MG1IC_Setpoint_Mode_Req"] and canService.send_signals["MG1IC_Setpoint_Mode_Req"]
     keyboard.wait("q")
