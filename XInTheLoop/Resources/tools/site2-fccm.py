@@ -20,7 +20,7 @@ if __name__ == "__main__":
       """Received CAN message, but don't print it"""
       pass
 
-    canService.notifier(received)
+    canService.notifier([received])
     canService.initialize_signals(0)
     canService.start()
 
