@@ -52,8 +52,11 @@ class CanMessage:
     self.filter_encode({k: v for k,v in signals.items() if not k.endswith("_Counter")})
 
   def filter_encode(self, signals: dict) -> None:
-    """Encode own signals only, ignore others"""
-    self.dict_encode({k: v for k,v in signals.items() if k.startswith(self.name + "_")})
+    """Encode own signals only, ignore others, and no action if no own signals"""
+    signals = {k: v for k,v in signals.items() if k.startswith(self.name + "_")}
+    if signals:
+      #DEBUG print("filter_encode", signals)
+      self.dict_encode(signals)
 
   def modifier_callback(self) -> Callable[[can.Message], can.Message]:
     return None  # Nothing to modify here.
@@ -86,6 +89,9 @@ class CrcCanMessage(CanMessage):
     #DEBUG print(f"CRC={self.msg.data[0 if self.crc_rule == CrcRule.B else 7]}")
 
   def filter_encode(self, signals: dict) -> None:
+    """Encode own signals only, ignore others, and no action if no own signals"""
+    if not any(k.startswith(self.name + "_") for k,v in signals.items()):
+      return
     for s in self.message.signals:
       if s.name.endswith("_Counter"):
         signals[s.name] = self.get_counter(signals.get(s.name))
