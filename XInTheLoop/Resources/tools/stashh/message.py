@@ -5,7 +5,7 @@ import can
 from cantools.database.can.database import Database
 import crcmod
 from enum import Enum
-from typing import Callable
+from typing import Callable, List
 
 CrcRule = Enum('CrcRule', ['A', 'B'])
 CRC8H2F = crcmod.mkCrcFun(0x12F, initCrc=0x00, rev=False, xorOut=0xFF)
@@ -130,7 +130,7 @@ class CanService:
   def initialize_signals(self, value = 0) -> None:
     self.dict_encode({sn: value for sn in self.send_signal_names()})
 
-  def notifier(self, callback = can.Printer()) -> None:
+  def notifier(self, callbacks: List[Callable[[can.Message], None]] = [can.Printer()]) -> None:
 
     def received(msg: can.Message) -> None:
       """Received CAN message"""
@@ -155,7 +155,7 @@ class CanService:
       except KeyError:
         print(f"Ignoring unexpected ID={msg.arbitration_id}  started={self.started()}")
 
-    can.Notifier(self.bus, [callback, received])
+    can.Notifier(self.bus, [received] + callbacks)
 
   def start(self) -> None:
     assert self.ready2send()
