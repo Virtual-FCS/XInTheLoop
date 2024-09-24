@@ -242,7 +242,7 @@ This example implements a UDP protocol to exchange values with an external syste
 <ul>
 <li><tt>site2.py</tt> is the base Site2 protocol.</li>
 <li><tt>site2-relay.py</tt> is the UDP-CAN relay service.</li>
-<li><tt>site2-fccm.py</tt> is a simple simulator of the FCCM CAN messages.</li>
+<li><tt>site2-fccu.py</tt> is a simple simulator of the FCCU CAN messages.</li>
 </ul>
 
 <p>The two latter tools both assume a USB-CAN adapter of type Peak PCAN-USB is connected, but it's easy to switch to some other CAN adapter that is supported by <tt>python-can</tt>.</p>
@@ -255,7 +255,7 @@ Except for the <b>Dry Run</b> (which only uses the base Site2 protocol), a USB-C
 <li><tt>cantools</tt></li>
 <li><tt>python-can</tt> (automatically installed as a dependency of <tt>cantools</tt>)</li>
 <li><tt>crcmod</tt></li>
-<li><tt>keyboard</tt> (only needed by <tt>site2-fccm.py</tt> used in the Moist Run)</li>
+<li><tt>keyboard</tt> (only needed by <tt>site2-fccu.py</tt> used in the Moist Run)</li>
 </ul>
 <p>Command to install the packages above:</p>
 
@@ -308,9 +308,9 @@ in the second shell window to send a series of 50 incoming messages while the si
 
 <li>When the compilation is finished and the simulation has started, execute
 
-<pre style=\"font-size: 12px;\">python site2-fccm.py</pre>
+<pre style=\"font-size: 12px;\">python site2-fccu.py</pre>
 
-in the second shell window to simulate the CAN messages of and FCCM.</li>
+in the second shell window to simulate the CAN messages of and FCCU.</li>
 
 <li>When the simulation has ended, select e.g. the variables packControlBits.uSetpoint_Mode_Req,  sync.yDC_current_output and sync.yDC_voltage_output to plot these received values in a graph of the simulation.</li>
 

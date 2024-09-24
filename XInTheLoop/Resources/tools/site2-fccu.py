@@ -1,4 +1,4 @@
-# Simulate FCCM sending incoming CAN and receive outgoing CAN
+# Simulate FCCU sending incoming CAN and receive outgoing CAN
 # Copyright (c) 2024 SINTEF
 
 import can
