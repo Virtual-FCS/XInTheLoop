@@ -5,6 +5,7 @@ import can
 from cantools.database.can.database import Database
 import crcmod
 from enum import Enum
+from typing import Callable
 
 CrcRule = Enum('CrcRule', ['A', 'B'])
 CRC8H2F = crcmod.mkCrcFun(0x12F, initCrc=0x00, rev=False, xorOut=0xFF)
@@ -54,8 +55,11 @@ class CanMessage:
     """Encode own signals only, ignore others"""
     self.dict_encode({k: v for k,v in signals.items() if k.startswith(self.name + "_")})
 
+  def modifier_callback(self) -> Callable[[can.Message], can.Message]:
+    return None  # Nothing to modify here.
+
   def send_periodic(self, bus: can.BusABC, tscale: float = 1) -> None:
-    self.task = bus.send_periodic(self.msg, tscale * self.message.cycle_time / 1000.0)
+    self.task = bus.send_periodic(self.msg, tscale * self.message.cycle_time / 1000.0, modifier_callback = self.modifier_callback())
     if not isinstance(self.task, can.ModifiableCyclicTaskABC):
       print("This interface doesn't seem to support modification")
       self.task.stop()
@@ -71,7 +75,8 @@ class CrcCanMessage(CanMessage):
 
   def get_counter(self, counter: int = None) -> int:
     if counter is None:
-        counter = (self.counter + 1) & 0xf
+      counter = self.counter
+    counter &= 0xf
     self.counter = counter
     return counter
 
@@ -87,6 +92,18 @@ class CrcCanMessage(CanMessage):
       elif s.name.endswith("_CRC"):
         signals[s.name] = 0
     super().filter_encode(signals)
+
+  def inc_counter(self, msg: can.Message) -> can.Message:
+    """Increment own counter and update CRC"""
+    assert self.msg == msg
+    ctr, shift, mask = (1, 0, 0xf0) if self.crc_rule == CrcRule.B else (6, 4, 0xf)
+    msg.data[ctr] = (self.get_counter(self.get_counter() + 1) << shift) | (msg.data[ctr] & mask)
+    crc_calc(msg, self.crc_rule, True)
+    assert self.msg == msg
+    return msg
+
+  def modifier_callback(self) -> Callable[[can.Message], can.Message]:
+    return lambda msg: self.inc_counter(msg)
 
 class CanService:
   def __init__(self, bus: can.BusABC, db: Database, tscale: float = 1):
@@ -111,7 +128,7 @@ class CanService:
       m.filter_encode(signals)
 
   def initialize_signals(self, value = 0) -> None:
-    self.dict_encode({sn: value for sn in self.send_signal_names() if not sn.endswith("_Counter")})
+    self.dict_encode({sn: value for sn in self.send_signal_names()})
 
   def notifier(self, callback = can.Printer()) -> None:
 
@@ -123,9 +140,7 @@ class CanService:
       try:
         signals = self.db.decode_message(msg.arbitration_id, msg.data, decode_choices=False)
         if any(msg.arbitration_id == m.message.frame_id for m in self.send_messages):
-           # Increment counter of msg in self.send_messages if seeing a sent message
-          self.dict_encode({k: v+1 if k.endswith("_Counter") else v for k,v in signals.items()})
-          print("Incremented counter of ", signals.keys()[0])
+          raise Exception("Receiving own messages should not happen")
         else:
           for k,v in signals.items():
             if k.endswith("_Counter"):
