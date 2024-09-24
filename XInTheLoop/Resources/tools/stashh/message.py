@@ -154,7 +154,8 @@ class CanService:
               steps = self.counter_steps.get(k, {})
               steps[step_value] = steps.get(step_value, 0) + 1  # Increase step frequency
               self.counter_steps[k] = steps
-              print(k, "=", v, "steps", steps)
+              if step_value < 0:  # Only print at each wrap-around to reduce the printed amount
+                print(k, "=", v, "steps", steps)
           self.received_signals.update(signals)
         #DEBUG print(signals)
         #DEBUG print({k: v for k,v in signals.items() if k.endswith("_Counter")})
