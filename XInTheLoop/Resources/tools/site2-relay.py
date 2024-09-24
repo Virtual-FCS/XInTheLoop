@@ -15,7 +15,7 @@ if __name__ == "__main__":
     )
 
     print("Create StasHH outgoing CAN service...")
-    canService = OutgoingCanService(bus, db, tscale=100)  # TODO: tscale=8
+    canService = OutgoingCanService(bus, db, tscale=8)  # A 10 ms period extends to 80 ms
     canService.notifier([])
 
     def receivedUDP(package: bytes, values: list) -> None:
