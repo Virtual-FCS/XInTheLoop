@@ -11,7 +11,7 @@ if __name__ == "__main__":
   with can.Bus(interface='pcan', channel='PCAN_USBBUS1', bitrate=500000, receive_own_messages=False) as bus, site2.socket() as s:
     s.connect((site2.host, site2.cfg[1].port))
     db = cantools.database.load_file(
-      Path(__file__).with_name('STASHH_FCCU_VCU_communication_20221123_v02.dbc')
+      Path(__file__).with_name('STASHH_FCCU_VCU_communication_20221123_v02-edit1.dbc')
     )
 
     print("Create StasHH outgoing CAN service...")
