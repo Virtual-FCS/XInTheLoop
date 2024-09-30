@@ -93,12 +93,12 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
     annotation(
       experiment(StartTime = 0, StopTime = 390, Tolerance = 1e-06, Interval = 0.1),
       Documentation(info = "<html><head></head><body>
-<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 6.5 minutes that in a cycle sends request of these modes to the FCM:</p>
+<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 6.5 minutes that in a cycle sends request of these modes to the FCCU:</p>
 <div><ul>
 <li>Start-up (idle)</li><li>Standby</li>
 <li>Starting</li><li>Running</li>
 <li>Stopping</li></ul></div>
-<p>It is used in the <b>Dry Run</b> and <b>Moist Run</b> test procedures of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
+<p>It is used in the test procedures of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
 </body></html>"));
   end Test;
 
@@ -235,8 +235,7 @@ Unpack all status bits from an integer input.
   annotation(
     Documentation(info = "<html><head></head><body>
 <p>
-This example implements a UDP protocol to exchange values with an external system running a StasHH compatible fuel cell module (FCM).
-</p>
+This example implements a UDP protocol to exchange values with an external system running a StasHH compatible fuel cell module (FCM) where a fuel cell control unit (FCCU) handle the StasHH Digital Interface via a CAN bus.</p>
 
 <h4 id=\"tool\">Python Tools</h4>
 <ul>
@@ -245,15 +244,15 @@ This example implements a UDP protocol to exchange values with an external syste
 <li><tt>site2-fccu.py</tt> is a simple simulator of the FCCU CAN messages.</li>
 </ul>
 
-<p>The two latter tools both assume a USB-CAN adapter of type Peak PCAN-USB is connected, but it's easy to switch to some other CAN adapter that is supported by <tt>python-can</tt>.</p>
+<p>The two latter tools both assume a USB-CAN adapter of type Peak PCAN-USB is connected, but it's easy to switch to some other CAN adapter that is supported by <tt>python-can</tt> using different arguments for the <tt>can.Bus()</tt> call.</p>
 
 <p>
-In all the <a href=\"#dry\">Dry Run</a>, <a href=\"#moist\">Moist Run</a>,  and the <a href=\"#wet\">Wet Run</a> sections below, a selection of these Python tools are used. It is assumed your PC has Python (version 3 or above) installed. If not, it can be installed from the Microsoft Store App.<p>
+In all the <a href=\"#dry\">Dry Run</a>, <a href=\"#moist\">Moist Run</a>,  and the <a href=\"#wet\">Wet Run</a> sections below, a selection of these Python tools are used. It is assumed your PC has Python (version 3 or above) installed. If not, it can be installed from the Microsoft Store App.</p><p>
 
 Except for the <b>Dry Run</b> (which only uses the base Site2 protocol), a USB-CAN adapter (or two such adapters for the <b>Moist Run</b>) must be connected and these Python packages need to be installed in the python environment in use:
-<ul>
+</p><ul>
 <li><tt>cantools</tt></li>
-<li><tt>python-can</tt> (automatically installed as a dependency of <tt>cantools</tt>)</li>
+<li><tt>python-can</tt> (automatically installed as a dependency of <tt>cantools</tt>, but check that the installed version is &ge; v4.3.0)</li>
 <li><tt>crcmod</tt></li>
 <li><tt>keyboard</tt> (only needed by <tt>site2-fccu.py</tt> used in the Moist Run)</li>
 </ul>
@@ -262,11 +261,11 @@ Except for the <b>Dry Run</b> (which only uses the base Site2 protocol), a USB-C
 <pre style=\"font-size: 12px;\">pip install cantools crcmod keyboard</pre>
 
 <p>
-The Python files&nbsp;<tt>site2*.py</tt>&nbsp;is located in the <tt>XInTheLoop/Resources/tools/</tt> folder - where <a href=\"modelica://XInTheLoop\">this library</a> is installed or cloned from github.
+The Python files&nbsp;<tt>site2*.py</tt>&nbsp;are located in the <tt>XInTheLoop/Resources/tools/</tt> folder - where <a href=\"modelica://XInTheLoop\">this library</a> is installed or cloned from github.
 </p>
 
 <h4 id=\"dry\">Dry Run</h4>
-To test this without a real hardware I/O application present, use the basic <a href=\"#tool\">Python tool included in the tools folder</a>.
+To only test the UDP protocol without a real hardware I/O application present, use the basic <a href=\"#tool\">Python tool included in the tools folder</a>.
 
 <ol>
 <li>Open a command shell window, and change to the tools&nbsp;folder. The Python file should now be shown if executing a <tt>dir</tt> command.</li>
@@ -281,19 +280,18 @@ To test this without a real hardware I/O application present, use the basic <a h
 
 <li>When the compilation is finished and the simulation has started, execute e.g.
 
-<pre style=\"font-size: 12px;\">python site2.py in 2 3 4 5 6 7 8 9 50</pre>
+<pre style=\"font-size: 12px;\">python site2.py in 2 3 4 5 6 7 8 9 300</pre>
 
-in the second shell window to send a series of 50 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 50 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
+in the second shell window to send a series of 300 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 300 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
-<li>When the simulation has ended, select e.g. the variables packControlBits.uSetpoint_Mode_Req,  sync.yDC_current_output and sync.yDC_voltage_output to plot these received values in a graph of the simulation.</li>
+<li>When the simulation has ended, select e.g. the variables <tt>packControlBits.uSetpoint_Mode_Req</tt>, <tt>sync.yDC_current_output</tt>, <tt>sync.yDC_voltage_output</tt> and <tt>unpackStatusBits.ySetpoint_Mode</tt> to plot these received values in a graph of the simulation.</li>
 
 </ol>
 
 <img src=\"modelica://XInTheLoop/Resources/Images/site2-test-plot.png\">
 
 <h4 id=\"moist\">Moist Run</h4>
-<p>To test this without a real Fuel Cell Module present, but with two USB-CAN adapters connected to test together with the UDP-CAN relay process, use the <a href=\"#tool\">Python tools included in the tools folder</a>.
-</p>
+<p>To test the model without a real Fuel Cell Module present, but with two interconnected USB-CAN adapters used by the UDP-CAN relay and FCCU simulater processes, use the <a href=\"#tool\">Python tools included in the tools folder</a>.</p>
 
 <ol>
 <li>Open a command shell window, and change to the tools&nbsp;folder. The Python file should now be shown if executing a <tt>dir</tt> command.</li>
@@ -312,12 +310,25 @@ in the second shell window to send a series of 50 incoming messages while the si
 
 in the second shell window to simulate the CAN messages of and FCCU.</li>
 
-<li>When the simulation has ended, select e.g. the variables packControlBits.uSetpoint_Mode_Req,  sync.yDC_current_output and sync.yDC_voltage_output to plot these received values in a graph of the simulation.</li>
+<li>When the simulation has ended, select e.g. the variables <tt>packControlBits.uSetpoint_Mode_Req</tt>,  <tt>sync.yDC_current_output</tt>, <tt>sync.yDC_voltage_output</tt> and <tt>unpackStatusBits.ySetpoint_Mode</tt> to plot these received values in a graph of the simulation.</li>
 
 </ol>
 
 <h4 id=\"wet\">Wet Run</h4>
-<div>To test this against a real StasHH FCM hardware, it must be connected to the same CAN bus as also available via a CAN adapter at the same PC as running OpenModelica and the site2-relay process that acts like a UDP service abstraction layer above the actual hardware or external system. The Python script implementation used for the dry run above is part of such a service.</div><div><br></div><div>TODO: Expand description.</div><div><br></div>
+<p>To test the model against a real StasHH FCCU hardware, the procedure is quite similar to the <a href=\"#moist\">Moist Run</a> described above, except only a single USB-CAN adapter must be connected from the PC to the FCCU CAN bus, instead of using two interconnected USB-CAN adapters. The steps are:</p>
+
+<ol>
+<li>Open a command shell window, and change to the tools&nbsp;folder. The Python file should now be shown if executing a <tt>dir</tt> command.</li>
+
+<li>To start the UDP-CAN relay service, execute
+
+<pre style=\"font-size: 12px;\">python site2-relay.py</pre>
+
+</li><li>Start simulation of the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model.</li>
+
+<li>When the simulation has ended, select e.g. the variables <tt>packControlBits.uSetpoint_Mode_Req</tt>, <tt>sync.yDC_current_output</tt>, <tt>sync.yDC_voltage_output</tt> and <tt>unpackStatusBits.ySetpoint_Mode</tt> to plot these received values in a graph of the simulation. All variables with a leading <tt>y</tt> from the <tt>sync</tt> and <tt>unpackStatusBits</tt> blocks are received from the FCCU.</li>
+
+</ol>
 
 <h4>Protocol Packet Details</h4>
 <div>In each UDP packet sent in this protocol there is a leading header:</div>
