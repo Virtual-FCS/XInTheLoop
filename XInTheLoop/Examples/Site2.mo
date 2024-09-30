@@ -12,23 +12,23 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {56, -26}, extent = {{-10, -10}, {30, 10}}, rotation = 0)));
     Modelica.StateGraph.InitialStepWithSignal idle(nOut = 1, nIn = 1) annotation(
       Placement(visible = true, transformation(origin = {-84, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toIdle(enableTimer = true, waitTime = 4)  annotation(
+    Modelica.StateGraph.Transition toIdle(enableTimer = true, waitTime = 9)  annotation(
       Placement(visible = true, transformation(origin = {92, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal stopping(nIn = 1, nOut = 1) annotation(
       Placement(visible = true, transformation(origin = {72, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toStopping(enableTimer = true, waitTime = 8)  annotation(
+    Modelica.StateGraph.Transition toStopping(enableTimer = true, waitTime = 300)  annotation(
       Placement(visible = true, transformation(origin = {52, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal running(nIn = 1, nOut = 1)  annotation(
       Placement(visible = true, transformation(origin = {34, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toRunning(enableTimer = true, waitTime = 5)  annotation(
+    Modelica.StateGraph.Transition toRunning(enableTimer = true, waitTime = 60)  annotation(
       Placement(visible = true, transformation(origin = {14, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal starting(nIn = 1, nOut = 1)  annotation(
       Placement(visible = true, transformation(origin = {-4, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.TransitionWithSignal toStarting(enableTimer = true, waitTime = 2)  annotation(
+    Modelica.StateGraph.TransitionWithSignal toStarting(enableTimer = true, waitTime = 3)  annotation(
       Placement(visible = true, transformation(origin = {-24, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal standby(nIn = 1, nOut = 1) annotation(
       Placement(visible = true, transformation(origin = {-44, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toStandby(enableTimer = true, waitTime = 5)  annotation(
+    Modelica.StateGraph.Transition toStandby(enableTimer = true, waitTime = 10)  annotation(
       Placement(visible = true, transformation(origin = {-64, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.BooleanExpression alwaysTrue(y = true)  annotation(
       Placement(visible = true, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -91,9 +91,9 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Line(points = {{-38, -92}, {-10, -92}, {-10, -80}, {-2, -80}}, color = {0, 0, 127}));
   protected
     annotation(
-      experiment(StartTime = 0, StopTime = 60, Tolerance = 1e-06, Interval = 0.1),
+      experiment(StartTime = 0, StopTime = 390, Tolerance = 1e-06, Interval = 0.1),
       Documentation(info = "<html><head></head><body>
-<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 60 seconds that in a cycle sends request of these modes to the FCM:</p>
+<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 6.5 minutes that in a cycle sends request of these modes to the FCM:</p>
 <div><ul>
 <li>Start-up (idle)</li><li>Standby</li>
 <li>Starting</li><li>Running</li>
