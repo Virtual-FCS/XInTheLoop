@@ -10,26 +10,26 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {-70, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.MathInteger.MultiSwitch modeRequest(expr = {0, 2, 10, 10, 21}, nu = 5, use_pre_as_default = true) annotation(
       Placement(visible = true, transformation(origin = {56, -26}, extent = {{-10, -10}, {30, 10}}, rotation = 0)));
-    Modelica.StateGraph.StepWithSignal standby(nIn = 1, nOut = 1) annotation(
-      Placement(visible = true, transformation(origin = {-44, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toStandby(enableTimer = true, waitTime = 5)  annotation(
-      Placement(visible = true, transformation(origin = {-64, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.StepWithSignal stopping(nIn = 1, nOut = 1) annotation(
-      Placement(visible = true, transformation(origin = {72, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toRunning(enableTimer = true, waitTime = 5)  annotation(
-      Placement(visible = true, transformation(origin = {14, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toStopping(enableTimer = true, waitTime = 8)  annotation(
-      Placement(visible = true, transformation(origin = {52, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.InitialStepWithSignal idle(nOut = 1, nIn = 1) annotation(
       Placement(visible = true, transformation(origin = {-84, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.Transition toIdle(enableTimer = true, waitTime = 4)  annotation(
       Placement(visible = true, transformation(origin = {92, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.StepWithSignal starting(nIn = 1, nOut = 1)  annotation(
-      Placement(visible = true, transformation(origin = {-4, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.StepWithSignal stopping(nIn = 1, nOut = 1) annotation(
+      Placement(visible = true, transformation(origin = {72, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.Transition toStopping(enableTimer = true, waitTime = 8)  annotation(
+      Placement(visible = true, transformation(origin = {52, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal running(nIn = 1, nOut = 1)  annotation(
       Placement(visible = true, transformation(origin = {34, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.Transition toRunning(enableTimer = true, waitTime = 5)  annotation(
+      Placement(visible = true, transformation(origin = {14, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.StepWithSignal starting(nIn = 1, nOut = 1)  annotation(
+      Placement(visible = true, transformation(origin = {-4, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.TransitionWithSignal toStarting(enableTimer = true, waitTime = 2)  annotation(
       Placement(visible = true, transformation(origin = {-24, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.StepWithSignal standby(nIn = 1, nOut = 1) annotation(
+      Placement(visible = true, transformation(origin = {-44, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.Transition toStandby(enableTimer = true, waitTime = 5)  annotation(
+      Placement(visible = true, transformation(origin = {-64, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.BooleanExpression alwaysTrue(y = true)  annotation(
       Placement(visible = true, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     XInTheLoop.Examples.Site2.Blocks.Sync sync annotation(
