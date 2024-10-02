@@ -43,11 +43,14 @@ Output bitwise OR between input 32 bit integers.
     extends Icons.Bitwise;
     extends Icons.Par_b;
     parameter Integer b = 0 "32 bit integer to bitwise XOR with input";
+    Modelica.Blocks.Interfaces.BooleanOutput yZero "Is the result zero?" annotation(
+      Placement(transformation(origin = {110, -60}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -60}, extent = {{-10, -10}, {10, 10}})));
   algorithm
     y := b;
     for i in 1:nu loop
       y := Functions.xor_ints(u[i], y);
     end for;
+    yZero := (y == 0);
     annotation(
       Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "XOR")}),
       Documentation(info = "<html><head></head><body>
