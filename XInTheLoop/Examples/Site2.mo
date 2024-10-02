@@ -205,11 +205,12 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
   annotation(
       experiment(StartTime = 0, StopTime = 500, Tolerance = 1e-06, Interval = 0.1),
       Documentation(info = "<html><head></head><body>
-<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 500 seconds that in a cycle sends request of these modes to the FCCU:</p>
+<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 500 seconds similar to the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model that in a cycle sends request of these modes to the FCCU:</p>
 <div><ul>
 <li>Start-up (idle)</li><li>Standby</li>
 <li>Starting</li><li>Running</li>
 <li>Stopping</li></ul></div>
+<p>The difference from the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model, is that in this model, several of the state machine transitions are dependent of the expected actual setpoint mode received from the FCCU, so the mode sequence timing might change a bit. Be aware that the mode sequence might stop if not receiving expected signals.</p>
 <p>It is used in the test procedures of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
 </body></html>"));
   end Test2;
@@ -392,7 +393,7 @@ To only test the UDP protocol without a real hardware I/O application present, u
 
 <li>When the compilation is finished and the simulation has started, execute e.g.
 
-<pre style=\"font-size: 12px;\">python site2.py in 2 3 4 5 6 7 8 9 300</pre>
+<pre style=\"font-size: 12px;\">python site2.py in 2 3 4 5 6 7 8 9 400</pre>
 
 in the second shell window to send a series of 300 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 300 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
@@ -414,7 +415,7 @@ in the second shell window to send a series of 300 incoming messages while the s
 
 </li><li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
 
-<li>Start simulation of the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model.</li>
+<li>Start simulation of either the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> or the <a href=\"modelica://XInTheLoop.Examples.Site2.Test2\">Test2</a> model.</li>
 
 <li>When the compilation is finished and the simulation has started, execute
 
@@ -426,6 +427,9 @@ in the second shell window to simulate the CAN messages of and FCCU.</li>
 
 </ol>
 
+<p>If simulating the Test2 model, the plot might look like this:</p>
+<img src=\"modelica://XInTheLoop/Resources/Images/site2-test2-plot.png\">
+
 <h4 id=\"wet\">Wet Run</h4>
 <p>To test the model against a real StasHH FCCU hardware, the procedure is quite similar to the <a href=\"#moist\">Moist Run</a> described above, except only a single USB-CAN adapter must be connected from the PC to the FCCU CAN bus, instead of using two interconnected USB-CAN adapters. The steps are:</p>
 
@@ -436,7 +440,7 @@ in the second shell window to simulate the CAN messages of and FCCU.</li>
 
 <pre style=\"font-size: 12px;\">python site2-relay.py</pre>
 
-</li><li>Start simulation of the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model.</li>
+<li>Start simulation of either the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> or the <a href=\"modelica://XInTheLoop.Examples.Site2.Test2\">Test2</a> model.</li>
 
 <li>When the simulation has ended, select e.g. the variables <tt>packControlBits.uSetpoint_Mode_Req</tt>, <tt>sync.yDC_current_output</tt>, <tt>sync.yDC_voltage_output</tt> and <tt>unpackStatusBits.ySetpoint_Mode</tt> to plot these received values in a graph of the simulation. All variables with a leading <tt>y</tt> from the <tt>sync</tt> and <tt>unpackStatusBits</tt> blocks are received from the FCCU.</li>
 
