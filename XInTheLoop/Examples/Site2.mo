@@ -102,6 +102,112 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
 </body></html>"));
   end Test;
 
+  model Test2 "Example model demonstrating exchanging values with this HIL site using a simple pattern of time varying data as input together with a closed loop controller reading the actual setpoint mode"
+    extends Modelica.Icons.Example;
+
+    inner Modelica.StateGraph.StateGraphRoot stateGraphRoot annotation(
+      Placement(visible = true, transformation(origin = {-70, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.MathInteger.MultiSwitch modeRequest(expr = {0, 2, 10, 10, 21}, nu = 5, use_pre_as_default = true) annotation(
+      Placement(visible = true, transformation(origin = {56, -26}, extent = {{-10, -10}, {30, 10}}, rotation = 0)));
+    Modelica.StateGraph.InitialStepWithSignal idle(nOut = 1, nIn = 1) annotation(
+      Placement(visible = true, transformation(origin = {-84, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.Transition toIdle(enableTimer = true, waitTime = 9)  annotation(
+      Placement(visible = true, transformation(origin = {92, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.StepWithSignal stopping(nIn = 1, nOut = 1) annotation(
+      Placement(visible = true, transformation(origin = {72, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.Transition toStopping(enableTimer = true, waitTime = 300)  annotation(
+      Placement(visible = true, transformation(origin = {52, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.StepWithSignal running(nIn = 1, nOut = 1)  annotation(
+      Placement(visible = true, transformation(origin = {34, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.TransitionWithSignal toRunning(enableTimer = true, waitTime = 6)  annotation(
+      Placement(visible = true, transformation(origin = {14, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.StepWithSignal starting(nIn = 1, nOut = 1)  annotation(
+      Placement(visible = true, transformation(origin = {-4, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.TransitionWithSignal toStarting(enableTimer = true, waitTime = 120)  annotation(
+      Placement(visible = true, transformation(origin = {-24, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.StepWithSignal standby(nIn = 1, nOut = 1) annotation(
+      Placement(visible = true, transformation(origin = {-44, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.StateGraph.Transition toStandby(enableTimer = true, waitTime = 3)  annotation(
+      Placement(visible = true, transformation(origin = {-64, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.BooleanExpression alwaysTrue(y = true)  annotation(
+      Placement(visible = true, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    XInTheLoop.Examples.Site2.Blocks.Sync sync annotation(
+      Placement(visible = true, transformation(origin = {10, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    XInTheLoop.Examples.Site2.Blocks.UnpackStatusBits unpackStatusBits annotation(
+      Placement(visible = true, transformation(origin = {40, -58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    XInTheLoop.Examples.Site2.Blocks.PackControlBits packControlBits annotation(
+      Placement(visible = true, transformation(origin = {-30, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.IntegerExpression HVESSC1_PowerDown_Command annotation(
+      Placement(visible = true, transformation(origin = {-84, -62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.IntegerExpression HVBI_Driveline_Availability(y = 1)  annotation(
+      Placement(visible = true, transformation(origin = {-84, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.RealExpression MG1IC_Setpoint_Req(y = 25.0)  annotation(
+      Placement(visible = true, transformation(origin = {-50, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  equation
+    connect(alwaysTrue.y, toStarting.condition) annotation(
+      Line(points = {{-18, -10}, {-12, -10}, {-12, 6}, {-24, 6}, {-24, 18}}, color = {255, 0, 255}));
+    connect(toStandby.outPort, standby.inPort[1]) annotation(
+      Line(points = {{-62.5, 30}, {-54.5, 30}}));
+    connect(idle.outPort[1], toStandby.inPort) annotation(
+      Line(points = {{-73.5, 30}, {-67.5, 30}}));
+    connect(toStopping.outPort, stopping.inPort[1]) annotation(
+      Line(points = {{53.5, 30}, {61.5, 30}}));
+    connect(stopping.outPort[1], toIdle.inPort) annotation(
+      Line(points = {{82.5, 30}, {88.5, 30}}));
+    connect(toIdle.outPort, idle.inPort[1]) annotation(
+      Line(points = {{93.5, 30}, {98, 30}, {98, 58}, {-98, 58}, {-98, 30}, {-95, 30}}));
+    connect(standby.outPort[1], toStarting.inPort) annotation(
+      Line(points = {{-33.5, 30}, {-27.5, 30}}));
+    connect(toStarting.outPort, starting.inPort[1]) annotation(
+      Line(points = {{-22.5, 30}, {-14.5, 30}}));
+    connect(starting.outPort[1], toRunning.inPort) annotation(
+      Line(points = {{6.5, 30}, {10.5, 30}}));
+    connect(toRunning.outPort, running.inPort[1]) annotation(
+      Line(points = {{15.5, 30}, {23.5, 30}}));
+    connect(running.outPort[1], toStopping.inPort) annotation(
+      Line(points = {{44.5, 30}, {48.5, 30}}));
+    connect(idle.active, modeRequest.u[1]) annotation(
+      Line(points = {{-84, 19}, {-84, -26}, {46, -26}}, color = {255, 0, 255}));
+    connect(standby.active, modeRequest.u[2]) annotation(
+      Line(points = {{-44, 19}, {-44, -26}, {46, -26}}, color = {255, 0, 255}));
+    connect(starting.active, modeRequest.u[3]) annotation(
+      Line(points = {{-4, 19}, {-4, -26}, {46, -26}}, color = {255, 0, 255}));
+    connect(running.active, modeRequest.u[4]) annotation(
+      Line(points = {{34, 19}, {34, -26}, {46, -26}}, color = {255, 0, 255}));
+    connect(stopping.active, modeRequest.u[5]) annotation(
+      Line(points = {{72, 19}, {72, -0.5}, {40, -0.5}, {40, -24.25}, {46, -24.25}, {46, -26}}, color = {255, 0, 255}));
+    connect(sync.yStatusBits, unpackStatusBits.u) annotation(
+      Line(points = {{14, -69}, {14, -59}, {28, -59}}, color = {255, 127, 0}));
+    connect(packControlBits.y, sync.uControlBits) annotation(
+      Line(points = {{-19, -70}, {-9.5, -70}, {-9.5, -74}, {-2, -74}}, color = {255, 127, 0}));
+    connect(modeRequest.y, packControlBits.uSetpoint_Mode_Req) annotation(
+      Line(points = {{88, -26}, {92, -26}, {92, -40}, {-50, -40}, {-50, -60}, {-42, -60}}, color = {255, 127, 0}));
+    connect(HVESSC1_PowerDown_Command.y, packControlBits.uPowerDown_Command) annotation(
+      Line(points = {{-72, -62}, {-60, -62}, {-60, -66}, {-42, -66}}, color = {255, 127, 0}));
+    connect(HVBI_Driveline_Availability.y, packControlBits.uDriveline_Availability) annotation(
+      Line(points = {{-72, -78}, {-60, -78}, {-60, -70}, {-42, -70}}, color = {255, 127, 0}));
+    connect(MG1IC_Setpoint_Req.y, sync.uSetpoint_Req) annotation(
+      Line(points = {{-38, -92}, {-10, -92}, {-10, -80}, {-2, -80}}, color = {0, 0, 127}));
+    connect(unpackStatusBits.ySetpoint_Mode, isStarting.u[1]) annotation(
+      Line(points = {{52, -52}, {55, -52}, {55, -56}, {60, -56}}, color = {255, 127, 0}));
+    connect(toRunning.condition, isStarting.yZero) annotation(
+      Line(points = {{14, 18}, {14, -12}, {96, -12}, {96, -62}, {81, -62}}, color = {255, 0, 255}));
+  protected
+    public
+    XInTheLoop.Blocks.Bitwise.XorInts isStarting(nu = 1, b = 18) annotation(
+      Placement(transformation(origin = {70, -56}, extent = {{-10, -10}, {10, 10}})));
+  annotation(
+      experiment(StartTime = 0, StopTime = 500, Tolerance = 1e-06, Interval = 0.1),
+      Documentation(info = "<html><head></head><body>
+<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 500 seconds that in a cycle sends request of these modes to the FCCU:</p>
+<div><ul>
+<li>Start-up (idle)</li><li>Standby</li>
+<li>Starting</li><li>Running</li>
+<li>Stopping</li></ul></div>
+<p>It is used in the test procedures of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
+</body></html>"));
+  end Test2;
+
   package Blocks "Site1-Specific Blocks"
     extends Icons.BlocksPackage;
 
