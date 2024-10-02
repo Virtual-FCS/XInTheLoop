@@ -1,0 +1,755 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU FCCU
+
+
+VAL_TABLE_ VTSig_Lamp 1 "Lamp on" 0 "Lamp off" ;
+
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ HVESSCFG_Nominal_Rated_Capacity : 0|24@1+ (0.001,0) [0|16449.535] "kWh" Vector__XXX
+ SG_ DM1_Failure_Mode_Identifier2 : 67|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Occurence_Count2 : 72|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method2 : 79|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number2 : 48|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier10 : 323|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier3 : 99|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier4 : 131|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier5 : 163|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier6 : 195|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier7 : 227|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier8 : 259|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier9 : 291|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Occurence_Count10 : 328|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Occurence_Count3 : 104|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Occurence_Count4 : 136|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Occurence_Count5 : 168|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Occurence_Count6 : 200|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Occurence_Count7 : 232|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Occurence_Count8 : 264|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Occurence_Count9 : 296|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method10 : 335|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method3 : 111|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method4 : 143|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method5 : 175|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method6 : 207|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method7 : 239|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method8 : 271|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_SPN_Conversion_Method9 : 303|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number10 : 304|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number3 : 80|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number4 : 112|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number5 : 144|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number6 : 176|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number7 : 208|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number8 : 240|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number9 : 272|19@1+ (1,0) [0|3] ""  VCU
+
+BO_ 2632665216 TPDT_FCCU: 8 FCCU
+ SG_ SequenceNumber : 0|8@1+ (1,0) [1|255] ""  VCU
+
+BO_ 2632730752 TPCM_FCCU: 8 FCCU
+ SG_ TotalNumberOfPacketsEoMA m19 : 24|8@1+ (1,0) [0|255] ""  VCU
+ SG_ TotalNumberOfPacketsBAM m32 : 24|8@1+ (1,0) [0|255] ""  VCU
+ SG_ TotalMessageSizeEoMA m19 : 8|16@1+ (1,0) [0|64255] "counts"  VCU
+ SG_ TotalMessageSizeBAM m32 : 8|16@1+ (1,0) [0|64255] "counts"  VCU
+ SG_ NumberOfPacketsThatCanBeSent m17 : 8|8@1+ (1,0) [0|255] ""  VCU
+ SG_ NextPacketNumberToBeSent m17 : 16|8@1+ (1,0) [0|255] ""  VCU
+ SG_ MaximumNumberOfPackets m16 : 32|8@1+ (1,0) [0|255] ""  VCU
+ SG_ TotalNumberOfPackets m16 : 24|8@1+ (1,0) [0|255] ""  VCU
+ SG_ TotalMessageSize m16 : 8|16@1+ (1,0) [0|64255] "counts"  VCU
+ SG_ ConnectionAbortReason m255 : 8|8@1+ (1,0) [0|255] ""  VCU
+ SG_ PGNumber : 40|24@1+ (1,0) [0|16777200] ""  VCU
+ SG_ ControlByte M : 0|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 2365484104 TCO1: 8 VCU
+ SG_ TCO1_Tachograph_vehicle_speed : 48|16@1+ (0.00390625,0) [0|250.99609375] "km/h"  FCCU
+
+BO_ 2566845768 AMB: 8 VCU
+ SG_ AMB_Ambient_Air_Temperature : 24|16@1+ (0.03125,-273) [-273|1734.96875] "°C"  FCCU
+ SG_ AMB_Barometric_Pressure : 0|8@1+ (0.5,0) [0|125] "kPa"  FCCU
+
+BO_ 2566841928 TD: 8 VCU
+ SG_ TD_Local_hour_offset : 56|8@1+ (1,-125) [-125|125] "h"  FCCU
+ SG_ TD_Local_minute_offset : 48|8@1+ (1,-125) [-125|125] "min"  FCCU
+ SG_ TD_Year : 40|8@1+ (1,1985) [1985|2235] "year"  FCCU
+ SG_ TD_Day : 32|8@1+ (0.25,0) [0|62.5] "days"  FCCU
+ SG_ TD_Month : 24|8@1+ (1,0) [0|250] "month"  FCCU
+ SG_ TD_Hour : 16|8@1+ (1,0) [0|250] "h"  FCCU
+ SG_ TD_Minutes : 8|8@1+ (1,0) [0|250] "min"  FCCU
+ SG_ TD_Seconds : 0|8@1+ (0.25,0) [0|62.5] "s"  FCCU
+
+BO_ 2566770816 IC2: 8 FCCU
+ SG_ IC2_FCS_Air_Filter_2_Diff_Press : 0|8@1+ (0.05,0) [0|12.5] "kPa"  VCU
+
+BO_ 2432541312 GFI3: 8 FCCU
+ SG_ GFI3_Fuel_Gas_Mass_Flow_Rate : 16|16@1+ (0.05,0) [0|3212.75] "kg/h"  VCU
+
+BO_ 2565505096 RQST_VCU: 3 VCU
+ SG_ ParameterGroupNumber : 0|24@1+ (1,0) [0|16777215] ""  FCCU
+
+BO_ 2632679496 TPDT_VCU: 8 VCU
+ SG_ SequenceNumber : 0|8@1+ (1,0) [1|255] ""  FCCU
+
+BO_ 2632745032 TPCM_VCU: 8 VCU
+ SG_ TotalNumberOfPacketsEoMA m19 : 24|8@1+ (1,0) [0|255] ""  FCCU
+ SG_ TotalNumberOfPacketsBAM m32 : 24|8@1+ (1,0) [0|255] ""  FCCU
+ SG_ TotalMessageSizeEoMA m19 : 8|16@1+ (1,0) [0|64255] "counts"  FCCU
+ SG_ TotalMessageSizeBAM m32 : 8|16@1+ (1,0) [0|64255] "counts"  FCCU
+ SG_ NumberOfPacketsThatCanBeSent m17 : 8|8@1+ (1,0) [0|255] ""  FCCU
+ SG_ NextPacketNumberToBeSent m17 : 16|8@1+ (1,0) [0|255] ""  FCCU
+ SG_ MaximumNumberOfPackets m16 : 32|8@1+ (1,0) [0|255] ""  FCCU
+ SG_ TotalNumberOfPackets m16 : 24|8@1+ (1,0) [0|255] ""  FCCU
+ SG_ TotalMessageSize m16 : 8|16@1+ (1,0) [0|64255] "counts"  FCCU
+ SG_ ConnectionAbortReason m255 : 8|8@1+ (1,0) [0|255] ""  FCCU
+ SG_ PGNumber : 40|24@1+ (1,0) [0|16777200] ""  FCCU
+ SG_ ControlByte M : 0|8@1+ (1,0) [0|255] ""  FCCU
+
+BO_ 2565490816 RQST_FCCU: 3 FCCU
+ SG_ ParameterGroupNumber : 0|24@1+ (1,0) [0|16777215] ""  VCU
+
+BO_ 2365508224 DM1: 8 FCCU
+ SG_ DM1_SPN_Conversion_Method1 : 47|1@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Occurence_Count1 : 40|7@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Failure_Mode_Identifier1 : 35|5@1+ (1,0) [0|31] ""  VCU
+ SG_ DM1_Suspect_Parameter_Number1 : 16|19@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Flash_Malfcn_Indicator_Lamp : 14|2@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Flash_Red_Stop_Lamp : 12|2@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Flash_Amber_Warning_Lamp : 10|2@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Flash_Protect_Lamp : 8|2@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Amber_Warning_Lamp : 2|2@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Red_Stop_Lamp : 4|2@1+ (1,0) [0|3] ""  VCU
+ SG_ DM1_Protect_Lamp : 0|2@1+ (1,0) [0|3] ""  VCU
+
+BO_ 2566673280 EGLI: 8 FCCU
+ SG_ EGLI_Detection_Pressure_3 : 40|8@1+ (4,0) [0|1000] "kPa"  VCU
+ SG_ EGLI_Detection_Pressure_2 : 32|8@1+ (4,0) [0|1000] "kPa"  VCU
+ SG_ EGLI_Detection_Pressure_1 : 24|8@1+ (4,0) [0|1000] "kPa"  VCU
+ SG_ EGLI_Concentration_3 : 16|8@1+ (0.5,0) [0|125] "%"  VCU
+ SG_ EGLI_Concentration_2 : 8|8@1+ (0.5,0) [0|125] "%"  VCU
+ SG_ EGLI_Concentration_1 : 0|8@1+ (0.5,0) [0|125] "%"  VCU
+
+BO_ 2365515136 HOURS: 8 FCCU
+ SG_ HOURS_Operation_Total : 0|32@1+ (0.05,0) [0|210554060.75] "h"  VCU
+
+BO_ 2566615424 MG1IMT: 8 FCCU
+ SG_ MG1IMT_Temperature_4 : 24|8@1+ (1,-40) [-40|255] "°C"  VCU
+ SG_ MG1IMT_Temperature_3 : 16|8@1+ (1,-40) [-40|255] "°C"  VCU
+ SG_ MG1IMT_Temperature_2 : 8|8@1+ (1,-40) [-40|255] "°C"  VCU
+ SG_ MG1IMT_Temperature_1 : 0|8@1+ (1,-40) [-40|255] "°C"  VCU
+
+BO_ 2566613832 HVBI: 8 VCU
+ SG_ HVBI_Driveline_Availability : 4|4@1+ (1,0) [0|15] ""  FCCU
+
+BO_ 2566675784 HVESSCFG: 6 VCU
+ SG_ HVESSCFG_Max_Operating_Voltage : 32|16@1+ (0.05,0) [0|3212.75] "V"  FCCU,VCU
+ SG_ HVESSCFG_Min_Operating_Voltage : 16|16@1+ (0.05,0) [0|3212.75] "V"  FCCU,VCU
+ SG_ HVESSCFG_Nominal_Voltage : 0|16@1+ (0.05,0) [0|3212.75] "V"  FCCU,VCU
+
+BO_ 2565964416 MG1ILAP: 8 FCCU
+ SG_ MG1ILAP_DC_power_output_min : 48|12@1+ (0.0625,-125) [-125|125.9375] "%"  VCU
+ SG_ MG1ILAP_DC_power_output_max : 36|12@1+ (0.0625,-125) [-125|125.9375] "%"  VCU
+ SG_ MG1ILAP_Counter : 8|4@1+ (1,0) [0|15] ""  VCU
+ SG_ MG1ILAP_CRC : 0|8@1+ (1,0) [0|255] "count"  VCU
+
+BO_ 2365289600 MG1IS1: 8 FCCU
+ SG_ MG1IS1_DC_voltage_output : 52|12@1+ (0.0625,-125) [-125|125.9375] "%"  VCU
+ SG_ MG1IS1_DC_current_output : 40|12@1+ (0.0625,-125) [-125|125.9375] "%"  VCU
+ SG_ MG1IS1_Counter : 8|4@1+ (1,0) [0|15] ""  VCU
+ SG_ MG1IS1_CRC : 0|8@1+ (1,0) [0|255] "count"  VCU
+
+BO_ 2365289856 MG1IR1: 8 FCCU
+ SG_ MG1IR1_Reference_Power : 48|16@1+ (0.0625,0) [0|4015.9375] "kW"  VCU
+ SG_ MG1IR1_Counter : 8|4@1+ (1,0) [0|15] ""  VCU
+ SG_ MG1IR1_CRC : 0|8@1+ (1,0) [0|255] "count"  VCU
+
+BO_ 2365289344 MG1IR2: 8 FCCU
+ SG_ MG1IR2_Reference_Voltage : 48|16@1+ (0.125,0) [0|8031.875] "V"  VCU
+ SG_ MG1IR2_Reference_Current : 32|16@1+ (0.125,0) [0|8031.875] "A"  VCU
+ SG_ MG1IR2_Counter : 8|4@1+ (1,0) [0|15] ""  VCU
+ SG_ MG1IR2_CRC : 0|8@1+ (1,0) [0|255] "count"  VCU
+
+BO_ 2350612552 HVESSC1: 8 VCU
+ SG_ HVESSC1_Control_1_CRC : 56|8@1+ (1,0) [0|255] "count"  FCCU
+ SG_ HVESSC1_Control_1_Counter : 52|4@1+ (1,0) [0|15] ""  FCCU
+ SG_ HVESSC1_PowerDown_Command : 2|2@1+ (1,0) [0|3] ""  FCCU
+
+BO_ 2364637568 MG1IMF1: 8 FCCU
+ SG_ MG1IMF1_HVIL_Status : 21|2@1+ (1,0) [0|3] ""  VCU
+ SG_ MG1IMF1_Setpoint_Mode : 16|5@1+ (1,0) [0|31] ""  VCU
+ SG_ MG1IMF1_Counter : 8|4@1+ (1,0) [0|15] ""  VCU
+ SG_ MG1IMF1_CRC : 0|8@1+ (1,0) [0|255] "count"  VCU
+
+BO_ 2351333448 MG1IC: 8 VCU
+ SG_ MG1IC_CRC : 0|8@1+ (1,0) [0|255] "count"  FCCU
+ SG_ MG1IC_Counter : 8|4@1+ (1,0) [0|15] ""  FCCU
+ SG_ MG1IC_Setpoint_Req : 48|16@1+ (0.00390625,-125) [-125|125.99609375] "%"  FCCU
+ SG_ MG1IC_Setpoint_Mode_Req : 43|5@1+ (1,0) [0|31] ""  FCCU
+
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 HVESSCFG_Nominal_Rated_Capacity "Per the HVES manufacturer, this is the manufacturer's nominal rated capacity of this instance of the energy storage system. 
+The rated capacity does not change over the life of the HVES.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier2 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count2 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method2 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number2 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier10 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier3 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier4 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier5 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier6 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier7 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier8 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Failure_Mode_Identifier9 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count10 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count3 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count4 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count5 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count6 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count7 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count8 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Occurence_Count9 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method10 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method3 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method4 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method5 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method6 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method7 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method8 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_SPN_Conversion_Method9 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number10 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number3 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number4 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number5 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number6 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number7 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number8 "See document J1939-73 for SP details.";
+CM_ SG_ 3221225472 DM1_Suspect_Parameter_Number9 "See document J1939-73 for SP details.";
+CM_ BO_ 2632665216 "Transport Protocol - Data Transfer";
+CM_ BO_ 2632730752 "Transport Protocol - Connection Management";
+CM_ SG_ 2632730752 TotalNumberOfPacketsEoMA "Total number of packets for BAM message.Total number of packets received for RTS/CTS message.Total number of packets for RTS/CTS message.";
+CM_ SG_ 2632730752 TotalNumberOfPacketsBAM "Total number of packets for BAM message.Total number of packets received for RTS/CTS message.Total number of packets for RTS/CTS message.";
+CM_ SG_ 2632730752 TotalMessageSizeEoMA "Total message size (in bytes) for BAM message.Total message size (in bytes) for RTS/CTS message.Total message size (in bytes) for RTS/CTS message.";
+CM_ SG_ 2632730752 TotalMessageSizeBAM "Total message size (in bytes) for BAM message.Total message size (in bytes) for RTS/CTS message.Total message size (in bytes) for RTS/CTS message.";
+CM_ SG_ 2632730752 NumberOfPacketsThatCanBeSent "Number of Packets that can be sent (TP.CM_CTS)";
+CM_ SG_ 2632730752 NextPacketNumberToBeSent "Next Packet Number to be sent (TP.CM_CTS)";
+CM_ SG_ 2632730752 MaximumNumberOfPackets "Maximum number of packets for RTS/CTS message.";
+CM_ SG_ 2632730752 TotalNumberOfPackets "Total number of packets for BAM message.Total number of packets received for RTS/CTS message.Total number of packets for RTS/CTS message.";
+CM_ SG_ 2632730752 TotalMessageSize "Total message size (in bytes) for BAM message.Total message size (in bytes) for RTS/CTS message.Total message size (in bytes) for RTS/CTS message.";
+CM_ SG_ 2632730752 ConnectionAbortReason "Reason for connection abort message.";
+CM_ BO_ 2365484104 "Tachograph";
+CM_ SG_ 2365484104 TCO1_Tachograph_vehicle_speed "Speed of the vehicle registered by the tachograph.";
+CM_ BO_ 2566845768 "This message contains measurement and configuration information about the vehicle ambient conditions.";
+CM_ SG_ 2566845768 AMB_Ambient_Air_Temperature "Temperature of air surrounding.";
+CM_ SG_ 2566845768 AMB_Barometric_Pressure "Absolute air pressure of the atmosphere.";
+CM_ BO_ 2566841928 "Time/Date by Main ECU";
+CM_ SG_ 2566841928 TD_Local_hour_offset "The hour component of the offset between the UTC  time and date and a local time zone time and date.  
+Positive value for time zones East of the Prime Meridian to the International Date Line.
+Negative value for time zones West of the ... .";
+CM_ SG_ 2566841928 TD_Local_minute_offset "The minute component of the offset between the UTC time and date and a local time zone time and date.  
+Positive value for time zones East of the Prime Meridian to the International Date Line.  
+Negative value for time zones West of the ... .
+";
+CM_ SG_ 2566841928 TD_Year "The year component of the current calendar date. 
+NOTE - A value of 0 for the year identifies the year 1985; a value of 1 identifies 1986; etc.";
+CM_ SG_ 2566841928 TD_Day "The day component of the current calendar date.  
+NOTE - A value of 0 for the date is null.  
+The values 1, 2, 3, and 4 are used to identify the first day of the month; 5, 6, 7, and 8 identify the second day of the month; etc.  
+";
+CM_ SG_ 2566841928 TD_Month "The month component of the current calendar date.  
+however, it may be reported as the month component of the current date at a local time zone.  
+NOTE - A value of 0 for the month is null.  The value 1 identifies January; 2 identifies February; etc.";
+CM_ SG_ 2566841928 TD_Hour "The hour component of the current time of day.  
+This should be reported as the hour component of the current time at UTC  a.k.a. GMT; 
+however, it may be reported as the hour component of the current time at a local time zone.  
+";
+CM_ SG_ 2566841928 TD_Minutes "The minutes component of the current time of day.  
+This should be reported as the minutes component of the current time at UTC a.k.a. GMT; 
+however, it may be reported as the minutes component of the current time at a local time zone.";
+CM_ SG_ 2566841928 TD_Seconds "The seconds component of the current time of day.
+This should be reported as the seconds component of the current time at UTC a.k.a. GMT; 
+however, it may be reported as the seconds component of the current time at a local time zone.
+";
+CM_ BO_ 2566770816 "Intake/Exhaust Conditions 2 is a second PG conveying this type of engine information. Also see PGN 65270.";
+CM_ SG_ 2566770816 IC2_FCS_Air_Filter_2_Diff_Press "Change in engine air system pressure, measured across the second air filter, due to the filter and any accumulation of solid foreign matter on or in the filter.
+This is for monitoring the air filter on the intake to the second turbocharger. ";
+CM_ BO_ 2432541312 "Gaseous fuel information 3";
+CM_ SG_ 2432541312 GFI3_Fuel_Gas_Mass_Flow_Rate "Gas mass flow rate delivered to an engine through its second fuel control system, using standard convention for determining position.";
+CM_ BO_ 2565505096 "Request";
+CM_ SG_ 2565505096 ParameterGroupNumber "PGN which is requested by Request2 message";
+CM_ BO_ 2632679496 "Transport Protocol - Data Transfer";
+CM_ BO_ 2632745032 "Transport Protocol - Connection Management";
+CM_ SG_ 2632745032 TotalNumberOfPacketsEoMA "Total number of packets for BAM message.Total number of packets received for RTS/CTS message.Total number of packets for RTS/CTS message.";
+CM_ SG_ 2632745032 TotalNumberOfPacketsBAM "Total number of packets for BAM message.Total number of packets received for RTS/CTS message.Total number of packets for RTS/CTS message.";
+CM_ SG_ 2632745032 TotalMessageSizeEoMA "Total message size (in bytes) for BAM message.Total message size (in bytes) for RTS/CTS message.Total message size (in bytes) for RTS/CTS message.";
+CM_ SG_ 2632745032 TotalMessageSizeBAM "Total message size (in bytes) for BAM message.Total message size (in bytes) for RTS/CTS message.Total message size (in bytes) for RTS/CTS message.";
+CM_ SG_ 2632745032 NumberOfPacketsThatCanBeSent "Number of Packets that can be sent (TP.CM_CTS)";
+CM_ SG_ 2632745032 NextPacketNumberToBeSent "Next Packet Number to be sent (TP.CM_CTS)";
+CM_ SG_ 2632745032 MaximumNumberOfPackets "Maximum number of packets for RTS/CTS message.";
+CM_ SG_ 2632745032 TotalNumberOfPackets "Total number of packets for BAM message.Total number of packets received for RTS/CTS message.Total number of packets for RTS/CTS message.";
+CM_ SG_ 2632745032 TotalMessageSize "Total message size (in bytes) for BAM message.Total message size (in bytes) for RTS/CTS message.Total message size (in bytes) for RTS/CTS message.";
+CM_ SG_ 2632745032 ConnectionAbortReason "Reason for connection abort message.";
+CM_ BO_ 2565490816 "Request";
+CM_ SG_ 2565490816 ParameterGroupNumber "PGN which is requested by Request2 message";
+CM_ BO_ 2365508224 "Active Diagnostic Trouble Codes
+See document J1939-73 for PG details.";
+CM_ SG_ 2365508224 DM1_SPN_Conversion_Method1 "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Occurence_Count1 "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Failure_Mode_Identifier1 "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Suspect_Parameter_Number1 "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Flash_Malfcn_Indicator_Lamp "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Flash_Red_Stop_Lamp "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Flash_Amber_Warning_Lamp "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Flash_Protect_Lamp "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Amber_Warning_Lamp "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Red_Stop_Lamp "See document J1939-73 for SP details.";
+CM_ SG_ 2365508224 DM1_Protect_Lamp "See document J1939-73 for SP details.";
+CM_ BO_ 2566673280 "Used to transmit the gaseous fuel leakage information determined by the fuel cell monitoring system.";
+CM_ SG_ 2566673280 EGLI_Detection_Pressure_3 "Pressure measured in gas leakage detection point 3. 
+Measured media is of the gas, meaning it could be air, inert gas, fuel air mixture or charge air mixture, depending on the failure mode detected. ";
+CM_ SG_ 2566673280 EGLI_Detection_Pressure_2 "Pressure measured in gas leakage detection point 2. 
+Measured media is of the gas, meaning it could be air, inert gas, fuel air mixture or charge air mixture, depending on the failure mode detected. ";
+CM_ SG_ 2566673280 EGLI_Detection_Pressure_1 "Pressure measured in gas leakage detection point 1. 
+Measured media is of the gas, meaning it could be air, inert gas, fuel air mixture or charge air mixture, depending on the failure mode detected. ";
+CM_ SG_ 2566673280 EGLI_Concentration_3 "Percentage of detected gaseous fuel leak compared to the lower explosion limit (LEL). 
+100% means the measured value is on the lower explosion limit. 
+0% means no detected gaseous fuel in measurement point. ";
+CM_ SG_ 2566673280 EGLI_Concentration_2 "Percentage of detected gaseous fuel leak compared to the lower explosion limit (LEL). 
+100% means the measured value is on the lower explosion limit. 
+0% means no detected gaseous fuel in measurement point. ";
+CM_ SG_ 2566673280 EGLI_Concentration_1 "Percentage of detected gaseous fuel leak compared to the lower explosion limit (LEL). 
+100% means the measured value is on the lower explosion limit. 
+0% means no detected gaseous fuel in measurement point. ";
+CM_ BO_ 2365515136 "FCCU operational hours";
+CM_ SG_ 2365515136 HOURS_Operation_Total "FCM total hours of operation";
+CM_ BO_ 2566615424 "Temperature Status Message";
+CM_ SG_ 2566615424 MG1IMT_Temperature_4 "Temperature 4";
+CM_ SG_ 2566615424 MG1IMT_Temperature_3 "Temperature 3";
+CM_ SG_ 2566615424 MG1IMT_Temperature_2 "Temperature 2";
+CM_ SG_ 2566615424 MG1IMT_Temperature_1 "Temperature 1";
+CM_ BO_ 2566613832 "High Voltage Bus Information";
+CM_ SG_ 2566613832 HVBI_Driveline_Availability "0000b = HV DC bus is not connected.
+0001b = HV DC bus is connected.
+0010b = HV DC bus connection is in process of being connected.
+0011b = HV DC bus disconnection is in process. 
+0101b = HV DC bus disconnect forewarning. ";
+CM_ BO_ 2566675784 "Configuration data for High Voltage Energy Storage Pack 1 (HV Bus).  
+Note that configuration data should not dynamically change during vehicle operation.";
+CM_ SG_ 2566675784 HVESSCFG_Max_Operating_Voltage "Per the HVES manufacturer, this is the maximum recommended voltage level for this High Voltage Energy Storage Pack instance operation.  
+Operating above this value may compromise HVES life.";
+CM_ SG_ 2566675784 HVESSCFG_Min_Operating_Voltage "Per the HVES manufacturer, this is the minimum recommended voltage level for this High Voltage Energy Storage Pack instance operation.  
+Operating below this value may compromise HVES life.";
+CM_ SG_ 2566675784 HVESSCFG_Nominal_Voltage "Per the HVES manufacturer, this is the nominal operating voltage of this High Voltage Energy Storage Pack instance, e.g. “300V” or “600V”.";
+CM_ BO_ 2565964416 "The electrical  power limits the FCCU is actually using. These may differ from the requested limits.";
+CM_ SG_ 2565964416 MG1ILAP_DC_power_output_min "The FCM keeps the DC Side power above this value.  This limit may be set in response to a Limits Request or determined by the FCCU based on operating conditions.
+
+Refer to SPN 10172 [Reference Power] to convert % to kW.";
+CM_ SG_ 2565964416 MG1ILAP_DC_power_output_max "The FCM keeps the DC Side power below this value.  This limit may be set in response to a Limits Request or determined by the FCCU based on operating conditions.
+
+Refer to SPN 10172 [Reference Power] to convert % to kW.";
+CM_ SG_ 2565964416 MG1ILAP_Counter "The message counter is used to detect situations where the transmitting ECU malfunction repeats the same frame all the time. 
+The transmitting device will increase the message counter by one with every transmission. 
+";
+CM_ SG_ 2565964416 MG1ILAP_CRC "The CRC is defined as follows:
+• Length: 8 bits
+• Polynomial: x^8+x^5+x^3+x^2+x+1
+• Initial Value: FFh
+• Input Data Reflection: Not reflected
+• Result Data Reflection: Not reflected
+• XOR value: FFh";
+CM_ BO_ 2365289600 "Status Message from the FCCU.  Some examples of use would be for a hybrid or electric vehicle propulsion motor or generator.";
+CM_ SG_ 2365289600 MG1IS1_DC_voltage_output "The measured or estimated DC side voltage.  
+
+Refer to SPN 10203 [Reference Voltage] to convert % to Volts.";
+CM_ SG_ 2365289600 MG1IS1_DC_current_output "This is the HV side current of the DC/DC converter.
+Refer to SPN 10202 [Reference Current] to convert % to Amps.
+For generating, the current is defined as positive. Positive current flows from the FCS through the inverter to the HV system.";
+CM_ SG_ 2365289600 MG1IS1_Counter "The message counter is used to detect situations where the transmitting ECU malfunction repeats the same frame all the time. 
+The transmitting device will increase the message counter by one with every transmission. 
+";
+CM_ SG_ 2365289600 MG1IS1_CRC "The CRC is defined as follows:
+• Length: 8 bits
+• Polynomial: x^8+x^5+x^3+x^2+x+1
+• Initial Value: FFh
+• Input Data Reflection: Not reflected
+• Result Data Reflection: Not reflected
+• XOR value: FFh";
+CM_ BO_ 2365289856 "The electrical reference values for the FCCU.";
+CM_ SG_ 2365289856 MG1IR1_Reference_Power "This value is used for converting power in percent to units of kW.
+(Value in kW) = (Percent Value)/(100%) * (Reference Power)
+E.g, if this parameter = 400 kW and percent is 75%:
+Value in kW = (75%)/(100%) * (400 kW) = 300 kW";
+CM_ SG_ 2365289856 MG1IR1_Counter "The message counter is used to detect situations where the transmitting ECU malfunction repeats the same frame all the time. 
+The transmitting device will increase the message counter by one with every transmission. 
+";
+CM_ SG_ 2365289856 MG1IR1_CRC "The CRC is defined as follows:
+• Length: 8 bits
+• Polynomial: x^8+x^5+x^3+x^2+x+1
+• Initial Value: FFh
+• Input Data Reflection: Not reflected
+• Result Data Reflection: Not reflected
+• XOR value: FFh";
+CM_ BO_ 2365289344 "The electrical reference values for the FCCU.";
+CM_ SG_ 2365289344 MG1IR2_Reference_Voltage "This value is used for converting FCCU in percent to units of Volts (RMS or DC).
+(Value in Volts) = (Percent Value)/(100%) * (Reference Voltage)
+E.g, if this parameter = 400 V and percent is 75%:
+Value in Volts = (75%)/(100%) * (400 V) = 300 V";
+CM_ SG_ 2365289344 MG1IR2_Reference_Current "This value is used for converting FCCU current in percent to units of Amps (RMS or DC).
+(Value in Amps) = (Percent Value)/(100%) * (Reference Current)
+E.g, if this parameter = 200 A and percent is 75%:
+Value in Amps = (75%)/(100%) * (200 A) = 150 A";
+CM_ SG_ 2365289344 MG1IR2_Counter "The message counter is used to detect situations where the transmitting ECU malfunction repeats the same frame all the time. 
+The transmitting device will increase the message counter by one with every transmission. 
+";
+CM_ SG_ 2365289344 MG1IR2_CRC "The CRC is defined as follows:
+• Length: 8 bits
+• Polynomial: x^8+x^5+x^3+x^2+x+1
+• Initial Value: FFh
+• Input Data Reflection: Not reflected
+• Result Data Reflection: Not reflected
+• XOR value: FFh";
+CM_ BO_ 2350612552 "Control commands to be sent to FCCU by application ECU.";
+CM_ SG_ 2350612552 HVESSC1_Control_1_CRC "The CRC is defined as follows:
+ • Length: 8 bits
+ • Polynomial: x^8+x^5+x^3+x^2+x+1
+ • Initial Value: FFh
+ • Input Data Reflection: Not reflected
+ • Result Data Reflection: Not reflected
+ • XOR value: FFh
+";
+CM_ SG_ 2350612552 HVESSC1_Control_1_Counter "The message counter is used to detect situations where the transmitting ECU malfunction repeats the same frame all the time. 
+The receiver of the information may use the counter parameter to detect this situation.";
+CM_ SG_ 2350612552 HVESSC1_PowerDown_Command "Command to shut down the FCM.  
+An emergency power-down should shut down the system as quickly as possible, such as in the event of a vehicle accident.   
+Receivers of this command should always support state 10b (Execute emergency power-down).";
+CM_ BO_ 2364637568 "The first mode feedback message from the FCCU.";
+CM_ SG_ 2364637568 MG1IMF1_HVIL_Status "Reports the High Voltage Interlock Loop (HVIL) state.
+
+00b = HVIL Closed
+01b = HVIL Open
+10b = Error
+11b = Not Available";
+CM_ SG_ 2364637568 MG1IMF1_Setpoint_Mode "Passive modes:  
+0 = Powered On
+2 = Standby 
+Active modes:
+9 = DC Side Voltage Mode
+10 = DC Side Current Mode
+11 = DC Power Control Mode
+Special modes:
+18 = Starting state
+20 = Stopping state
+30 = Error";
+CM_ SG_ 2364637568 MG1IMF1_Counter "The message counter is used to detect situations where the transmitting ECU malfunction repeats the same frame all the time. 
+The transmitting device will increase the message counter by one with every transmission. 
+";
+CM_ SG_ 2364637568 MG1IMF1_CRC "The CRC is defined as follows:
+• Length: 8 bits
+• Polynomial: x^8+x^5+x^3+x^2+x+1
+• Initial Value: FFh
+• Input Data Reflection: Not reflected
+• Result Data Reflection: Not reflected
+• XOR value: FFh";
+CM_ BO_ 2351333448 "Primary Control Message from Master CU to FCCU.
+Some examples of use would be for a hybrid or electric vehicle propulsion motor or generator.";
+CM_ SG_ 2351333448 MG1IC_CRC "The CRC is defined as follows:
+• Length: 8 bits
+• Polynomial: x^8+x^5+x^3+x^2+x+1
+• Initial Value: FFh
+• Input Data Reflection: Not reflected
+• Result Data Reflection: Not reflected
+• XOR value: FFh";
+CM_ SG_ 2351333448 MG1IC_Counter "The message counter is used to detect situations where the transmitting ECU malfunction repeats the same frame all the time. 
+The transmitting device will increase the message counter by one with every transmission. 
+";
+CM_ SG_ 2351333448 MG1IC_Setpoint_Req "Requests the set point for this inverter based on SPN 10162.";
+CM_ SG_ 2351333448 MG1IC_Setpoint_Mode_Req "Passive modes:  
+0 = Power On
+2 = Standby 
+Active modes:
+9 = Enable DC Side Voltage Mode
+10 = Enable DC Side Current Mode
+11 = Enable DC Power Control Mode
+Special modes:
+20 = Inverter active discharge mode
+21 = Inverter power down command mode";
+BA_DEF_ BO_  "SingleFrame" INT 0 1;
+BA_DEF_  "SAE_J1939_71_SpecVersion" STRING ;
+BA_DEF_  "SAE_J1939_73_SpecVersion" STRING ;
+BA_DEF_  "SAE_J1939_21_SpecVersion" STRING ;
+BA_DEF_  "SAE_J1939_75_SpecVersion" STRING ;
+BA_DEF_  "DatabaseVersion" STRING ;
+BA_DEF_  "SAE_J1939_81_SpecVersion" STRING ;
+BA_DEF_ SG_  "SigType" ENUM  "Default","Range","RangeSigned","ASCII","Discrete","Control","ReferencePGN","DTC","StringDelimiter","StringLength","StringLengthControl","MessageCounter","MessageChecksum";
+BA_DEF_ SG_  "GenSigEVName" STRING ;
+BA_DEF_ SG_  "GenSigILSupport" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType";
+BA_DEF_ BO_  "GenMsgFastOnStart" INT 0 100000;
+BA_DEF_ SG_  "GenSigInactiveValue" INT 0 0;
+BA_DEF_ BO_  "GenMsgCycleTimeFast" INT 0 3600000;
+BA_DEF_ BO_  "GenMsgNrOfRepetition" INT 0 1000000;
+BA_DEF_ SG_  "GenSigStartValue" INT 0 10000;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 1000;
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 100000;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "NmJ1939SystemInstance" INT 0 15;
+BA_DEF_ BU_  "NmJ1939System" INT 0 127;
+BA_DEF_ BU_  "NmJ1939ManufacturerCode" INT 0 2047;
+BA_DEF_ BU_  "NmJ1939IndustryGroup" INT 0 7;
+BA_DEF_ BU_  "NmJ1939IdentityNumber" INT 0 2097151;
+BA_DEF_ BU_  "NmJ1939FunctionInstance" INT 0 7;
+BA_DEF_ BU_  "NmJ1939Function" INT 0 255;
+BA_DEF_ BU_  "NmJ1939ECUInstance" INT 0 3;
+BA_DEF_ BU_  "NmJ1939AAC" INT 0 1;
+BA_DEF_ BU_  "NmStationAddress" INT 0 255;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "cyclic","NotUsed","IfActive","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed","noMsgSendType";
+BA_DEF_ BO_  "GenMsgRequestable" INT 0 1;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 3600000;
+BA_DEF_ SG_  "SPN" INT 0 524287;
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "ProtocolType" STRING ;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG";
+BA_DEF_DEF_  "SingleFrame" 1;
+BA_DEF_DEF_  "SAE_J1939_71_SpecVersion" "";
+BA_DEF_DEF_  "SAE_J1939_73_SpecVersion" "";
+BA_DEF_DEF_  "SAE_J1939_21_SpecVersion" "";
+BA_DEF_DEF_  "SAE_J1939_75_SpecVersion" "";
+BA_DEF_DEF_  "DatabaseVersion" "";
+BA_DEF_DEF_  "SAE_J1939_81_SpecVersion" "";
+BA_DEF_DEF_  "SigType" "Default";
+BA_DEF_DEF_  "GenSigEVName" "Env@Nodename_@Signame";
+BA_DEF_DEF_  "GenSigILSupport" "Yes";
+BA_DEF_DEF_  "GenSigSendType" "NoSigSendType";
+BA_DEF_DEF_  "GenMsgFastOnStart" 0;
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenMsgCycleTimeFast" 0;
+BA_DEF_DEF_  "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "NmJ1939SystemInstance" 0;
+BA_DEF_DEF_  "NmJ1939System" 0;
+BA_DEF_DEF_  "NmJ1939ManufacturerCode" 0;
+BA_DEF_DEF_  "NmJ1939IndustryGroup" 0;
+BA_DEF_DEF_  "NmJ1939IdentityNumber" 0;
+BA_DEF_DEF_  "NmJ1939FunctionInstance" 0;
+BA_DEF_DEF_  "NmJ1939Function" 0;
+BA_DEF_DEF_  "NmJ1939ECUInstance" 0;
+BA_DEF_DEF_  "NmJ1939AAC" 0;
+BA_DEF_DEF_  "NmStationAddress" 254;
+BA_DEF_DEF_  "GenMsgSendType" "noMsgSendType";
+BA_DEF_DEF_  "GenMsgRequestable" 1;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "SPN" 0;
+BA_DEF_DEF_  "DBName" "";
+BA_DEF_DEF_  "BusType" "CAN";
+BA_DEF_DEF_  "ProtocolType" "J1939";
+BA_DEF_DEF_  "VFrameFormat" "J1939PG";
+BA_ "DBName" "DFE1080_STASHH_FCCU_VCU_communic";
+BA_ "VFrameFormat" BO_ 2632665216 3;
+BA_ "SPN" SG_ 2632665216 SequenceNumber 2572;
+BA_ "GenSigStartValue" SG_ 2632665216 SequenceNumber 1;
+BA_ "VFrameFormat" BO_ 2632730752 3;
+BA_ "SPN" SG_ 2632730752 TotalNumberOfPacketsEoMA 2558;
+BA_ "SPN" SG_ 2632730752 TotalNumberOfPacketsBAM 2558;
+BA_ "SPN" SG_ 2632730752 TotalMessageSizeEoMA 2557;
+BA_ "SPN" SG_ 2632730752 TotalMessageSizeBAM 2557;
+BA_ "SPN" SG_ 2632730752 NumberOfPacketsThatCanBeSent 2561;
+BA_ "SPN" SG_ 2632730752 NextPacketNumberToBeSent 2562;
+BA_ "SPN" SG_ 2632730752 MaximumNumberOfPackets 2559;
+BA_ "SPN" SG_ 2632730752 TotalNumberOfPackets 2558;
+BA_ "SPN" SG_ 2632730752 TotalMessageSize 2557;
+BA_ "SPN" SG_ 2632730752 ConnectionAbortReason 2570;
+BA_ "SPN" SG_ 2632730752 PGNumber 2560;
+BA_ "SPN" SG_ 2632730752 ControlByte 2556;
+BA_ "GenMsgCycleTime" BO_ 2365484104 50;
+BA_ "VFrameFormat" BO_ 2365484104 3;
+BA_ "SPN" SG_ 2365484104 TCO1_Tachograph_vehicle_speed 1624;
+BA_ "GenSigStartValue" SG_ 2365484104 TCO1_Tachograph_vehicle_speed 0;
+BA_ "GenMsgCycleTime" BO_ 2566845768 1000;
+BA_ "VFrameFormat" BO_ 2566845768 3;
+BA_ "SPN" SG_ 2566845768 AMB_Ambient_Air_Temperature 171;
+BA_ "GenSigStartValue" SG_ 2566845768 AMB_Ambient_Air_Temperature 8736;
+BA_ "SPN" SG_ 2566845768 AMB_Barometric_Pressure 108;
+BA_ "GenSigStartValue" SG_ 2566845768 AMB_Barometric_Pressure 0;
+BA_ "VFrameFormat" BO_ 2566841928 3;
+BA_ "GenSigStartValue" SG_ 2566841928 TD_Local_hour_offset 125;
+BA_ "SPN" SG_ 2566841928 TD_Local_hour_offset 1602;
+BA_ "GenSigStartValue" SG_ 2566841928 TD_Local_minute_offset 125;
+BA_ "SPN" SG_ 2566841928 TD_Local_minute_offset 1601;
+BA_ "SPN" SG_ 2566841928 TD_Year 964;
+BA_ "SPN" SG_ 2566841928 TD_Day 962;
+BA_ "SPN" SG_ 2566841928 TD_Month 963;
+BA_ "SPN" SG_ 2566841928 TD_Hour 961;
+BA_ "SPN" SG_ 2566841928 TD_Minutes 960;
+BA_ "SPN" SG_ 2566841928 TD_Seconds 959;
+BA_ "GenMsgCycleTime" BO_ 2566770816 500;
+BA_ "VFrameFormat" BO_ 2566770816 3;
+BA_ "SPN" SG_ 2566770816 IC2_FCS_Air_Filter_2_Diff_Press 2809;
+BA_ "GenSigStartValue" SG_ 2566770816 IC2_FCS_Air_Filter_2_Diff_Press 0;
+BA_ "GenMsgCycleTime" BO_ 2432541312 500;
+BA_ "VFrameFormat" BO_ 2432541312 3;
+BA_ "SPN" SG_ 2432541312 GFI3_Fuel_Gas_Mass_Flow_Rate 3467;
+BA_ "VFrameFormat" BO_ 2565505096 3;
+BA_ "SPN" SG_ 2565505096 ParameterGroupNumber 2574;
+BA_ "VFrameFormat" BO_ 2632679496 3;
+BA_ "SPN" SG_ 2632679496 SequenceNumber 2572;
+BA_ "GenSigStartValue" SG_ 2632679496 SequenceNumber 1;
+BA_ "VFrameFormat" BO_ 2632745032 3;
+BA_ "SPN" SG_ 2632745032 TotalNumberOfPacketsEoMA 2558;
+BA_ "SPN" SG_ 2632745032 TotalNumberOfPacketsBAM 2558;
+BA_ "SPN" SG_ 2632745032 TotalMessageSizeEoMA 2557;
+BA_ "SPN" SG_ 2632745032 TotalMessageSizeBAM 2557;
+BA_ "SPN" SG_ 2632745032 NumberOfPacketsThatCanBeSent 2561;
+BA_ "SPN" SG_ 2632745032 NextPacketNumberToBeSent 2562;
+BA_ "SPN" SG_ 2632745032 MaximumNumberOfPackets 2559;
+BA_ "SPN" SG_ 2632745032 TotalNumberOfPackets 2558;
+BA_ "SPN" SG_ 2632745032 TotalMessageSize 2557;
+BA_ "SPN" SG_ 2632745032 ConnectionAbortReason 2570;
+BA_ "SPN" SG_ 2632745032 PGNumber 2560;
+BA_ "SPN" SG_ 2632745032 ControlByte 2556;
+BA_ "VFrameFormat" BO_ 2565490816 3;
+BA_ "SPN" SG_ 2565490816 ParameterGroupNumber 2574;
+BA_ "GenMsgCycleTime" BO_ 2365508224 1000;
+BA_ "VFrameFormat" BO_ 2365508224 3;
+BA_ "SPN" SG_ 2365508224 DM1_SPN_Conversion_Method1 1706;
+BA_ "SPN" SG_ 2365508224 DM1_Occurence_Count1 1216;
+BA_ "SPN" SG_ 2365508224 DM1_Failure_Mode_Identifier1 1215;
+BA_ "SPN" SG_ 2365508224 DM1_Suspect_Parameter_Number1 1214;
+BA_ "SPN" SG_ 2365508224 DM1_Flash_Malfcn_Indicator_Lamp 3038;
+BA_ "SPN" SG_ 2365508224 DM1_Flash_Red_Stop_Lamp 3039;
+BA_ "SPN" SG_ 2365508224 DM1_Flash_Amber_Warning_Lamp 3040;
+BA_ "SPN" SG_ 2365508224 DM1_Flash_Protect_Lamp 3041;
+BA_ "SPN" SG_ 2365508224 DM1_Amber_Warning_Lamp 624;
+BA_ "SPN" SG_ 2365508224 DM1_Red_Stop_Lamp 623;
+BA_ "SPN" SG_ 2365508224 DM1_Protect_Lamp 987;
+BA_ "GenMsgCycleTime" BO_ 2566673280 500;
+BA_ "VFrameFormat" BO_ 2566673280 3;
+BA_ "SPN" SG_ 2566673280 EGLI_Detection_Pressure_3 6839;
+BA_ "SPN" SG_ 2566673280 EGLI_Detection_Pressure_2 6838;
+BA_ "SPN" SG_ 2566673280 EGLI_Detection_Pressure_1 6837;
+BA_ "SPN" SG_ 2566673280 EGLI_Concentration_3 6836;
+BA_ "SPN" SG_ 2566673280 EGLI_Concentration_2 6835;
+BA_ "SPN" SG_ 2566673280 EGLI_Concentration_1 6834;
+BA_ "VFrameFormat" BO_ 2365515136 3;
+BA_ "SPN" SG_ 2365515136 HOURS_Operation_Total 247;
+BA_ "GenMsgCycleTime" BO_ 2566615424 1000;
+BA_ "VFrameFormat" BO_ 2566615424 3;
+BA_ "SPN" SG_ 2566615424 MG1IMT_Temperature_4 10222;
+BA_ "GenSigStartValue" SG_ 2566615424 MG1IMT_Temperature_4 40;
+BA_ "SPN" SG_ 2566615424 MG1IMT_Temperature_3 10221;
+BA_ "GenSigStartValue" SG_ 2566615424 MG1IMT_Temperature_3 40;
+BA_ "SPN" SG_ 2566615424 MG1IMT_Temperature_2 10220;
+BA_ "GenSigStartValue" SG_ 2566615424 MG1IMT_Temperature_2 40;
+BA_ "SPN" SG_ 2566615424 MG1IMT_Temperature_1 9059;
+BA_ "GenSigStartValue" SG_ 2566615424 MG1IMT_Temperature_1 40;
+BA_ "GenMsgCycleTime" BO_ 2566613832 100;
+BA_ "VFrameFormat" BO_ 2566613832 3;
+BA_ "SPN" SG_ 2566613832 HVBI_Driveline_Availability 20802;
+BA_ "VFrameFormat" BO_ 2566675784 3;
+BA_ "SPN" SG_ 2566675784 HVESSCFG_Max_Operating_Voltage 8117;
+BA_ "SPN" SG_ 2566675784 HVESSCFG_Min_Operating_Voltage 8116;
+BA_ "SPN" SG_ 2566675784 HVESSCFG_Nominal_Voltage 8115;
+BA_ "GenMsgCycleTime" BO_ 2565964416 100;
+BA_ "VFrameFormat" BO_ 2565964416 3;
+BA_ "SPN" SG_ 2565964416 MG1ILAP_DC_power_output_min 10187;
+BA_ "GenSigStartValue" SG_ 2565964416 MG1ILAP_DC_power_output_min 0;
+BA_ "SPN" SG_ 2565964416 MG1ILAP_DC_power_output_max 10186;
+BA_ "GenSigStartValue" SG_ 2565964416 MG1ILAP_DC_power_output_max 0;
+BA_ "SPN" SG_ 2565964416 MG1ILAP_Counter 10183;
+BA_ "SPN" SG_ 2565964416 MG1ILAP_CRC 10182;
+BA_ "GenMsgCycleTime" BO_ 2365289600 10;
+BA_ "VFrameFormat" BO_ 2365289600 3;
+BA_ "SPN" SG_ 2365289600 MG1IS1_DC_voltage_output 9101;
+BA_ "GenSigStartValue" SG_ 2365289600 MG1IS1_DC_voltage_output 0;
+BA_ "SPN" SG_ 2365289600 MG1IS1_DC_current_output 10175;
+BA_ "GenSigStartValue" SG_ 2365289600 MG1IS1_DC_current_output 0;
+BA_ "SPN" SG_ 2365289600 MG1IS1_Counter 10174;
+BA_ "SPN" SG_ 2365289600 MG1IS1_CRC 10173;
+BA_ "GenMsgCycleTime" BO_ 2365289856 1000;
+BA_ "VFrameFormat" BO_ 2365289856 3;
+BA_ "SPN" SG_ 2365289856 MG1IR1_Reference_Power 10172;
+BA_ "SPN" SG_ 2365289856 MG1IR1_Counter 10169;
+BA_ "SPN" SG_ 2365289856 MG1IR1_CRC 10168;
+BA_ "GenMsgCycleTime" BO_ 2365289344 1000;
+BA_ "VFrameFormat" BO_ 2365289344 3;
+BA_ "SPN" SG_ 2365289344 MG1IR2_Reference_Voltage 10203;
+BA_ "SPN" SG_ 2365289344 MG1IR2_Reference_Current 10202;
+BA_ "SPN" SG_ 2365289344 MG1IR2_Counter 10201;
+BA_ "SPN" SG_ 2365289344 MG1IR2_CRC 10200;
+BA_ "GenMsgCycleTime" BO_ 2350612552 20;
+BA_ "VFrameFormat" BO_ 2350612552 3;
+BA_ "SPN" SG_ 2350612552 HVESSC1_Control_1_CRC 13028;
+BA_ "SPN" SG_ 2350612552 HVESSC1_Control_1_Counter 13027;
+BA_ "SPN" SG_ 2350612552 HVESSC1_PowerDown_Command 8124;
+BA_ "GenMsgCycleTime" BO_ 2364637568 100;
+BA_ "VFrameFormat" BO_ 2364637568 3;
+BA_ "SPN" SG_ 2364637568 MG1IMF1_HVIL_Status 9103;
+BA_ "SPN" SG_ 2364637568 MG1IMF1_Setpoint_Mode 10167;
+BA_ "SPN" SG_ 2364637568 MG1IMF1_Counter 10165;
+BA_ "SPN" SG_ 2364637568 MG1IMF1_CRC 10164;
+BA_ "GenMsgCycleTime" BO_ 2351333448 10;
+BA_ "VFrameFormat" BO_ 2351333448 3;
+BA_ "SPN" SG_ 2351333448 MG1IC_CRC 10157;
+BA_ "SPN" SG_ 2351333448 MG1IC_Counter 10158;
+BA_ "GenSigStartValue" SG_ 2351333448 MG1IC_Setpoint_Req 0;
+BA_ "SPN" SG_ 2351333448 MG1IC_Setpoint_Req 10163;
+BA_ "SPN" SG_ 2351333448 MG1IC_Setpoint_Mode_Req 10162;
+BA_ "NmStationAddress" BU_ VCU 72;
+BA_ "NmStationAddress" BU_ FCCU 128;
+VAL_ 2632730752 PGNumber 255 "NotAvailable" ;
+VAL_ 2632730752 ControlByte 24 "EAbort" 23 "EEoMACK" 22 "EDPO" 21 "ECTS" 20 "ERTS" 255 "Abort" 32 "BAM" 19 "EoMA" 17 "CTS" 16 "RTS" ;
+VAL_ 2632745032 PGNumber 255 "NotAvailable" ;
+VAL_ 2632745032 ControlByte 24 "EAbort" 23 "EEoMACK" 22 "EDPO" 21 "ECTS" 20 "ERTS" 255 "Abort" 32 "BAM" 19 "EoMA" 17 "CTS" 16 "RTS" ;
+VAL_ 2365508224 DM1_Failure_Mode_Identifier1 31 "Condition exists" 30 "Reserved" 29 "Reserved" 28 "Reserved" 27 "Reserved" 26 "Reserved" 25 "Reserved" 24 "Reserved" 23 "Reserved" 22 "Reserved" 21 "Data Drifted Low" 20 "Data Drifted High" 19 "Data Error" 18 "Low - moderate severity (2)" 17 "Low - least severe (1)" 16 "High - moderate severity (2)" 15 "High - least severe (1)" 14 "Special Instruction" 13 "Out of Calibration" 12 "Failure" 11 "Other Failure Mode" 10 "Abnormal Rate of Change" 9 "Abnormal Update Rate" 8 "Abnormal Frq, Pulse Width, Perd" 7 "Not Responding Properly" 6 "Current Above Normal" 5 "Current Below Normal" 4 "Voltage Below Normal" 3 "Voltage Above Normal" 2 "Erratic, Intermittent, Incorrect" 1 "Low - most severe (3)" 0 "High - most severe (3)" ;
+VAL_ 2365508224 DM1_Amber_Warning_Lamp 1 "Lamp on" 0 "Lamp off" ;
+VAL_ 2365508224 DM1_Red_Stop_Lamp 1 "Lamp on" 0 "Lamp off" ;
+VAL_ 2365508224 DM1_Protect_Lamp 1 "Lamp on" 0 "Lamp off" ;
+VAL_ 2566613832 HVBI_Driveline_Availability 5 "HV DC bus disconnect forewarning" 4 "SAE Reserved" 3 "HV DC bus disconnect in process" 2 "HV DC bus is being connected" 1 "HV DC bus is connected" 0 "HV DC bus is not connected" ;
+VAL_ 2350612552 HVESSC1_PowerDown_Command 3 "Dont't care / Take no action" 2 "Execute emergency power down" 1 "Execute normal power-down" 0 "Power-down not requested" ;
+VAL_ 2364637568 MG1IMF1_HVIL_Status 3 "Not Available" 2 "Error" 1 "HVIL Open" 0 "HVIL Closed" ;
+VAL_ 2364637568 MG1IMF1_Setpoint_Mode 30 "Error" 18 "Starting state" 20 "Stopping state" 11 "DC Power Control Mode" 10 "DC Side A Mode" 9 "DC Side V Mode" 2 "Standby" 0 "Powered On" ;
+VAL_ 2351333448 MG1IC_Setpoint_Mode_Req 21 "Power down command mode" 20 "Active discharge mode" 11 "Enable DC Power Control Mode" 10 "Enable DC Side A Control Mode" 9 "Enable DC Side V Control Mode" 2 "Standby" 0 "Power On" ;
+
