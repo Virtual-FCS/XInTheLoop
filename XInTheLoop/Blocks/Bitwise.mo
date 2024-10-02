@@ -38,6 +38,23 @@ Output bitwise OR between input 32 bit integers.
 </body></html>"));
   end OrInts;
 
+  block XorInts "Output bitwise XOR between input 32 bit integers"
+    extends Modelica.Blocks.Interfaces.PartialIntegerMISO;
+    extends Icons.Bitwise;
+    extends Icons.Par_b;
+    parameter Integer b = 0 "32 bit integer to bitwise XOR with input";
+  algorithm
+    y := b;
+    for i in 1:nu loop
+      y := Functions.xor_ints(u[i], y);
+    end for;
+    annotation(
+      Icon(graphics = {Text(origin = {-123, 66}, extent = {{21, -26}, {225, -106}}, textString = "XOR")}),
+      Documentation(info = "<html><head></head><body>
+Output bitwise XOR between input 32 bit integers.
+</body></html>"));
+  end XorInts;
+
   block LeftShiftInt "Output bitwise LEFT SHIFT of input 32 bit integer"
     extends Modelica.Blocks.Interfaces.PartialIntegerSISO;
     extends Icons.Bitwise;
