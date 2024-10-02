@@ -48,6 +48,15 @@ package Functions
     annotation(Include = "#include \"or_ints.c\"");
   end or_ints;
 
+  function xor_ints "Bitwise XOR between two 32 bit integers"
+    extends Modelica.Icons.Function;
+    input Integer a "Left integer";
+    input Integer b "Right integer";
+    output Integer y "Result integer";
+    external "C" y=xor_ints(a, b);
+    annotation(Include = "#include \"xor_ints.c\"");
+  end xor_ints;
+
   function lshift_int "Bitwise LEFT SHIFT of 32 bit integer"
     extends Modelica.Icons.Function;
     input Integer a "Input integer";
