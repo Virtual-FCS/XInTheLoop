@@ -24,11 +24,11 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {14, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal starting(nIn = 1, nOut = 1)  annotation(
       Placement(visible = true, transformation(origin = {-4, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.TransitionWithSignal toStarting(enableTimer = true, waitTime = 3)  annotation(
+    Modelica.StateGraph.TransitionWithSignal toStarting(enableTimer = true, waitTime = 120)  annotation(
       Placement(visible = true, transformation(origin = {-24, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal standby(nIn = 1, nOut = 1) annotation(
       Placement(visible = true, transformation(origin = {-44, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toStandby(enableTimer = true, waitTime = 10)  annotation(
+    Modelica.StateGraph.Transition toStandby(enableTimer = true, waitTime = 3)  annotation(
       Placement(visible = true, transformation(origin = {-64, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.BooleanExpression alwaysTrue(y = true)  annotation(
       Placement(visible = true, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -91,9 +91,9 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Line(points = {{-38, -92}, {-10, -92}, {-10, -80}, {-2, -80}}, color = {0, 0, 127}));
   protected
     annotation(
-      experiment(StartTime = 0, StopTime = 390, Tolerance = 1e-06, Interval = 0.1),
+      experiment(StartTime = 0, StopTime = 500, Tolerance = 1e-06, Interval = 0.1),
       Documentation(info = "<html><head></head><body>
-<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 6.5 minutes that in a cycle sends request of these modes to the FCCU:</p>
+<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 500 seconds that in a cycle sends request of these modes to the FCCU:</p>
 <div><ul>
 <li>Start-up (idle)</li><li>Standby</li>
 <li>Starting</li><li>Running</li>
