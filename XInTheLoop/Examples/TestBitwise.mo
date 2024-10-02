@@ -21,7 +21,7 @@ model TestBitwise
     Placement(visible = true, transformation(origin = {70, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   XInTheLoop.Blocks.Bitwise.RightShiftUInt rightShiftUInt(b = 1) annotation(
     Placement(visible = true, transformation(origin = {70, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Blocks.Bitwise.XorInts xorInts(nu = 2)  annotation(
+  XInTheLoop.Blocks.Bitwise.XorInts xorInts(nu = 2)  annotation(
     Placement(transformation(origin = {70, 80}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(sawTooth.y, realToInteger.u) annotation(
