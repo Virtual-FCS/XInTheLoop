@@ -111,7 +111,7 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {56, -26}, extent = {{-10, -10}, {30, 10}}, rotation = 0)));
     Modelica.StateGraph.InitialStepWithSignal idle(nOut = 1, nIn = 1) annotation(
       Placement(visible = true, transformation(origin = {-84, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.Transition toIdle(enableTimer = true, waitTime = 9)  annotation(
+    Modelica.StateGraph.TransitionWithSignal toIdle(enableTimer = true, waitTime = 3)  annotation(
       Placement(visible = true, transformation(origin = {92, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal stopping(nIn = 1, nOut = 1) annotation(
       Placement(visible = true, transformation(origin = {72, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -119,7 +119,7 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {52, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal running(nIn = 1, nOut = 1)  annotation(
       Placement(visible = true, transformation(origin = {34, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.StateGraph.TransitionWithSignal toRunning(enableTimer = true, waitTime = 6)  annotation(
+    Modelica.StateGraph.TransitionWithSignal toRunning(enableTimer = true, waitTime = 3)  annotation(
       Placement(visible = true, transformation(origin = {14, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.StateGraph.StepWithSignal starting(nIn = 1, nOut = 1)  annotation(
       Placement(visible = true, transformation(origin = {-4, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -130,11 +130,11 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
     Modelica.StateGraph.Transition toStandby(enableTimer = true, waitTime = 3)  annotation(
       Placement(visible = true, transformation(origin = {-64, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.BooleanExpression alwaysTrue(y = true)  annotation(
-      Placement(visible = true, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = false, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     XInTheLoop.Examples.Site2.Blocks.Sync sync annotation(
       Placement(visible = true, transformation(origin = {10, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     XInTheLoop.Examples.Site2.Blocks.UnpackStatusBits unpackStatusBits annotation(
-      Placement(visible = true, transformation(origin = {40, -58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(transformation(origin = {40, -62}, extent = {{-10, -10}, {10, 10}})));
     XInTheLoop.Examples.Site2.Blocks.PackControlBits packControlBits annotation(
       Placement(visible = true, transformation(origin = {-30, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.IntegerExpression HVESSC1_PowerDown_Command annotation(
@@ -143,9 +143,11 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Placement(visible = true, transformation(origin = {-84, -78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.RealExpression MG1IC_Setpoint_Req(y = 25.0)  annotation(
       Placement(visible = true, transformation(origin = {-50, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    XInTheLoop.Blocks.Bitwise.XorInts zIfRunning(nu = 1, b = 0) annotation(
+      Placement(transformation(origin = {70, -56}, extent = {{-10, -10}, {10, 10}})));
+    XInTheLoop.Blocks.Bitwise.XorInts zIfStandby(nu = 1, b = 2) annotation(
+      Placement(transformation(origin = {70, -86}, extent = {{-10, -10}, {10, 10}})));
   equation
-    connect(alwaysTrue.y, toStarting.condition) annotation(
-      Line(points = {{-18, -10}, {-12, -10}, {-12, 6}, {-24, 6}, {-24, 18}}, color = {255, 0, 255}));
     connect(toStandby.outPort, standby.inPort[1]) annotation(
       Line(points = {{-62.5, 30}, {-54.5, 30}}));
     connect(idle.outPort[1], toStandby.inPort) annotation(
@@ -177,7 +179,7 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
     connect(stopping.active, modeRequest.u[5]) annotation(
       Line(points = {{72, 19}, {72, -0.5}, {40, -0.5}, {40, -24.25}, {46, -24.25}, {46, -26}}, color = {255, 0, 255}));
     connect(sync.yStatusBits, unpackStatusBits.u) annotation(
-      Line(points = {{14, -69}, {14, -59}, {28, -59}}, color = {255, 127, 0}));
+      Line(points = {{14, -69}, {14, -62}, {28, -62}}, color = {255, 127, 0}));
     connect(packControlBits.y, sync.uControlBits) annotation(
       Line(points = {{-19, -70}, {-9.5, -70}, {-9.5, -74}, {-2, -74}}, color = {255, 127, 0}));
     connect(modeRequest.y, packControlBits.uSetpoint_Mode_Req) annotation(
@@ -188,14 +190,18 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
       Line(points = {{-72, -78}, {-60, -78}, {-60, -70}, {-42, -70}}, color = {255, 127, 0}));
     connect(MG1IC_Setpoint_Req.y, sync.uSetpoint_Req) annotation(
       Line(points = {{-38, -92}, {-10, -92}, {-10, -80}, {-2, -80}}, color = {0, 0, 127}));
-    connect(unpackStatusBits.ySetpoint_Mode, isStarting.u[1]) annotation(
-      Line(points = {{52, -52}, {55, -52}, {55, -56}, {60, -56}}, color = {255, 127, 0}));
-    connect(toRunning.condition, isStarting.yZero) annotation(
-      Line(points = {{14, 18}, {14, -12}, {96, -12}, {96, -62}, {81, -62}}, color = {255, 0, 255}));
+    connect(unpackStatusBits.ySetpoint_Mode, zIfRunning.u[1]) annotation(
+      Line(points = {{51, -57}, {55, -57}, {55, -56}, {60, -56}}, color = {255, 127, 0}));
+    connect(zIfRunning.yZero, toRunning.condition) annotation(
+      Line(points = {{14, 18}, {14, -12}, {94, -12}, {94, -62}, {81, -62}}, color = {255, 0, 255}));
+    connect(unpackStatusBits.ySetpoint_Mode, zIfStandby.u[1]) annotation(
+      Line(points = {{51, -57}, {54, -57}, {54, -84}, {58, -84}, {58, -86}, {60, -86}}, color = {255, 127, 0}));
+    connect(zIfStandby.yZero, toIdle.condition) annotation(
+      Line(points = {{82, -92}, {96, -92}, {96, 8}, {92, 8}, {92, 18}}, color = {255, 0, 255}));
+    connect(zIfStandby.yZero, toStarting.condition) annotation(
+      Line(points = {{82, -92}, {96, -92}, {96, 8}, {-24, 8}, {-24, 18}}, color = {255, 0, 255}));
   protected
     public
-    XInTheLoop.Blocks.Bitwise.XorInts isStarting(nu = 1, b = 18) annotation(
-      Placement(transformation(origin = {70, -56}, extent = {{-10, -10}, {10, 10}})));
   annotation(
       experiment(StartTime = 0, StopTime = 500, Tolerance = 1e-06, Interval = 0.1),
       Documentation(info = "<html><head></head><body>
