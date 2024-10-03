@@ -203,7 +203,7 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
   protected
     public
   annotation(
-      experiment(StartTime = 0, StopTime = 500, Tolerance = 1e-06, Interval = 0.1),
+      experiment(StartTime = 0, StopTime = 600, Tolerance = 1e-06, Interval = 0.12),
       Documentation(info = "<html><head></head><body>
 <p>A test model that creates a very&nbsp;simple input value sequence with a duration of 500 seconds similar to the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model that in a cycle sends request of these modes to the FCCU:</p>
 <div><ul>
