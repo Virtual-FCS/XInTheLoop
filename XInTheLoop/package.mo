@@ -3,7 +3,7 @@ package XInTheLoop "Components for X-in-the-Loop functionality"
   extends Icons.XInTheLoop;
   annotation(
     preferredView = "info",
-    version = "0.3.0",
+    version = "0.4.0-dev",
     uses(Modelica(version = "4.0.0"), Modelica_DeviceDrivers(version = "2.1.1")),
     Documentation(info = "<html><head></head><body>
 <p>This library enables an external system in the loop while simulating a model. A typical use case is to exchange the needed set of values between a high-level controller model and a low level hardware controller process.</p>

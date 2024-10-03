@@ -21,6 +21,8 @@ model TestBitwise
     Placement(visible = true, transformation(origin = {70, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   XInTheLoop.Blocks.Bitwise.RightShiftUInt rightShiftUInt(b = 1) annotation(
     Placement(visible = true, transformation(origin = {70, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  XInTheLoop.Blocks.Bitwise.XorInts xorInts(nu = 2)  annotation(
+    Placement(transformation(origin = {70, 80}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(sawTooth.y, realToInteger.u) annotation(
     Line(points = {{-59, 0}, {-42, 0}}, color = {0, 0, 127}));
@@ -40,6 +42,10 @@ equation
     Line(points = {{21, 40}, {48, 40}, {48, 46}, {60, 46}, {60, 50}}, color = {255, 127, 0}));
   connect(integerExpression.y, orInts.u[2]) annotation(
     Line(points = {{21, 40}, {48, 40}, {48, 24}, {60, 24}, {60, 20}}, color = {255, 127, 0}));
+  connect(product.y, xorInts.u[1]) annotation(
+    Line(points = {{22, 0}, {40, 0}, {40, 80}, {60, 80}}, color = {255, 127, 0}));
+  connect(integerExpression.y, xorInts.u[2]) annotation(
+    Line(points = {{22, 40}, {48, 40}, {48, 76}, {60, 76}, {60, 80}}, color = {255, 127, 0}));
 protected
   annotation(
     experiment(StartTime = 0, StopTime = 2, Tolerance = 1e-06, Interval = 0.004),
