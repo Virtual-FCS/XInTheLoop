@@ -333,17 +333,6 @@ Pack all control bits into an integer output.
 Unpack all status bits from an integer input.
 </body></html>"));
     end UnpackStatusBits;
-
-    block SelectSetpointMode
-      parameter Boolean useHeatPort=false annotation(choices(checkBox=true));
-      parameter Integer selectSetpointMode(min=0, max=31) annotation(choices(
-      choice=0 "Power On", choice=2 "Standby", choice=9 "Voltage Control", choice=10 "Current Control",
-      choice=11 "Power Control", choice=20 "Stop", choice=21 "Power Down" ));
-  Modelica.Blocks.Interfaces.IntegerOutput ySetpoint_Mode annotation(
-        Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    equation
-      ySetpoint_Mode = selectSetpointMode;
-    end SelectSetpointMode;
   end Blocks;
   annotation(
     Documentation(info = "<html><head></head><body>
