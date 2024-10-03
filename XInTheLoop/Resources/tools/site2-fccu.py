@@ -33,7 +33,7 @@ if __name__ == "__main__":
         prev = req
       if req == 10 and (timer() - t0) > 20:  # Simulate starting takes 20 seconds
         req = 0
-      if req == 21 and (timer() - t0) > 2:  # Simulate stopping takes 2 seconds
+      if req == 21 and (timer() - t0) > 40:  # Simulate stopping takes 40 seconds
         req = 2
       return deviation.get(req, req)
 
