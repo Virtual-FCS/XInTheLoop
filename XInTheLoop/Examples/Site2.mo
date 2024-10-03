@@ -205,12 +205,12 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
   annotation(
       experiment(StartTime = 0, StopTime = 600, Tolerance = 1e-06, Interval = 0.12),
       Documentation(info = "<html><head></head><body>
-<p>A test model that creates a very&nbsp;simple input value sequence with a duration of 500 seconds similar to the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model that in a cycle sends request of these modes to the FCCU:</p>
+<p>A test model that creates a very&nbsp;simple input value sequence similar to the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model, except with a duration of 600 seconds, that in a cycle sends request of these modes to the FCCU:</p>
 <div><ul>
 <li>Start-up (idle)</li><li>Standby</li>
 <li>Starting</li><li>Running</li>
 <li>Stopping</li></ul></div>
-<p>The difference from the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model, is that in this model, several of the state machine transitions are dependent of the expected actual setpoint mode received from the FCCU, so the mode sequence timing might change a bit. Be aware that the mode sequence might stop if not receiving expected signals.</p>
+<p>The difference from the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model, is that in this model, several of the state machine transitions are dependent of the expected actual setpoint mode received from the FCCU, so the mode sequence timing might change a bit, and the duration is extended to 600 seconds to capture the full shutdown period. Be aware that the mode sequence might stop if not receiving expected signals.</p>
 <p>It is used in the test procedures of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
 </body></html>"));
   end Test2;
@@ -386,8 +386,9 @@ To only test the UDP protocol without a real hardware I/O application present, u
 <li>To capture and dump the outgoing values sent to the external system, execute
 
 <pre style=\"font-size: 12px;\">python site2.py out</pre>
+</li>
 
-</li><li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
+<li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
 
 <li>Start simulation of the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model.</li>
 
@@ -395,12 +396,13 @@ To only test the UDP protocol without a real hardware I/O application present, u
 
 <pre style=\"font-size: 12px;\">python site2.py in 2 3 4 5 6 7 8 9 400</pre>
 
-in the second shell window to send a series of 300 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the 300 repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
+in the second shell window to send a series of 400 incoming messages while the simulation is running. In the command line example above, the first message will contain a payload vector of the specified dummy values, and then for each of the repetitions, all values in the payload vector are incremented before sending the next message after a one second delay.</li>
 
 <li>When the simulation has ended, select e.g. the variables <tt>packControlBits.uSetpoint_Mode_Req</tt>, <tt>sync.yDC_current_output</tt>, <tt>sync.yDC_voltage_output</tt> and <tt>unpackStatusBits.ySetpoint_Mode</tt> to plot these received values in a graph of the simulation.</li>
 
 </ol>
 
+<p>Such a plot might look like the one below, but how long into the simulation duration where the ramp curves are starting to rise, will depend on the delay between simulation start and starting the Python script:</p>
 <img src=\"modelica://XInTheLoop/Resources/Images/site2-test-plot.png\">
 
 <h4 id=\"moist\">Moist Run</h4>
@@ -412,8 +414,9 @@ in the second shell window to send a series of 300 incoming messages while the s
 <li>To start the UDP-CAN relay service, execute
 
 <pre style=\"font-size: 12px;\">python site2-relay.py</pre>
+</li>
 
-</li><li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
+<li>Open a second command shell window, and change to the tools&nbsp;folder. This preparation step should be done before starting simulation to reduce time usage during simulation.</li>
 
 <li>Start simulation of either the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> or the <a href=\"modelica://XInTheLoop.Examples.Site2.Test2\">Test2</a> model.</li>
 
@@ -439,6 +442,7 @@ in the second shell window to simulate the CAN messages of and FCCU.</li>
 <li>To start the UDP-CAN relay service, execute
 
 <pre style=\"font-size: 12px;\">python site2-relay.py</pre>
+</li>
 
 <li>Start simulation of either the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> or the <a href=\"modelica://XInTheLoop.Examples.Site2.Test2\">Test2</a> model.</li>
 
@@ -446,7 +450,7 @@ in the second shell window to simulate the CAN messages of and FCCU.</li>
 
 </ol>
 
-<h4>Protocol Packet Details</h4>
+<h4>UDP Protocol Packet Details</h4>
 <div>In each UDP packet sent in this protocol there is a leading header:</div>
 <div><ol><li>A constant 32-bit \"magic\" integer number to reduce the risk of interpreting a random missent packet from another application as a valid packet in this protocol.</li><li>A 32-bit integer version number that should be increased when the packet format is changed in a way that is not backward compatible. If only appending new values to the packet payload format, then the version number normally does not need to change because extra content at the end should be ignored by the receiver.</li><li>A 16-bit integer packet sequence number incremented by the sender for each packet. The counter is independent for each direction. When a counter value exceeds 16 bits, it wraps around to zero again.</li><li>A 16-bit integer received packet sequence number containing a copy of the packet sequence number from the last received packet in the reverse direction. In the Python script of this example, the last packet in each direction is written to temporary files to remember these sequence numbers, but in a typical hardware/external I/O application, it normally is much easier to use internal variables instead.</li></ol></div>
 <div>followed by a payload:</div>
