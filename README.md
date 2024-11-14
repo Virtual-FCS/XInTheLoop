@@ -15,7 +15,7 @@ A generic UDP based protocol is developed to exchange values between the Modelic
 
 Together with a set of generic support blocks, it should be easy to implement your own blocks for interfacing one particular external system.
 
-The external system can be developed in any language/framework that support UDP communication. An [included Python script](XInTheLoop/Resources/tools/site1-protocol.py) for debugging the UDP communication can be used as inspiration.
+The external system can be developed in any language/framework that support UDP communication. A set of [included Python scripts](XInTheLoop/Resources/tools/) for UDP communication in the example use cases can be used as inspiration.
 
 ## Site1 Example
 
