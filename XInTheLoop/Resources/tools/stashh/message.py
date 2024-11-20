@@ -116,9 +116,6 @@ class CanService:
 
     def received(msg: can.Message) -> None:
       """Received CAN message"""
-      if msg is None:
-        print("Ignoring empty message received")
-        return
       try:
         signals = self.db.decode_message(msg.arbitration_id, msg.data, decode_choices=False)
         self.received_signals.update(signals)
