@@ -1,5 +1,4 @@
 # StasHH outgoing CAN messages
-# Copyright (c) 2024 SINTEF
 
 import can
 from cantools.database.can.database import Database
