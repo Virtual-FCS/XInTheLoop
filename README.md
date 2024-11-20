@@ -21,10 +21,6 @@ The external system can be developed in any language/framework that support UDP 
 
 The Site1 example is a test model and interfacing blocks for one particular external FCS system containing a fuel cell, a DC-to-DC-converter, a battery, and a variable load.
 
-## Site2 Example
-
-The Site2 example contains test models that use a UDP protocol to exchange values with an external system running a StasHH compatible fuel cell module (FCM), where a fuel cell control unit (FCCU) handle the StasHH Digital Interface via a CAN bus, and python scripts acting as a relay between the UDP protocol and the CAN protocol.
-
 ## Dependencies
 
 - Modelica v4.0.0
