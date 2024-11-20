@@ -2,9 +2,9 @@
 
 import can
 from cantools.database.can.database import Database
-from .message import CanService, CrcCanMessage, CrcRule
+from .message import CrcMessageOut, CrcRule, Service
 
-class Mg1imf1(CrcCanMessage):
+class Mg1imf1(CrcMessageOut):
   def __init__(self, db: Database):
     super().__init__(db, "MG1IMF1", CrcRule.B)
 
@@ -16,7 +16,7 @@ class Mg1imf1(CrcCanMessage):
       "MG1IMF1_HVIL_Status": hvil_status,
     }, crc)
 
-class Mg1ir1(CrcCanMessage):
+class Mg1ir1(CrcMessageOut):
   def __init__(self, db: Database):
     super().__init__(db, "MG1IR1", CrcRule.B)
 
@@ -27,7 +27,7 @@ class Mg1ir1(CrcCanMessage):
       "MG1IR1_Reference_Power": reference_power,
     }, crc)
 
-class Mg1ir2(CrcCanMessage):
+class Mg1ir2(CrcMessageOut):
   def __init__(self, db: Database):
     super().__init__(db, "MG1IR2", CrcRule.B)
 
@@ -39,7 +39,7 @@ class Mg1ir2(CrcCanMessage):
       "MG1IR2_Reference_Voltage": reference_voltage,
     }, crc)
 
-class Mg1is1(CrcCanMessage):
+class Mg1is1(CrcMessageOut):
   def __init__(self, db: Database):
     super().__init__(db, "MG1IS1", CrcRule.B)
 
@@ -51,7 +51,7 @@ class Mg1is1(CrcCanMessage):
       "MG1IS1_DC_voltage_output": voltage,
     }, crc)
 
-class Mg1ilap(CrcCanMessage):
+class Mg1ilap(CrcMessageOut):
   def __init__(self, db: Database):
     super().__init__(db, "MG1ILAP", CrcRule.B)
 
@@ -63,7 +63,7 @@ class Mg1ilap(CrcCanMessage):
       "MG1ILAP_DC_power_output_min": power_output_min,
     }, crc)
 
-class IncomingCanService(CanService):
+class InService(Service):
 
   def __init__(self, bus: can.BusABC, db: Database, tscale: float = 1):
     super().__init__(bus, db, tscale)
