@@ -210,7 +210,7 @@ package Site2 "Example Site 2 for Hardware-in-the-loop (HIL) simulation"
 <li>Start-up (idle)</li><li>Standby</li>
 <li>Starting</li><li>Running</li>
 <li>Stopping</li></ul></div>
-<p>The main difference from the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model, is that in this model, several of the state machine transitions are dependent of the expected actual setpoint mode received from the FCCU, so the mode sequence timing might change a bit, and the duration is extended to 600 seconds to capture the full shutdown period. Be aware that the mode sequence might stop if not receiving expected signals.</p>
+<p>The difference from the <a href=\"modelica://XInTheLoop.Examples.Site2.Test\">Test</a> model, is that in this model, several of the state machine transitions are dependent of the expected actual setpoint mode received from the FCCU, so the mode sequence timing might change a bit, and the duration is extended to 600 seconds to capture the full shutdown period. Be aware that the mode sequence might stop if not receiving expected signals.</p>
 <p>It is used in the test procedures of <a href=\"modelica://XInTheLoop.Examples.Site2\">this site</a>.</p>
 </body></html>"));
   end Test2;

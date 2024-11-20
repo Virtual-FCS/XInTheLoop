@@ -1,6 +1,6 @@
 # XInTheLoop Library
 
-XInTheLoop is a Modelica library for interfacing a model with an external system for continuous interaction during real-time simulation of the model. The external system in this case is a software tightly coupled with e.g. a physical process hardware, some user interface, another model simulation, a computational service, or some other software service.
+XInTheLoop is a Modelica library for interfacing a model with an external system for continuous interaction during simulation of the model. The external system in this case is a software tightly coupled with e.g. a physical process hardware, some user interface, another model simulation, a computational service, or some other software service.
 
 [![OpenModelica v1.23 win64](https://img.shields.io/badge/OpenModelica-v1.23%20win64-blue)](https://openmodelica.org/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7697300.svg)](https://doi.org/10.5281/zenodo.7697300)
@@ -38,7 +38,7 @@ The bug is still present in OMEdit v1.23.1 for Windows.
 
 ## Development
 
-The initial versions of this library has been developed as part of the Virtual-FCS project. The main library [VirtualFCS](https://github.com/Virtual-FCS/VirtualFCS) can be used to build advanced FCS models, and then combined with this library to include an external system in the loop.
+The base of this library has been developed as part of the Virtual-FCS project. The main library [VirtualFCS](https://github.com/Virtual-FCS/VirtualFCS) can be used to build advanced FCS models, and then combined with this library to include an external system in the loop.
 
 This library has been further developed as part of the StasHH project.
 
