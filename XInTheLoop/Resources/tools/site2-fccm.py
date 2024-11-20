@@ -15,12 +15,7 @@ if __name__ == "__main__":
 
     print("Create StasHH incoming CAN service...")
     canService = IncomingCanService(bus, db, tscale=100)
-
-    def received(msg: can.Message) -> None:
-      """Received CAN message, but don't print it"""
-      pass
-
-    canService.notifier(received)
+    canService.notifier()
     canService.initialize_signals(0)
     canService.start()
 
